@@ -1,0 +1,19 @@
+.label {
+	//display: flex;
+	margin: 10px 0;
+}
+
+.checkbox {
+	width: 20px;
+	height: 20px;
+	&:active {
+		color: green;
+	}
+}
+
+.spanClassName {
+	margin-left: 10px;
+	font-size: 18px;
+	color: white;
+	text-shadow: 1px 1px 2px black;
+}

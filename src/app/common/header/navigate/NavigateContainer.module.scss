@@ -1,0 +1,17 @@
+
+.navigation {
+	display: flex;
+	height: 100%;
+	align-items: center;
+
+	&__item {
+		margin-left: 10px;
+		border-bottom: 1px solid white;
+		& a {
+			text-decoration: none;
+			color: white;
+			font-size: 18px;
+			text-transform: uppercase;
+		}
+	}
+}
