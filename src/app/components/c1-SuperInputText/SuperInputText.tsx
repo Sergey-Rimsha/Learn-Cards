@@ -12,6 +12,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё проп
     onEnter?: () => void
     error?: string
     spanClassName?: string
+    type?: 'text' | 'password' | 'email'
 }
 
 export const SuperInputText: React.FC<SuperInputTextPropsType> = (
@@ -39,13 +40,15 @@ export const SuperInputText: React.FC<SuperInputTextPropsType> = (
         && onEnter(); // то вызвать его
     };
 
-    const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`;
-    const finalInputClassName = `${s.errorInput} ${className}`; // need to fix with (?:) and s.superInput
+    const finalSpanClassName = `${spanClassName ? spanClassName : s.error}`;
+    const finalInputClassName = `${className ? className : s.superInput} ${error ? s.errorInput : ''}`;
+
+    const inputType = type ? type : 'text';
 
     return (
         <>
             <input
-                type={'text'}
+                type={inputType}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
                 className={finalInputClassName}

@@ -1,5 +1,6 @@
 import {NavLink} from 'react-router-dom';
-import {pathWays} from "../../ways/Ways";
+
+import {pathWays} from '../../ways/Ways';
 
 import styles from './NavigateContainer.module.scss';
 
