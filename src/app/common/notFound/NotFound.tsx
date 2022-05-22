@@ -6,7 +6,7 @@ export const NotFound = () => {
 	return (
 		<div className={style.block}>
 			<h2>
-				404	 NOTFOUND
+				404	 NOT FOUND
 			</h2>
 		</div>
 	);

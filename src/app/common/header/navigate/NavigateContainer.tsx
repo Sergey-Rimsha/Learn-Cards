@@ -51,7 +51,7 @@ export const NavigateContainer = () => {
 				<NavLink
 					className={setActive}
 					to={pathWays.notFound}>
-					notfound
+					not found
 				</NavLink>
 			</div>
 			<div className={styles.navigation__item}>
