@@ -4,7 +4,7 @@ import {LoginContainer} from '../auth/login/LoginContainer';
 import {ProfileContainer} from '../profile/ProfileContainer';
 import {RegistrationContainer} from '../auth/registration/RegistrationContainer';
 import {RecoveryContainer} from '../auth/recovery/RecoveryContainer';
-import {NewPassword} from '../auth/newPassword/NewPassword';
+import {Password} from '../auth/password/Password';
 import {NotFound} from '../notFound/NotFound';
 import {TestComponents} from "../testComponents/TestComponents";
 
@@ -30,7 +30,7 @@ export const Ways = () => {
 				<Route path={pathWays.login} element={<LoginContainer/>}/>
 				<Route path={pathWays.registration} element={<RegistrationContainer/>}/>
 				<Route path={pathWays.recovery} element={<RecoveryContainer/>}/>
-				<Route path={pathWays.newPassword} element={<NewPassword/>}/>
+				<Route path={pathWays.newPassword} element={<Password/>}/>
 
 				<Route path={pathWays.testComponents} element={<TestComponents />}/>
 

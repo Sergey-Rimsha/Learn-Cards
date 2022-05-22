@@ -1,22 +1,20 @@
-
-
-type AuthStateType = {
+type LoginStateType = {
 	email: string | null
 	password: string | null
 	rememberMe: boolean
 }
 
-type AuthActionType = {
+export type LoginActionType = {
 
 }
 
-const initialState: AuthStateType = {
+const initialState: LoginStateType = {
 	email: null,
 	password: null,
 	rememberMe: false,
 };
 
-export const authReducer = (state = initialState, action: AuthActionType ) => {
+export const loginReducer = (state = initialState, action: LoginActionType ) => {
 
 	switch (action) {
 
