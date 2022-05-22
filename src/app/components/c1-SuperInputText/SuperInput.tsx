@@ -1,6 +1,6 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent} from 'react';
 
-import s from './SuperInputText.module.css';
+import s from './SuperInput.module.scss';
 
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -15,7 +15,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & { // и + ещё проп
     type?: 'text' | 'password' | 'email'
 }
 
-export const SuperInputText: React.FC<SuperInputTextPropsType> = (
+export const SuperInput: React.FC<SuperInputTextPropsType> = (
     {
         type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
         onChange, onChangeText,
@@ -40,13 +40,13 @@ export const SuperInputText: React.FC<SuperInputTextPropsType> = (
         && onEnter(); // то вызвать его
     };
 
-    const finalSpanClassName = `${spanClassName ? spanClassName : s.error}`;
-    const finalInputClassName = `${className ? className : s.superInput} ${error ? s.errorInput : ''}`;
+    const finalSpanClassName = `${spanClassName ? spanClassName : s.block__error}`;
+    const finalInputClassName = `${className ? className : s.block__input} ${error ? s.block__input_error : ''}`;
 
     const inputType = type ? type : 'text';
 
     return (
-        <>
+        <div className={s.block}>
             <input
                 type={inputType}
                 onChange={onChangeCallback}
@@ -55,7 +55,7 @@ export const SuperInputText: React.FC<SuperInputTextPropsType> = (
 
                 {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
             />
-            {error && <span className={finalSpanClassName}>{error}</span>}
-        </>
+            {error && <div className={finalSpanClassName}>{error}</div>}
+        </div>
     );
 };

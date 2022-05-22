@@ -29,34 +29,24 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
         // сделайте так чтоб работал onChange и onChangeChecked
     };
 
-    const finalInputClassName = `${s.checkbox} ${className ? className : ''}`;
+    // const finalInputClassName = `${s.checkbox} ${className ? className : ''}`;
+    const finalInputClassName = `${className ? className : s.label}`;
+    const descriptionClassName = `${spanClassName ? spanClassName : ''}`;
 
     return (
-        <label className={s.label}>
-            <input
-                type={'checkbox'}
-                onChange={onChangeCallback}
-                className={finalInputClassName}
+        <>
+            <label className={finalInputClassName}>
+                <input
+                    type={'checkbox'}
+                    onChange={onChangeCallback}
 
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (checked например там внутри)
-            />
-            {children && <span className={s.spanClassName}>{children}</span>}
-        </label> // благодаря label нажатие на спан передастся в инпут
+                    {...restProps}
+                />
+                <span/>
+                {children && <div className={descriptionClassName}>{children}</div>}
+            </label>
+        </>
     );
 };
 
 export default SuperCheckbox;
-
-//
-// const f = () => {
-//     return (
-//         <section title=".squaredThree">
-//             <!-- .squaredThree -->
-//             <div className="squaredThree">
-//                 <input type="checkbox" value="None" id="squaredThree" name="check" checked/>
-//                 <label htmlFor="squaredThree"></label>
-//             </div>
-//             <!-- end .squaredThree -->
-//         </section>
-//     )
-// }

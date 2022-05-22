@@ -4,7 +4,7 @@ export const RecoveryContainer = () => {
 
 	return (
 		<h2>
-			Recovery
+			Recovery password
 		</h2>
 	);
 };
