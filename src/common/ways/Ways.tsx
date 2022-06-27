@@ -6,7 +6,7 @@ import {RegistrationContainer} from '../auth/registration/RegistrationContainer'
 import {RecoveryContainer} from '../auth/recovery/RecoveryContainer';
 import {Password} from '../auth/password/Password';
 import {NotFound} from '../notFound/NotFound';
-import {TestComponents} from "../testComponents/TestComponents";
+import {TestComponents} from '../testComponents/TestComponents';
 
 export const pathWays = {
 	login: 'login',
@@ -16,7 +16,7 @@ export const pathWays = {
 	newPassword: 'newPassword',
 	notFound: '404',
 
-	testComponents: 'testComponents'
+	testComponents: 'testComponents',
 };
 
 
