@@ -1,28 +1,41 @@
-import {combineReducers, createStore} from 'redux';
 
-import {LoginActionType, loginReducer} from './loginReducer';
+import {useDispatch} from 'react-redux';
+import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
+
+import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
+
 import {ProfileActionType, profileReducer} from './profileReducer';
 import {PasswordActionType, passwordReducer} from './passwordReducer';
 import {RecoveryActionType, recoveryReducer} from './recoveryReducer';
 import {RegistrationActionType, registrationReducer} from './registrationReducer';
+import {AuthActionType, authReducer} from './reducers/authReducer';
+import {AppActionType, appReducer} from './reducers/appReducer';
 
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // RootActionType
 export type AppRootActionType = ProfileActionType
-	| LoginActionType
+	| AuthActionType
+	| AppActionType
 	| PasswordActionType
 	| RecoveryActionType
 	| RegistrationActionType
 
 
+export const AppDispatch = () => useDispatch<ThunkDispatch<AppRootStateType,void,AnyAction>>();
+
+// для типизации thunk
+export type AppThunkType = ThunkAction<void, AppRootStateType, unknown, AnyAction>
+
+
 const rootReducer = combineReducers({
 	profile: profileReducer,
-	login: loginReducer,
+	auth: authReducer,
+	app: appReducer,
 	password: passwordReducer,
 	recovery: recoveryReducer,
 	registration: registrationReducer,
 });
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunk));

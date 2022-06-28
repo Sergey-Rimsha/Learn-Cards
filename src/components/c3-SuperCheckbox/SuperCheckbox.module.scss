@@ -3,8 +3,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	//width: 150px;
-	//height: 25px;
+		//width: 150px;
+		//height: 25px;
 	cursor: pointer;
 
 	& input {
@@ -15,7 +15,7 @@
 			transform: rotate(45deg);
 			width: 10px;
 			margin-left: 10px;
-			border-color: green;
+			border-color: #21268F;
 			border-top-color: transparent;
 			border-left-color: transparent;
 			border-radius: 0;
@@ -24,9 +24,9 @@
 
 	& span {
 		display: block;
-		width: 25px;
-		height: 25px;
-		border: 3px solid gray;
+		width: 17px;
+		height: 17px;
+		border: 3px solid #21268F;
 		border-radius: 6px;
 		transition: all 0.375s;
 	}

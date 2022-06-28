@@ -4,6 +4,10 @@ import {useNavigate} from 'react-router-dom';
 
 // import {AppDispatch} from '../../../store/store';
 
+import {AppDispatch} from '../../../store/store';
+
+import {loginUserTC} from '../../../store/reducers/authReducer';
+
 import {Login} from './login';
 
 
@@ -12,7 +16,7 @@ export const LoginContainer = () => {
 
 	const navigate = useNavigate();
 
-	// const dispatch = AppDispatch();
+	const dispatch = AppDispatch();
 
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
@@ -55,13 +59,12 @@ export const LoginContainer = () => {
 	// слушаем событие на кнопке onClick и отправляем password and email
 	const onSubmitHandler = () => {
 		// validate data email password
-		if (email.length > 5 && password.length > 6) {
+		if (email.length > 5 && password.length > 7) {
 
 			// упакавали в obj email password rememberMe
 			const data = {email, password, rememberMe};
-
-			// после окончания запроса вернёться true
-			// dispatch(setDataLoginTC(data));
+			// dispatch ThunkCreator
+			dispatch(loginUserTC(data));
 		}
 	};
 

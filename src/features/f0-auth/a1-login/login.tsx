@@ -3,6 +3,8 @@ import {ChangeEvent} from 'react';
 import {TextField} from '../../../components/c4-Textfield/TextField';
 
 import s from './login.module.scss';
+import SuperButton from "../../../components/c2-SuperButton/SuperButton";
+import SuperCheckbox from "../../../components/c3-SuperCheckbox/SuperCheckbox";
 
 type LoginPropsType = {
 	email: string
@@ -20,6 +22,8 @@ type LoginPropsType = {
 export const Login = (props: LoginPropsType) => {
 
 	// const error = useSelector<AppRootStateType, string | undefined>(state => state.auth.error);
+
+	console.log('render login');
 
 	return (
 		<section className={s.blockLogin}>
@@ -44,9 +48,9 @@ export const Login = (props: LoginPropsType) => {
 							type={'password'}/>
 					</div>
 
-					{/*<SuperCheckbox onChange={props.onChangeChecked} checked={props.rememberMe}>*/}
-					{/*	remember Me*/}
-					{/*</SuperCheckbox>*/}
+					<SuperCheckbox onChange={props.onChangeChecked} checked={props.rememberMe}>
+						remember Me
+					</SuperCheckbox>
 
 					<div className={s.form__forgot}>
 						<span onClick={props.redirectLink}>Forgot Password</span>
@@ -63,6 +67,12 @@ export const Login = (props: LoginPropsType) => {
 						{/*	Login*/}
 						{/*</Button>*/}
 						{/*<button className={s.form__button} type={'submit'}>Login</button>*/}
+
+						<button
+							className={s.form__button}
+							onClick={props.onSubmitHandler}>
+							Login
+						</button>
 					</div>
 				</form>
 				<div className={s.login__quest}>
