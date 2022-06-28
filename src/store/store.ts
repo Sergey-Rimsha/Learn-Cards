@@ -1,5 +1,5 @@
 
-import {useDispatch} from 'react-redux';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
 
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
@@ -27,6 +27,10 @@ export const AppDispatch = () => useDispatch<ThunkDispatch<AppRootStateType,void
 
 // для типизации thunk
 export type AppThunkType = ThunkAction<void, AppRootStateType, unknown, AnyAction>
+
+// универсальный селектор для типизации всего приложения
+
+export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector;
 
 
 const rootReducer = combineReducers({

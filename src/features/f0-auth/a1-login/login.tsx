@@ -5,6 +5,7 @@ import {TextField} from '../../../components/c4-Textfield/TextField';
 import s from './login.module.scss';
 import SuperButton from "../../../components/c2-SuperButton/SuperButton";
 import SuperCheckbox from "../../../components/c3-SuperCheckbox/SuperCheckbox";
+import {useAppSelector} from "../../../store/store";
 
 type LoginPropsType = {
 	email: string
@@ -23,7 +24,9 @@ export const Login = (props: LoginPropsType) => {
 
 	// const error = useSelector<AppRootStateType, string | undefined>(state => state.auth.error);
 
-	console.log('render login');
+	const error = useAppSelector<string | undefined>(state => state.auth.loginError);
+
+	// console.log('render login');
 
 	return (
 		<section className={s.blockLogin}>
@@ -57,7 +60,7 @@ export const Login = (props: LoginPropsType) => {
 					</div>
 
 					{/*показываем ошибку если отправка api не удалась*/}
-					{/*<span className={s.form__errorMessage}>{error}</span>*/}
+					<span className={s.form__errorMessage}>{error}</span>
 
 					<div className={s.form__buttonWrap}>
 						{/*<Button*/}

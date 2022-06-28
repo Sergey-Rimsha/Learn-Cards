@@ -1,7 +1,7 @@
 import {AppThunkType} from '../store';
 import {AuthAPI, LoginDataType} from '../../api/Api';
 
-import {setIsAuth} from './appReducer';
+import {setIsAuth, setLoadingStatus} from './appReducer';
 
 type AuthStateType = {
 	userData: UserDataType,
@@ -107,8 +107,12 @@ export const setIsActiveButton = (isActive: boolean) => {
 // login -> post {data-> email password, remember Me}
 export const loginUserTC = (data: LoginDataType): AppThunkType => (dispatch) => {
 
+	dispatch(setLoadingStatus('loading'));
+
 	// clear error
 	dispatch(setLoginError(''));
+
+
 
 	AuthAPI.login(data)
 		.then(res => {
@@ -119,6 +123,9 @@ export const loginUserTC = (data: LoginDataType): AppThunkType => (dispatch) => 
 			// console.log(err.response.data);
 			dispatch(setLoginError(err.response.data.error));
 			dispatch(setIsAuth(false));
+		})
+		.finally(() => {
+			dispatch(setLoadingStatus('idle'));
 		});
 };
 
