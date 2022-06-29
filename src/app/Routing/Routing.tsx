@@ -8,12 +8,12 @@ import {Preloader} from '../../components/c5-Preloader/Preloader';
 import {RegisterContainer} from '../../features/f0-auth/a0-register/RegisterContainer';
 
 export const PATH = {
-	login: 'login',
-	profile: 'profile',
-	register: 'register',
-	recovery: 'recovery',
-	newPassword: 'newPassword',
-	notFound: '404',
+	login: '/login',
+	profile: '/profile',
+	register: '/register',
+	recovery: '/recovery',
+	newPassword: '/newPassword',
+	notFound: '/404',
 
 	testComponents: 'testComponents',
 };

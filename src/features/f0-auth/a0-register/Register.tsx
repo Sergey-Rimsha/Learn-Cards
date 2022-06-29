@@ -7,11 +7,12 @@ import {RegisterDataType} from './RegisterContainer';
 
 type RegisterPropsType = {
 	onRegister: (payload: RegisterDataType) => void
+	onRedirect: () => void
 }
 
 export const Register = (props: RegisterPropsType) => {
 
-	const {onRegister} = props;
+	const {onRegister, onRedirect} = props;
 	
 	const [email, setEmail] = useState<string | undefined>('');
 	const [pass1, setPass1] = useState<string | undefined>('');
@@ -33,6 +34,10 @@ export const Register = (props: RegisterPropsType) => {
 		if (email && pass1 && pass2) {
 			onRegister({email, pass1, pass2});
 		}
+	};
+
+	const onClickHandlerCancel = () => {
+		onRedirect();
 	};
 
 
@@ -59,7 +64,8 @@ export const Register = (props: RegisterPropsType) => {
 					<div className={s.form__wrapBtn}>
 						<button
 							className={`${s.form__btn} ${s.form__btn_cancel}`}
-							disabled={false}>
+							disabled={false}
+							onClick={onClickHandlerCancel}>
 							Cancel
 						</button>
 						<button

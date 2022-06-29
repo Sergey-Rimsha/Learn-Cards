@@ -1,13 +1,15 @@
 import {AppThunkType} from '../store';
 import {AuthAPI, LoginDataType} from '../../api/Api';
 
+import {RegisterDataType} from '../../features/f0-auth/a0-register/RegisterContainer';
+
 import {setIsAuth, setLoadingStatus} from './appReducer';
-import {RegisterDataType} from "../../features/f0-auth/a0-register/RegisterContainer";
 
 type AuthStateType = {
 	userData: UserDataType,
 	
 	loginError?: string
+	registerStatus: boolean
 	
 	activeButton: boolean
 }
@@ -15,6 +17,7 @@ type AuthStateType = {
 export type AuthActionType = ReturnType<typeof setUserData> 
 	| ReturnType<typeof setLoginError>
 	| ReturnType<typeof setIsActiveButton>
+	| ReturnType<typeof setRegisterStatus>
 
 export type UserDataType = {
 	_id: string
@@ -47,7 +50,7 @@ const initialState: AuthStateType = {
 	},
 
 	loginError: '',
-
+	registerStatus: false,
 	activeButton: false,
 };
 
@@ -72,7 +75,12 @@ export const authReducer = (state = initialState, action: AuthActionType ): Auth
 				activeButton: action.isActive,
 			};
 		}
-
+		case 'AUTH/SET_REGISTER_STATUS': {
+			return {
+				...state,
+				registerStatus: action.status,
+			};
+		}
 
 		default: return state;
 	}
@@ -100,6 +108,13 @@ export const setIsActiveButton = (isActive: boolean) => {
 	return {
 		type: 'AUTH/SET_IS_ACTIVE_BUTTON',
 		isActive,
+	} as const;
+};
+
+export const setRegisterStatus = (status: boolean) => {
+	return {
+		type: 'AUTH/SET_REGISTER_STATUS',
+		status,
 	} as const;
 };
 
@@ -133,6 +148,7 @@ export const registerUserTC = (payload: {email: string, password: string}): AppT
 	AuthAPI.register(payload)
 		.then(res => {
 			console.log(res);
+			dispatch(setRegisterStatus(true));
 		})
 		.catch(err => {
 			console.log(err);

@@ -1,7 +1,14 @@
-import {AppDispatch} from '../../../store/store';
+import {useEffect} from 'react';
+
+import {useNavigate} from 'react-router-dom';
+
+import {AppDispatch, useAppSelector} from '../../../store/store';
 import {registerUserTC} from '../../../store/reducers/authReducer';
 
+import {PATH} from '../../../app/Routing/Routing';
+
 import {Register} from './Register';
+
 
 export type RegisterDataType = {
 	email: string
@@ -13,8 +20,13 @@ export type RegisterDataType = {
 export const RegisterContainer = () => {
 
 	const dispatch = AppDispatch();
+	const navigate = useNavigate();
 
-	console.log('Register render');
+	const registerStatus = useAppSelector<boolean>(state => state.auth.registerStatus);
+
+	useEffect(() => {
+		if (registerStatus) navigate(PATH.login);
+	}, [registerStatus, navigate]);
 
 	const onRegister = (payload: RegisterDataType) => {
 		const data = {
@@ -26,11 +38,16 @@ export const RegisterContainer = () => {
 		}
 	};
 
-
+	const onRedirect = () => {
+		navigate(PATH.login);
+	};
 
 	return (
 		<>
-			<Register onRegister={onRegister}/>
+			<Register
+				onRegister={onRegister}
+				onRedirect={onRedirect}
+			/>
 		</>
 	);
 };
