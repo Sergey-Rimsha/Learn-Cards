@@ -2,6 +2,7 @@ import {AppThunkType} from '../store';
 import {AuthAPI, LoginDataType} from '../../api/Api';
 
 import {setIsAuth, setLoadingStatus} from './appReducer';
+import {RegisterDataType} from "../../features/f0-auth/a0-register/RegisterContainer";
 
 type AuthStateType = {
 	userData: UserDataType,
@@ -108,11 +109,8 @@ export const setIsActiveButton = (isActive: boolean) => {
 export const loginUserTC = (data: LoginDataType): AppThunkType => (dispatch) => {
 
 	dispatch(setLoadingStatus('loading'));
-
 	// clear error
 	dispatch(setLoginError(''));
-
-
 
 	AuthAPI.login(data)
 		.then(res => {
@@ -123,6 +121,21 @@ export const loginUserTC = (data: LoginDataType): AppThunkType => (dispatch) => 
 			// console.log(err.response.data);
 			dispatch(setLoginError(err.response.data.error));
 			dispatch(setIsAuth(false));
+		})
+		.finally(() => {
+			dispatch(setLoadingStatus('idle'));
+		});
+};
+
+export const registerUserTC = (payload: {email: string, password: string}): AppThunkType => (dispatch) => {
+	dispatch(setLoadingStatus('loading'));
+
+	AuthAPI.register(payload)
+		.then(res => {
+			console.log(res);
+		})
+		.catch(err => {
+			console.log(err);
 		})
 		.finally(() => {
 			dispatch(setLoadingStatus('idle'));

@@ -1,8 +1,9 @@
 import {NavLink} from 'react-router-dom';
 
-import {pathWays} from '../../ways/Ways';
+
 
 import styles from './NavigateContainer.module.scss';
+import {PATH} from "../../../app/Routing/Routing";
 
 
 export const NavigateContainer = () => {
@@ -15,49 +16,49 @@ export const NavigateContainer = () => {
 			<div className={styles.navigation__item}>
 				<NavLink
 					className={setActive}
-					to={pathWays.profile}>
+					to={PATH.profile}>
 					profile
 				</NavLink>
 			</div>
 			<div className={styles.navigation__item}>
 				<NavLink
 					className={setActive}
-					to={pathWays.login}>
+					to={PATH.login}>
 					login
 				</NavLink>
 			</div>
 			<div className={styles.navigation__item}>
 				<NavLink
 					className={setActive}
-					to={pathWays.registration}>
+					to={PATH.register}>
 					registration
 				</NavLink>
 			</div>
 			<div className={styles.navigation__item}>
 				<NavLink
 					className={setActive}
-					to={pathWays.recovery}>
+					to={PATH.recovery}>
 					recovery password
 				</NavLink>
 			</div>
 			<div className={styles.navigation__item}>
 				<NavLink
 					className={setActive}
-					to={pathWays.newPassword}>
+					to={PATH.newPassword}>
 					new password
 				</NavLink>
 			</div>
 			<div className={styles.navigation__item}>
 				<NavLink
 					className={setActive}
-					to={pathWays.notFound}>
+					to={PATH.notFound}>
 					not found
 				</NavLink>
 			</div>
 			<div className={styles.navigation__item}>
 				<NavLink
 					className={setActive}
-					to={pathWays.testComponents}>
+					to={PATH.testComponents}>
 					test Components
 				</NavLink>
 			</div>

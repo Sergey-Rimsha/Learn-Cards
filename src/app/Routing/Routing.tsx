@@ -5,11 +5,12 @@ import {LoginContainer} from '../../features/f0-auth/a1-login/LoginContainer';
 import {useAppSelector} from '../../store/store';
 import {LoadingStatusType} from '../../store/reducers/appReducer';
 import {Preloader} from '../../components/c5-Preloader/Preloader';
+import {RegisterContainer} from '../../features/f0-auth/a0-register/RegisterContainer';
 
 export const PATH = {
 	login: 'login',
 	profile: 'profile',
-	registration: 'registration',
+	register: 'register',
 	recovery: 'recovery',
 	newPassword: 'newPassword',
 	notFound: '404',
@@ -26,6 +27,7 @@ export const Routing = () => {
 			{status === 'loading' && <Preloader/>}
 			<Routes>
 				<Route path={PATH.login} element={<LoginContainer/>}/>
+				<Route path={PATH.register} element={<RegisterContainer/>}/>
 			</Routes>
 		</>
 		

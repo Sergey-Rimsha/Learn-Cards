@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {RegisterDataType} from "../features/f0-auth/a0-register/RegisterContainer";
 
 export type LoginDataType = {
 	email: string,
@@ -46,5 +47,7 @@ export const AuthAPI = {
 	login(data: LoginDataType) {
 		return instance.post<AuthResponseType>('auth/login', data);
 	},
-
+	register(payload: {email: string, password: string}) {
+		return instance.post<AuthResponseType>('auth/register', payload);
+	},
 };

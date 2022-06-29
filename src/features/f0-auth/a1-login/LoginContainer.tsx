@@ -1,12 +1,14 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 import {useNavigate} from 'react-router-dom';
 
 // import {AppDispatch} from '../../../store/store';
 
-import {AppDispatch} from '../../../store/store';
+import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {loginUserTC} from '../../../store/reducers/authReducer';
+
+import {PATH} from '../../../app/Routing/Routing';
 
 import {Login} from './login';
 
@@ -24,20 +26,20 @@ export const LoginContainer = () => {
 	// const [activeBtn, setActiveBtn] = useState<boolean>(false);
 
 	// const activeLoginBtn = useSelector<AppRootStateType, boolean>(state => state.auth.activeLoginBtn);
-	// const isAuth = useSelector<AppRootStateType, boolean>(state => state.app.isAuth);
+	const isAuth = useAppSelector<boolean>(state => state.app.isAuth);
 
 	//
-	// useEffect(() => {
-	// 	if (isAuth) navigate(PATH.PROFILE);
-	// },[isAuth, navigate]);
+	useEffect(() => {
+		if (isAuth) navigate(PATH.profile);
+	},[isAuth, navigate]);
 
 	// редирект на если забыли пароль
 	const redirectLink = () => {
-		// navigate(PATH.RECOVERY);
+		navigate(PATH.recovery);
 	};
 
 	const navigateRegistration = () => {
-		// navigate(PATH.REGISTRATION);
+		navigate(PATH.register);
 	};
 
 	// слушаем импут email и записывает в setState

@@ -7,7 +7,7 @@ import s from './TextField.module.scss';
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-type InputType = 'text' | 'password'
+type InputType = 'text' | 'password' | 'email'
 
 type TextFieldPropsType = DefaultInputPropsType & {
     label?: string
