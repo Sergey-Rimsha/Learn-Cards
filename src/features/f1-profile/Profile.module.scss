@@ -1,0 +1,35 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.block {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.profile {
+	width: 413px;
+	height: 540px;
+	background: $bgWhite;
+	border-radius: 8px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	&__title {
+		@include FontPoppins();
+		font-style: normal;
+		font-size: 22px;
+		line-height: 33px;
+		margin-top: 36px;
+	}
+
+	&__ava {
+		width: 96px;
+		height: 96px;
+		border: 1px solid red;
+		border-radius: 50%;
+		margin-top: 15px;
+	}
+}

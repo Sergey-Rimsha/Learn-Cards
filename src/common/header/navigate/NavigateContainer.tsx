@@ -1,13 +1,10 @@
 import {NavLink} from 'react-router-dom';
 
-
-
 import styles from './NavigateContainer.module.scss';
 import {PATH} from "../../../app/Routing/Routing";
 
 
 export const NavigateContainer = () => {
-
 
 	const setActive = ({isActive}: any) => (isActive ? styles.navigation__item_active : '');
 
