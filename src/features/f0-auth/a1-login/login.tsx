@@ -2,10 +2,10 @@ import {ChangeEvent} from 'react';
 
 import {TextField} from '../../../components/c4-Textfield/TextField';
 
+import SuperCheckbox from '../../../components/c3-SuperCheckbox/SuperCheckbox';
+import {useAppSelector} from '../../../store/store';
+
 import s from './login.module.scss';
-import SuperButton from "../../../components/c2-SuperButton/SuperButton";
-import SuperCheckbox from "../../../components/c3-SuperCheckbox/SuperCheckbox";
-import {useAppSelector} from "../../../store/store";
 
 type LoginPropsType = {
 	email: string

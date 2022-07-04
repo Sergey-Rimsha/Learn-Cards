@@ -32,4 +32,47 @@
 		border-radius: 50%;
 		margin-top: 15px;
 	}
+
+	&__name {
+		@include FontPoppins();
+		font-style: normal;
+		font-size: 24px;
+		line-height: 27px;
+		margin-top: 40px;
+		color: $base-color;
+	}
+
+	&__profession {
+		@include FontSanFrancisco();
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 17px;
+		margin-top: 30px;
+		color: $base-color;
+		opacity: 0.5;
+	}
+
+	&__editBtn {
+		width: 124px;
+		height: 36px;
+		background-color: $bgWhite;
+		border: 1px solid #635D80;
+		border-radius: 2px;
+
+		margin-top: 45px;
+
+		@include FontSanFrancisco();
+		font-style: normal;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 14px;
+		color: $link-color;
+
+		&:hover {
+			background-color: #D7D8EF;;
+		}
+	}
+
 }
+
