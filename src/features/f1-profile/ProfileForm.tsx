@@ -1,18 +1,30 @@
-import React from 'react';
+import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 
 import {TextField} from '../../components/c4-Textfield/TextField';
 
 import s from './ProfileForm.module.scss';
 
 type ProfileFormType = {
+	name: string
 	onClickEditMode: (edit: boolean) => void
+	onChangeProfile: (name?: string, avatar?: string) => void
 }
 
 export const ProfileForm = (props: ProfileFormType) => {
 
-	const {onClickEditMode } = props;
+	const {onClickEditMode, name, onChangeProfile} = props;
 
-	const sevData = () => {
+	const [newName, setNewName] = useState('');
+	const [avatar, setAvatar] = useState<any>();
+
+	const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+		setNewName(e.currentTarget.value);
+	};
+
+
+	const sevData = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		onChangeProfile(newName, avatar);
 		onClickEditMode(false);
 	};
 
@@ -20,14 +32,23 @@ export const ProfileForm = (props: ProfileFormType) => {
 		onClickEditMode(false);
 	};
 
+	const onLoadedFile = (e: ChangeEvent<HTMLInputElement>) => {
+		let files = e.currentTarget.files;
+		if (files) setAvatar(files);
+	};
+
+	useEffect(() => {
+		setNewName(name);
+	},[name]);
+
 
 	return (
-		<form className={s.form}>
+		<form onSubmit={sevData} className={s.form}>
 			<div className={s.form__input}>
-				<TextField label={'name'} type={'text'}/>
+				<TextField onChange={onChangeName} value={newName} label={'name'} type={'text'}/>
 			</div>
 			<div className={s.form__input}>
-				<TextField label={'email'} type={'email'}/>
+				<input onChange={onLoadedFile} type={'file'} name={'ava'}/>
 			</div>
 			<div className={s.form__wrapBtn}>
 				<button
@@ -39,7 +60,7 @@ export const ProfileForm = (props: ProfileFormType) => {
 				<button
 					className={`${s.form__btn} ${s.form__btn_reg}`}
 					disabled={false}
-					onClick={sevData}>
+					type={'submit'}>
 					Save
 				</button>
 			</div>

@@ -1,13 +1,10 @@
 import {AppThunkType} from '../store';
-import {AuthAPI, LoginDataType} from '../../api/Api';
-
-import {RegisterDataType} from '../../features/f0-auth/a0-register/RegisterContainer';
+import {API, LoginDataType} from '../../api/Api';
 
 import {setIsAuth, setLoadingStatus} from './appReducer';
+import {setUserData} from "./profileReducer";
 
 type AuthStateType = {
-	userData: UserDataType,
-	
 	loginError?: string
 	registerStatus: boolean
 	
@@ -19,35 +16,9 @@ export type AuthActionType = ReturnType<typeof setUserData>
 	| ReturnType<typeof setIsActiveButton>
 	| ReturnType<typeof setRegisterStatus>
 
-export type UserDataType = {
-	_id: string
-	email: string
-	name: string
-	avatar?: string
-	publicCardPacksCount: number
-	created: string
-	updated: string
-	isAdmin: boolean
-	verified: boolean
-	rememberMe: boolean
-	error?: string;
-}
 
 
 const initialState: AuthStateType = {
-	userData: {
-		_id: '',
-		email: '',
-		name: '',
-		avatar: '',
-		publicCardPacksCount: 0,
-		created: '',
-		updated: '',
-		isAdmin: false,
-		verified: false,
-		rememberMe: false,
-		error: '',
-	},
 
 	loginError: '',
 	registerStatus: false,
@@ -57,12 +28,6 @@ const initialState: AuthStateType = {
 export const authReducer = (state = initialState, action: AuthActionType ): AuthStateType => {
 
 	switch (action.type) {
-		case 'AUTH/SET_USER_DATA': {
-			return {
-				...state,
-				userData: action.data,
-			};
-		}
 		case 'AUTH/SET_LOGIN_ERROR': {
 			return {
 				...state,
@@ -88,13 +53,7 @@ export const authReducer = (state = initialState, action: AuthActionType ): Auth
 
 // action creator
 
-// save data users
-export const setUserData = (data: UserDataType) => {
-	return {
-		type: 'AUTH/SET_USER_DATA',
-		data,
-	} as const;
-};
+
 
 // save error message
 export const setLoginError = (error: string) => {
@@ -127,7 +86,7 @@ export const loginUserTC = (data: LoginDataType): AppThunkType => (dispatch) => 
 	// clear error
 	dispatch(setLoginError(''));
 
-	AuthAPI.login(data)
+	API.login(data)
 		.then(res => {
 			dispatch(setUserData(res.data));
 			dispatch(setIsAuth(true));
@@ -145,7 +104,7 @@ export const loginUserTC = (data: LoginDataType): AppThunkType => (dispatch) => 
 export const registerUserTC = (payload: {email: string, password: string}): AppThunkType => (dispatch) => {
 	dispatch(setLoadingStatus('loading'));
 
-	AuthAPI.register(payload)
+	API.register(payload)
 		.then(res => {
 			console.log(res);
 			dispatch(setRegisterStatus(true));

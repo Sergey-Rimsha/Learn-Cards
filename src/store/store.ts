@@ -1,10 +1,9 @@
-
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
 
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
-import {ProfileActionType, profileReducer} from './profileReducer';
+import {ProfileActionType, profileReducer} from './reducers/profileReducer';
 import {PasswordActionType, passwordReducer} from './passwordReducer';
 import {RecoveryActionType, recoveryReducer} from './recoveryReducer';
 import {RegistrationActionType, registrationReducer} from './registrationReducer';

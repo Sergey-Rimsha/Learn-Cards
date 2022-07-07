@@ -1,5 +1,8 @@
-
 import React, {useState} from 'react';
+
+
+
+import {UserDataType} from '../../store/reducers/profileReducer';
 
 import s from './Profile.module.scss';
 import {ProfileForm} from './ProfileForm';
@@ -7,31 +10,32 @@ import {ProfileForm} from './ProfileForm';
 type ProfilePropsType = {
 	editMode: boolean
 	onClickEditMode: (edit: boolean) => void
+	onChangeProfile: (name?: string, avatar?: string) => void
+	userData: UserDataType
 }
 
 export const Profile = (props: ProfilePropsType) => {
 
-	const {editMode, onClickEditMode} = props;
+	const {editMode, onClickEditMode, userData, onChangeProfile} = props;
 
 	const onEditButton = () => {
-		console.log('sdasd');
 		onClickEditMode(true);
 	};
 
 	return (
 		<div className={s.block}>
-			<section className={s.profile}>
+			<div className={s.profile}>
 				<div className={s.profile__title}>
 					Personal Information
 				</div>
 				<div className={s.profile__ava}>
-					<img src={''} alt={'ava'}/>
+					<img src={userData.avatar} alt={'ava'}/>
 				</div>
 
 				{!editMode &&
 					<>
 						<div className={s.profile__name}>
-							Ivan Ivanov
+							{userData.name}
 						</div>
 						<div className={s.profile__profession}>
 							Front-end developer
@@ -44,12 +48,14 @@ export const Profile = (props: ProfilePropsType) => {
 					</>
 				}
 
-
-				{editMode && <ProfileForm onClickEditMode={onClickEditMode}/>}
-
-
-			</section>
-
+				{
+					editMode &&
+					<ProfileForm
+						name={userData.name}
+						onChangeProfile={onChangeProfile}
+						onClickEditMode={onClickEditMode}/>
+				}
+			</div>
 		</div>
 	);
 };

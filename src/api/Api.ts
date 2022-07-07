@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {RegisterDataType} from "../features/f0-auth/a0-register/RegisterContainer";
 
 export type LoginDataType = {
 	email: string,
@@ -31,6 +30,18 @@ export type AuthResponseError = {
 	passwordRegExp: string
 }
 
+export type ChangeProfileType = {
+	name?: string
+	avatar?: string
+}
+
+
+export type PutResponseType = {
+	token: '1a50f000-fe30-11ec-a794-9994a5d7f3bf'
+	tokenDeathTime: 1657829109504
+	updatedUser: AuthResponseType
+}
+
 const instance = axios.create({
 	// process.env.REACT_APP_BACK_URL || для gh-page
 	// https://neko-back.herokuapp.com/2.0/ для gh-page
@@ -42,12 +53,19 @@ const instance = axios.create({
 
 
 
-export const AuthAPI = {
+export const API = {
 
 	login(data: LoginDataType) {
 		return instance.post<AuthResponseType>('auth/login', data);
 	},
-	register(payload: {email: string, password: string}) {
-		return instance.post<AuthResponseType>('auth/register', payload);
+	register(data: {email: string, password: string}) {
+		return instance.post<AuthResponseType>('auth/register', data);
 	},
+	me() {
+		return instance.put<AuthResponseType>('auth/me', {});
+	},
+	changeProfile(data: ChangeProfileType) {
+		return instance.put<PutResponseType>('auth/me', data);
+	},
+
 };
