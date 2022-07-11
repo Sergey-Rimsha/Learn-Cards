@@ -1,4 +1,4 @@
-import {ChangeEvent} from 'react';
+import React from 'react';
 
 import {TextField} from '../../../components/c4-Textfield/TextField';
 
@@ -6,16 +6,14 @@ import SuperCheckbox from '../../../components/c3-SuperCheckbox/SuperCheckbox';
 import {useAppSelector} from '../../../store/store';
 
 import s from './login.module.scss';
+import {FormikLoginErrorType} from './LoginContainer';
 
 type LoginPropsType = {
-	email: string
-	password: string
-	activeLoginBtn: boolean
-	rememberMe: boolean
-	onChangeHandlerEmail: (e: ChangeEvent<HTMLInputElement>) => void
-	onChangeHandlerPassword: (e: ChangeEvent<HTMLInputElement>) => void
-	onChangeChecked: (e: ChangeEvent<HTMLInputElement>) => void
-	onSubmitHandler: () => void
+	formikValue: {email: string, password: string, toggle: boolean, loginError: string}
+	formikErrors: FormikLoginErrorType
+	formikTouched: any
+	handleChange: (e: React.ChangeEvent<any>) => void
+	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 	redirectLink: () => void
 	navigateRegistration: () => void
 }
@@ -32,26 +30,53 @@ export const Login = (props: LoginPropsType) => {
 		<section className={s.blockLogin}>
 			<div className={s.login}>
 				<h2 className={s.login__logo}>It-incubator</h2>
-				<form className={s.form}>
+				<form className={s.form} onSubmit={props.handleSubmit}>
 					<h3 className={s.form__title}>Sign In</h3>
 
 					<div className={s.form__group}>
 						<TextField
-							label={'Email'}
-							onChange={props.onChangeHandlerEmail}
-							value={props.email}
-							type={'text'}/>
+							id='email'
+							name='email'
+							label='email'
+							type='text'
+							value={props.formikValue.email}
+							onChange={props.handleChange}
+						/>
 					</div>
+
+					{
+						props.formikTouched.email &&
+						props.formikErrors.email &&
+						<div style={{color: 'red'}}>
+							{props.formikErrors.email}
+						</div>
+					}
 
 					<div className={s.form__group}>
 						<TextField
-							label={'Password'}
-							onChange={props.onChangeHandlerPassword}
-							value={props.password}
-							type={'password'}/>
+							id='password'
+							name='password'
+							type='password'
+							value={props.formikValue.password}
+							onChange={props.handleChange}
+						/>
 					</div>
 
-					<SuperCheckbox onChange={props.onChangeChecked} checked={props.rememberMe}>
+					{
+						props.formikTouched.email &&
+						props.formikErrors.password &&
+						<div style={{color: 'red'}}>
+							{props.formikErrors.password}
+						</div>
+					}
+
+					<SuperCheckbox
+						id='toggle'
+						name='toggle'
+						type='checkbox'
+						checked={props.formikValue.toggle}
+						onChange={props.handleChange}
+					>
 						remember Me
 					</SuperCheckbox>
 
@@ -60,20 +85,14 @@ export const Login = (props: LoginPropsType) => {
 					</div>
 
 					{/*показываем ошибку если отправка api не удалась*/}
-					<span className={s.form__errorMessage}>{error}</span>
+					<span className={s.form__errorMessage}>
+						{props.formikErrors.loginError}
+					</span>
 
 					<div className={s.form__buttonWrap}>
-						{/*<Button*/}
-						{/*	disabled={props.activeLoginBtn}*/}
-						{/*	onClick={props.onSubmitHandler}*/}
-						{/*	width={'266px'}>*/}
-						{/*	Login*/}
-						{/*</Button>*/}
-						{/*<button className={s.form__button} type={'submit'}>Login</button>*/}
-
 						<button
 							className={s.form__button}
-							onClick={props.onSubmitHandler}>
+							type='submit'>
 							Login
 						</button>
 					</div>

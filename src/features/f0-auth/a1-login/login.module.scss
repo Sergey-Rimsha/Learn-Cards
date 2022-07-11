@@ -10,7 +10,7 @@
 
 .login {
 	width: 413px;
-	height: 600px;
+	min-height: 600px;
 	background: $bgWhite;
 	border-radius: 8px;
 	display: flex;
@@ -106,6 +106,7 @@
 		line-height: 24px;
 		text-align: center;
 		color: $link-color;
+		margin-bottom: 10px;
 	}
 }
 

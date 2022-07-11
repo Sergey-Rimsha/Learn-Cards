@@ -1,17 +1,24 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 
 import {useNavigate} from 'react-router-dom';
 
 // import {AppDispatch} from '../../../store/store';
+import {useFormik} from 'formik';
 
 import {AppDispatch, useAppSelector} from '../../../store/store';
 
-import {loginUserTC} from '../../../store/reducers/authReducer';
+import {loginUserTC, setLoginError} from '../../../store/reducers/authReducer';
 
 import {PATH} from '../../../app/Routing/Routing';
 
 import {Login} from './login';
 
+
+export type FormikLoginErrorType = {
+	email?: string
+	password?: string
+	loginError?: string
+}
 
 
 export const LoginContainer = () => {
@@ -20,18 +27,14 @@ export const LoginContainer = () => {
 
 	const dispatch = AppDispatch();
 
-	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
-	const [rememberMe, setRememberMe] = useState<boolean>(false);
-	// const [activeBtn, setActiveBtn] = useState<boolean>(false);
-
-	// const activeLoginBtn = useSelector<AppRootStateType, boolean>(state => state.auth.activeLoginBtn);
 	const isAuth = useAppSelector<boolean>(state => state.app.isAuth);
+
+	const loginError = useAppSelector<string | undefined>(state => state.auth.loginError);
 
 	//
 	useEffect(() => {
 		if (isAuth) navigate(PATH.profile);
-	},[isAuth, navigate]);
+	}, [isAuth, navigate]);
 
 	// редирект на если забыли пароль
 	const redirectLink = () => {
@@ -42,45 +45,73 @@ export const LoginContainer = () => {
 		navigate(PATH.register);
 	};
 
-	// слушаем импут email и записывает в setState
-	const onChangeHandlerEmail = (e: ChangeEvent<HTMLInputElement>) => {
-		setEmail(e.currentTarget.value);
-	};
+	const formik = useFormik({
+		initialValues: {
+			email: '',
+			password: '',
+			toggle: false,
+			loginError: '',
+		},
+		validate: (values) => {
+			const errors: FormikLoginErrorType = {};
+			if (!values.email) {
+				errors.email = 'Required';
+			} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+				errors.email = 'Invalid email address';
+			}
 
-	// слушаем checked input remember Me
-	const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
-		setRememberMe(e.currentTarget.checked);
-	};
+			if (!values.password) {
+				errors.password = 'Пароль обязателен';
+			} else if (values.password.length < 7) {
+				errors.password = 'Пароль должен быть больше 7 символов';
+			}
 
+			if (loginError) {
+				formik.errors.loginError = loginError;
+			}
 
-	// слушаем импут password и записывает в setState
-	const onChangeHandlerPassword = (e: ChangeEvent<HTMLInputElement>) => {
-		setPassword(e.currentTarget.value);
-	};
-
-	// слушаем событие на кнопке onClick и отправляем password and email
-	const onSubmitHandler = () => {
-		// validate data email password
-		if (email.length > 5 && password.length > 7) {
-
-			// упакавали в obj email password rememberMe
-			const data = {email, password, rememberMe};
+			return errors;
+		},
+		onSubmit: (values, actions) => {
+			const data = {
+				email: values.email,
+				password: values.password,
+				rememberMe: values.toggle,
+			};
 			// dispatch ThunkCreator
+
 			dispatch(loginUserTC(data));
-		}
-	};
+			// actions.setErrors({loginError});
+
+		},
+	});
+
+	// if (formik.touched) {
+	// 	dispatch(setLoginError(''));
+	// 	formik.errors.loginError = '';
+	// }
+	//
+
+	if (loginError) {
+		formik.errors.loginError = loginError;
+	}
+
+	// useEffect(() => {
+	// 	if (formik.touched.email || formik.touched.password) {
+	// 		dispatch(setLoginError(''));
+	// 		formik.errors.loginError = loginError;
+	// 	}
+	// }, [loginError, dispatch, formik.touched, formik.errors]);
+
 
 	return (
 		<>
 			<Login
-				email={email}
-				password={password}
-				activeLoginBtn={false}
-				rememberMe={rememberMe}
-				onChangeChecked={onChangeChecked}
-				onChangeHandlerEmail={onChangeHandlerEmail}
-				onChangeHandlerPassword={onChangeHandlerPassword}
-				onSubmitHandler={onSubmitHandler}
+				formikValue={formik.values}
+				formikErrors={formik.errors}
+				formikTouched={formik.touched}
+				handleChange={formik.handleChange}
+				handleSubmit={formik.handleSubmit}
 				redirectLink={redirectLink}
 				navigateRegistration={navigateRegistration}
 			/>
