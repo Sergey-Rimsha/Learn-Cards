@@ -20,18 +20,22 @@ export type FormikLoginErrorType = {
 	loginError?: string
 }
 
+export type FormikStateType = {
+	email: string
+	password: string
+	toggle: boolean
+	loginError: string
+}
+
 
 export const LoginContainer = () => {
 
 	const navigate = useNavigate();
-
 	const dispatch = AppDispatch();
 
 	const isAuth = useAppSelector<boolean>(state => state.app.isAuth);
-
 	const loginError = useAppSelector<string | undefined>(state => state.auth.loginError);
 
-	//
 	useEffect(() => {
 		if (isAuth) navigate(PATH.profile);
 	}, [isAuth, navigate]);
@@ -72,36 +76,27 @@ export const LoginContainer = () => {
 
 			return errors;
 		},
-		onSubmit: (values, actions) => {
+		onSubmit: (values) => {
 			const data = {
 				email: values.email,
 				password: values.password,
 				rememberMe: values.toggle,
 			};
+
 			// dispatch ThunkCreator
-
 			dispatch(loginUserTC(data));
-			// actions.setErrors({loginError});
-
 		},
 	});
 
-	// if (formik.touched) {
-	// 	dispatch(setLoginError(''));
-	// 	formik.errors.loginError = '';
-	// }
-	//
 
-	if (loginError) {
-		formik.errors.loginError = loginError;
-	}
-
-	// useEffect(() => {
-	// 	if (formik.touched.email || formik.touched.password) {
-	// 		dispatch(setLoginError(''));
-	// 		formik.errors.loginError = loginError;
-	// 	}
-	// }, [loginError, dispatch, formik.touched, formik.errors]);
+	useEffect(() => {
+		if (loginError) {
+			formik.setErrors({loginError: loginError});
+		}
+		if (formik.touched.email || formik.touched.password) {
+			dispatch(setLoginError(''));
+		}
+	}, [loginError, formik, dispatch]);
 
 
 	return (

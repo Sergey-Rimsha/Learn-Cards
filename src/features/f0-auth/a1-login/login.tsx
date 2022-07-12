@@ -1,30 +1,25 @@
 import React from 'react';
 
+import {FormikTouched} from 'formik/dist/types';
+
 import {TextField} from '../../../components/c4-Textfield/TextField';
 
 import SuperCheckbox from '../../../components/c3-SuperCheckbox/SuperCheckbox';
-import {useAppSelector} from '../../../store/store';
 
 import s from './login.module.scss';
-import {FormikLoginErrorType} from './LoginContainer';
+import {FormikLoginErrorType, FormikStateType} from './LoginContainer';
 
 type LoginPropsType = {
-	formikValue: {email: string, password: string, toggle: boolean, loginError: string}
+	formikValue: FormikStateType
 	formikErrors: FormikLoginErrorType
-	formikTouched: any
-	handleChange: (e: React.ChangeEvent<any>) => void
+	formikTouched: FormikTouched<FormikStateType>
+	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 	redirectLink: () => void
 	navigateRegistration: () => void
 }
 
 export const Login = (props: LoginPropsType) => {
-
-	// const error = useSelector<AppRootStateType, string | undefined>(state => state.auth.error);
-
-	const error = useAppSelector<string | undefined>(state => state.auth.loginError);
-
-	// console.log('render login');
 
 	return (
 		<section className={s.blockLogin}>
@@ -47,9 +42,9 @@ export const Login = (props: LoginPropsType) => {
 					{
 						props.formikTouched.email &&
 						props.formikErrors.email &&
-						<div style={{color: 'red'}}>
+						<span className={s.form__errorMessage}>
 							{props.formikErrors.email}
-						</div>
+						</span>
 					}
 
 					<div className={s.form__group}>
@@ -57,6 +52,7 @@ export const Login = (props: LoginPropsType) => {
 							id='password'
 							name='password'
 							type='password'
+							label='password'
 							value={props.formikValue.password}
 							onChange={props.handleChange}
 						/>
@@ -65,20 +61,22 @@ export const Login = (props: LoginPropsType) => {
 					{
 						props.formikTouched.email &&
 						props.formikErrors.password &&
-						<div style={{color: 'red'}}>
+						<span className={s.form__errorMessage}>
 							{props.formikErrors.password}
-						</div>
+						</span>
 					}
 
-					<SuperCheckbox
-						id='toggle'
-						name='toggle'
-						type='checkbox'
-						checked={props.formikValue.toggle}
-						onChange={props.handleChange}
-					>
-						remember Me
-					</SuperCheckbox>
+					<div className={s.form__group}>
+						<SuperCheckbox
+							id='toggle'
+							name='toggle'
+							type='checkbox'
+							checked={props.formikValue.toggle}
+							onChange={props.handleChange}
+						>
+							remember Me
+						</SuperCheckbox>
+					</div>
 
 					<div className={s.form__forgot}>
 						<span onClick={props.redirectLink}>Forgot Password</span>
