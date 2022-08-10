@@ -1,4 +1,5 @@
-@import '../../common/style/mixins';
+//@import './../src/styles/mixins';
+//@import './../src/styles/variables';
 
 $colorBg: #ECECF9;
 $colorWhite: #FFFFFF;
@@ -19,13 +20,16 @@ $colorGray: #F8F7FD;
 	& th {
 		padding-right: 24px;
 		padding-left: 24px;
+		max-width: 200px;
+		max-height: 50px;
 	}
 
 
 	&__head {
 		height: 48px;
 		background-color: $colorBg;
-		@include FontSanFrancisco();
+		//@include FontSanFrancisco();
+		font-family: 'SF UI Display', sans-serif;
 		font-style: normal;
 		font-weight: 700;
 		font-size: 13px;
@@ -34,7 +38,8 @@ $colorGray: #F8F7FD;
 	}
 
 	&__body {
-		@include FontSanFrancisco();
+		//@include FontSanFrancisco();
+		font-family: 'SF UI Display', sans-serif;
 		font-style: normal;
 		font-weight: 400;
 		font-size: 13px;
@@ -70,7 +75,8 @@ $colorGray: #F8F7FD;
 		width: 48px;
 		cursor: pointer;
 
-		@include FontSanFrancisco();
+		//@include FontSanFrancisco();
+		font-family: 'SF UI Display', sans-serif;
 		font-style: normal;
 		font-weight: 600;
 		font-size: 12px;

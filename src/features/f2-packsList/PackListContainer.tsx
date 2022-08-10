@@ -5,8 +5,8 @@ import {AppDispatch, useAppSelector} from '../../store/store';
 import {addCardsPack} from '../../store/reducers/packListReducer';
 
 import {LoadingStatusType} from '../../store/reducers/appReducer';
-
-import {TablePacks} from './TablePacks';
+import {TablePacksContainer} from "./p0-tablePack/TablePacksContainer";
+import {PacksList} from "./PacksList";
 
 export const PackListContainer = () => {
 	
@@ -40,16 +40,10 @@ export const PackListContainer = () => {
 
 	return (
 		<div>
-			<div>
-				<input onChange={onChangePackName}
-					   value={namePack}
-					   disabled={isLoading}/>
-				<button onClick={onHandlerSubmitPackName}
-						disabled={isLoading}>
-					add new pack
-				</button>
-			</div>
-			<TablePacks/>
+			<PacksList
+				// onChangePackName={onChangePackName}
+				onHandlerSubmitPackName={onHandlerSubmitPackName}
+			/>
 		</div>
 
 	);
