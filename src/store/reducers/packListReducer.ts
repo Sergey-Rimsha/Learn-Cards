@@ -1,3 +1,7 @@
+import {AppThunkType} from '../store';
+import {apiCards, NewCardsPack} from '../../api/Api';
+
+import {setLoadingStatus} from './appReducer';
 
 export type CardPacksType = {
 	cardsCount: number
@@ -72,10 +76,61 @@ export const packListReducer = (state = initialState, acton: PackListActionType)
 	}
 };
 
-
+// action creator
 export const setPackList = (data: PackStateType) => {
 	return {
 		type: 'PACK/SET-PACK_LIST',
 		data,
 	} as const;
+};
+
+// thunk creators!!!
+export const getCardsPacks = ():AppThunkType => (dispatch, getState) => {
+	dispatch(setLoadingStatus('loading'));
+
+	const pageCount = getState().packList.pageCount;
+	const page = getState().packList.page;
+
+	apiCards.getCards({pageCount, page})
+		.then(res => {
+			// console.log(res.data);
+			dispatch(setPackList(res.data));
+		})
+		.catch(err => {
+			// console.log(err);
+		})
+		.finally(() => {
+			dispatch(setLoadingStatus('idle'));
+		});
+};
+
+export const addCardsPack = (data: NewCardsPack): AppThunkType => (dispatch) => {
+	dispatch(setLoadingStatus('loading'));
+	apiCards.postCards(data)
+	.then(res => {
+		// console.log(res);
+		dispatch(getCardsPacks());
+	})
+	.catch(err => {
+		// console.log(err);
+	})
+	.finally(() => {
+		dispatch(setLoadingStatus('idle'));
+	});
+};
+
+export const delCardsPack = (id: string):AppThunkType => (dispatch) => {
+
+	dispatch(setLoadingStatus('loading'));
+
+	apiCards.deletePack(id)
+		.then((res) => {
+			dispatch(getCardsPacks());
+		})
+		.catch((err) => {
+			// console.log(err);
+		})
+		.finally(() => {
+			dispatch(setLoadingStatus('idle'));
+		});
 };

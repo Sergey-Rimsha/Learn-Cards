@@ -59,6 +59,13 @@ export const NavigateContainer = () => {
 					test Components
 				</NavLink>
 			</div>
+			<div className={styles.navigation__item}>
+				<NavLink
+					className={setActive}
+					to={PATH.packList}>
+					packList
+				</NavLink>
+			</div>
 		</nav>
 	);
 };

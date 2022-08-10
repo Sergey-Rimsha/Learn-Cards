@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {PackStateType} from "../store/reducers/packListReducer";
 
 export type LoginDataType = {
 	email: string,
@@ -35,6 +36,22 @@ export type ChangeProfileType = {
 	avatar?: string
 }
 
+export type GetParamsType = {
+	packName?: string
+	min?: number
+	max?: number
+	sortPacks?: string
+	page?: number
+	pageCount?: number
+	user_id?: string
+}
+
+export type NewCardsPack = {
+	name?: string
+	deckCover?: string
+	private?: boolean
+}
+
 
 export type PutResponseType = {
 	token: '1a50f000-fe30-11ec-a794-9994a5d7f3bf'
@@ -68,4 +85,19 @@ export const API = {
 		return instance.put<PutResponseType>('auth/me', data);
 	},
 
+};
+
+
+export const apiCards = {
+	getCards(params?: GetParamsType) {
+		return instance.get<PackStateType>('cards/pack', {params});
+	},
+
+	postCards(cardsPack: NewCardsPack) {
+		return instance.post<PackStateType>('cards/pack', {cardsPack});
+	},
+
+	deletePack(idPack: string) {
+		return instance.delete<PackStateType>('cards/pack', {params:{id: idPack}});
+	},
 };

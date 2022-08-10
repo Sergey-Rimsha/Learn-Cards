@@ -1,38 +1,39 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {useDispatch, useSelector} from 'react-redux';
+import {CardPacksType, delCardsPack, getCardsPacks} from '../../store/reducers/packListReducer';
 
-import {Dispatch} from 'redux';
+import {AppDispatch, useAppSelector} from '../../store/store';
 
-import {AppRootStateType} from '../../store/store';
+import {LoadingStatusType} from '../../store/reducers/appReducer';
 
 import s from './TablePacks.module.scss';
-import {apiCards} from './api/api';
 
-import {CardPacksType, PackListActionType, setPackList} from './api/n0-bll/packListReducer';
 
 export const TablePacks = () => {
 
-    const dispatch = useDispatch<Dispatch<PackListActionType>>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    
+    const dispatch = AppDispatch();
+    const cardPacks = useAppSelector<Array<CardPacksType>>(state => state.packList.cardPacks);
 
-    const cardPacks = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.tablePacks.cardPacks);
-    const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
+    const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
 
 
     useEffect(() => {
-        apiCards.getCards({pageCount: 10, page: 1})
-            .then(res => {
-                // console.log(res.data);
-                dispatch(setPackList(res.data));
-            })
-            .catch(err => {
-                // console.log(err);
-            });
+        dispatch(getCardsPacks());
     }, []);
+
+    useEffect(() => {
+        if (loadingStatus === 'loading') {
+            setIsLoading(true);
+        } else {
+            setIsLoading(false);
+        }
+    },[loadingStatus]);
 
     // для удаления pack карточек
     const onClickDeletePack = (id: string) => {
-        apiCards.deletePack(id);
+        dispatch(delCardsPack(id));
     };
 
     const renderCardsPacks = (): any => {

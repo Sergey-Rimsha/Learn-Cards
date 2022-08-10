@@ -9,6 +9,7 @@ import {RecoveryActionType, recoveryReducer} from './recoveryReducer';
 import {RegistrationActionType, registrationReducer} from './registrationReducer';
 import {AuthActionType, authReducer} from './reducers/authReducer';
 import {AppActionType, appReducer} from './reducers/appReducer';
+import {packListReducer} from "./reducers/packListReducer";
 
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
@@ -28,7 +29,6 @@ export const AppDispatch = () => useDispatch<ThunkDispatch<AppRootStateType,void
 export type AppThunkType = ThunkAction<void, AppRootStateType, unknown, AnyAction>
 
 // универсальный селектор для типизации всего приложения
-
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector;
 
 
@@ -39,6 +39,8 @@ const rootReducer = combineReducers({
 	password: passwordReducer,
 	recovery: recoveryReducer,
 	registration: registrationReducer,
+
+	packList: packListReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
