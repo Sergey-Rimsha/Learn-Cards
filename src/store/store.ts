@@ -3,12 +3,13 @@ import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
 
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
+import {composeWithDevTools} from 'redux-devtools-extension';
+
 import {ProfileActionType, profileReducer} from './reducers/profileReducer';
 
 import {AuthActionType, authReducer} from './reducers/authReducer';
 import {AppActionType, appReducer} from './reducers/appReducer';
 import {PackListActionType, packListReducer} from './reducers/packListReducer';
-
 
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
@@ -37,4 +38,4 @@ const rootReducer = combineReducers({
 	packList: packListReducer,
 });
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

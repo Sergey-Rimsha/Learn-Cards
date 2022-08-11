@@ -34,6 +34,7 @@ export type PackStateType = {
 }
 
 export type PackListActionType = ReturnType<typeof setPackList>
+	| ReturnType<typeof setParamsPage>
 
 const initialState: PackStateType = {
 	cardPacks: [{
@@ -71,6 +72,13 @@ export const packListReducer = (state = initialState, acton: PackListActionType)
 				...acton.data,
 			};
 		}
+		case 'PACK/SET-PARAMS_PAGE': {
+			return  {
+				...state,
+				page: acton.page,
+				pageCount: acton.pageCount,
+			};
+		}
 
 		default: return state;
 	}
@@ -81,6 +89,15 @@ export const setPackList = (data: PackStateType) => {
 	return {
 		type: 'PACK/SET-PACK_LIST',
 		data,
+	} as const;
+};
+
+// change params Pagination CurrentPage and PageCount
+export const setParamsPage = (pageCount: number, page: number) => {
+	return {
+		type: 'PACK/SET-PARAMS_PAGE',
+		pageCount,
+		page,
 	} as const;
 };
 

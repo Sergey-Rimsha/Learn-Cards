@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PaginationContainer from '../../components/c6-Pagination/PaginationContainer';
+
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
 
@@ -23,7 +25,7 @@ export const PacksList = (props: PacksListPropsType) => {
                     <div className={s.main}>
                         <h2 className={s.main__title}>Packs list</h2>
                         <TablePacksContainer/>
-                        {/*<PaginationContainer/>*/}
+                        <PaginationContainer/>
                     </div>
                 </div>
             </div>

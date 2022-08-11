@@ -2,12 +2,11 @@ import {AppThunkType} from '../store';
 import {API, LoginDataType} from '../../api/Api';
 
 import {setIsAuth, setLoadingStatus} from './appReducer';
-import {setUserData} from "./profileReducer";
+import {setUserData} from './profileReducer';
 
 type AuthStateType = {
 	loginError?: string
 	registerStatus: boolean
-	
 	activeButton: boolean
 }
 
@@ -19,7 +18,6 @@ export type AuthActionType = ReturnType<typeof setUserData>
 
 
 const initialState: AuthStateType = {
-
 	loginError: '',
 	registerStatus: false,
 	activeButton: false,
@@ -53,8 +51,6 @@ export const authReducer = (state = initialState, action: AuthActionType ): Auth
 
 // action creator
 
-
-
 // save error message
 export const setLoginError = (error: string) => {
 	return {
@@ -79,6 +75,7 @@ export const setRegisterStatus = (status: boolean) => {
 
 
 //Thunk Creator
+
 // login -> post {data-> email password, remember Me}
 export const loginUserTC = (data: LoginDataType): AppThunkType => (dispatch) => {
 
@@ -106,11 +103,11 @@ export const registerUserTC = (payload: {email: string, password: string}): AppT
 
 	API.register(payload)
 		.then(res => {
-			console.log(res);
+			// console.log(res);
 			dispatch(setRegisterStatus(true));
 		})
 		.catch(err => {
-			console.log(err);
+			// console.log(err);
 		})
 		.finally(() => {
 			dispatch(setLoadingStatus('idle'));

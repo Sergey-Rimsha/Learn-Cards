@@ -18,7 +18,8 @@ export const TablePacksContainer = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
 
-	const isAuth = useSelector<AppRootStateType, boolean>(state => state.app.isAuth);
+	// const isAuth = useSelector<AppRootStateType, boolean>(state => state.app.isAuth);
+
 	// const currentPage = useSelector<AppRootStateType, number>(state => state.app.currentPage);
 	// const pageCount = useSelector<AppRootStateType, number>(state => state.app.pageCount);
 	// // для отрисовки моих или всех
@@ -27,6 +28,9 @@ export const TablePacksContainer = () => {
 	// const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
 	// const min = useSelector<AppRootStateType, number>(state => state.tablePacks.params.showMinCard);
 	// const max = useSelector<AppRootStateType, number>(state => state.tablePacks.params.showMaxCard);
+
+	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
+	const currentPage = useAppSelector<number>(state => state.packList.page);
 
 	const [namePack, setNamePack] = useState<string>('');
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
@@ -59,7 +63,7 @@ export const TablePacksContainer = () => {
 
 	useEffect(() => {
 		dispatch(getCardsPacks());
-	},[]);
+	},[pageCount, currentPage, dispatch]);
 
 
 	// для удаления pack карточек
