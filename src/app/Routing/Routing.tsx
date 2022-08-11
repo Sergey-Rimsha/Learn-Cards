@@ -6,6 +6,7 @@ import {RegisterContainer} from '../../features/f0-auth/a0-register/RegisterCont
 import {Layout} from '../Layout';
 import {ProfileContainer} from '../../features/f1-profile/ProfileContainer';
 import {PackListContainer} from '../../features/f2-packsList/PackListContainer';
+import {NotFound} from '../../common/notFound/NotFound';
 
 export const PATH = {
 	login: '/login',
@@ -29,6 +30,8 @@ export const Routing = () => {
 					<Route path={PATH.register} element={<RegisterContainer/>}/>
 					<Route path={PATH.profile} element={<ProfileContainer/>}/>
 					<Route path={PATH.packList} element={<PackListContainer/>}/>
+
+					<Route path={'*'} element={<NotFound/>}/>
 				</Route>
 			</Routes>
 		</>

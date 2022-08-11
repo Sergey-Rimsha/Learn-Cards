@@ -2,8 +2,9 @@ import {useState} from 'react';
 
 import {AppDispatch, useAppSelector} from '../../store/store';
 
+import {putProfile} from '../../store/reducers/profileReducer';
+
 import {Profile} from './Profile';
-import {putProfile} from "../../store/reducers/profileReducer";
 
 export const ProfileContainer = () => {
 

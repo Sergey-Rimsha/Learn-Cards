@@ -3,7 +3,8 @@ import React, {useEffect, useState} from 'react';
 import {AppDispatch, useAppSelector} from '../../store/store';
 
 import {LoadingStatusType} from '../../store/reducers/appReducer';
-import {PacksList} from "./PacksList";
+
+import {PacksList} from './PacksList';
 
 export const PackListContainer = () => {
 	

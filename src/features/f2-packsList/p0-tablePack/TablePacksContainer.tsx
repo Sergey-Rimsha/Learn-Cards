@@ -6,8 +6,9 @@ import {AppDispatch, AppRootStateType, useAppSelector} from '../../../store/stor
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
+import {addCardsPack, getCardsPacks} from '../../../store/reducers/packListReducer';
+
 import {TablePacks} from './TablePacks';
-import {addCardsPack, getCardsPacks} from "../../../store/reducers/packListReducer";
 
 export const TablePacksContainer = () => {
 
