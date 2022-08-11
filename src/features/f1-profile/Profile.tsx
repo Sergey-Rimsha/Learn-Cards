@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 import {UserDataType} from '../../store/reducers/profileReducer';
 
 import s from './Profile.module.scss';
-import {ProfileForm} from './ProfileForm';
+import {ProfileForm} from './p0-profileForm/ProfileForm';
 
 type ProfilePropsType = {
 	editMode: boolean

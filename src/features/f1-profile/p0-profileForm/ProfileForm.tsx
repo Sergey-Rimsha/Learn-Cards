@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 
-import {TextField} from '../../components/c4-Textfield/TextField';
+import {TextField} from '../../../components/c4-Textfield/TextField';
 
 import s from './ProfileForm.module.scss';
 

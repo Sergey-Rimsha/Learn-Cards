@@ -7,7 +7,7 @@ import {AppDispatch, AppRootStateType, useAppSelector} from '../../../store/stor
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
 import {TablePacks} from './TablePacks';
-import {getCardsPacks} from "../../../store/reducers/packListReducer";
+import {addCardsPack, getCardsPacks} from "../../../store/reducers/packListReducer";
 
 export const TablePacksContainer = () => {
 
@@ -44,7 +44,7 @@ export const TablePacksContainer = () => {
 	// для добавления карточек Pack
 	const onHandlerSubmitPackName = () => {
 		if (namePack) {
-			// dispatch(postNewPackTC(namePack));
+			dispatch(addCardsPack({name: namePack}));
 		}
 	};
 
