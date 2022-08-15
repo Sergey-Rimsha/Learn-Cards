@@ -4,18 +4,28 @@ import {AppDispatch, useAppSelector} from '../../store/store';
 
 import {LoadingStatusType} from '../../store/reducers/appReducer';
 
+import {setParamsPage} from '../../store/reducers/packListReducer';
+
 import {PacksList} from './PacksList';
 
 export const PackListContainer = () => {
-	
-	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	// const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
-	
-	const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
-	
 	const dispatch = AppDispatch();
 
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
+	const totalCount = useAppSelector<number>(state => state.packList.cardPacksTotalCount);
+	const currentPage = useAppSelector<number>(state => state.packList.page);
+	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
+
+	// setParams Pagination
+	const setParamsPagination = (pageCount: number, currentPage: number) => {
+		dispatch(setParamsPage(pageCount, currentPage));
+	};
+
+
+	// loading status transform boolean -> useState
 	useEffect(() => {
 		if (loadingStatus === 'loading') {
 			setIsLoading(true);
@@ -24,10 +34,15 @@ export const PackListContainer = () => {
 		}
 	},[loadingStatus]);
 
-
 	return (
 		<div>
-			<PacksList/>
+			<PacksList
+				isLoading={isLoading}
+				totalCount={totalCount}
+				currentPage={currentPage}
+				pageCount={pageCount}
+				setParamsPagination={setParamsPagination}
+			/>
 		</div>
 
 	);

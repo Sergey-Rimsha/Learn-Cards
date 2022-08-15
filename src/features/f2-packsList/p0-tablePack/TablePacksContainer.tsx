@@ -1,8 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 
-import {useSelector} from 'react-redux';
-
-import {AppDispatch, AppRootStateType, useAppSelector} from '../../../store/store';
+import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
@@ -94,6 +92,7 @@ export const TablePacksContainer = () => {
 		// dispatch(getLearnCardsPack(id));
 		// navigate(`${PATH.LEARN_CARDS}/${name}`);
 	};
+
 
 
 	useEffect(() => {

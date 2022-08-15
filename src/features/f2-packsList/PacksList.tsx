@@ -1,11 +1,17 @@
 import React from 'react';
 
-import PaginationContainer from '../../components/c6-Pagination/PaginationContainer';
+
+import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
 
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
 
 type PacksListPropsType = {
+    isLoading: boolean
+    totalCount: number
+    currentPage: number
+    pageCount: number
+    setParamsPagination: (pageCount: number, currentPage: number) => void
 
 }
 
@@ -25,7 +31,13 @@ export const PacksList = (props: PacksListPropsType) => {
                     <div className={s.main}>
                         <h2 className={s.main__title}>Packs list</h2>
                         <TablePacksContainer/>
-                        <PaginationContainer/>
+                        <PaginationContainer
+                            isLoading={props.isLoading}
+                            totalCount={props.totalCount}
+                            currentPage={props.currentPage}
+                            pageCount={props.pageCount}
+                            setParamsPagination={props.setParamsPagination}
+                        />
                     </div>
                 </div>
             </div>
