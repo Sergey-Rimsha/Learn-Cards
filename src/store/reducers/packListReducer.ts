@@ -31,10 +31,16 @@ export type PackStateType = {
 	pageCount: number
 	token: string
 	tokenDeathTime: number
+	params: PackListParamsType
+};
+
+export type PackListParamsType = {
+	userId: string
 }
 
 export type PackListActionType = ReturnType<typeof setPackList>
 	| ReturnType<typeof setParamsPage>
+	| ReturnType<typeof setParamsUserId>
 
 const initialState: PackStateType = {
 	cardPacks: [{
@@ -59,9 +65,12 @@ const initialState: PackStateType = {
 	maxCardsCount: 103,
 	minCardsCount: 0,
 	page: 1,
-	pageCount: 10,
+	pageCount: 8,
 	token: '27777e20-e5d5-11ec-a71b-af6a6d5de3fe',
 	tokenDeathTime: 1655151219458,
+	params: {
+		userId: '',
+	},
 };
 
 export const packListReducer = (state = initialState, acton: PackListActionType): PackStateType => {
@@ -77,6 +86,15 @@ export const packListReducer = (state = initialState, acton: PackListActionType)
 				...state,
 				page: acton.page,
 				pageCount: acton.pageCount,
+			};
+		}
+		case 'PACK/SET-PARAMS_USERID': {
+			return {
+				...state,
+				params: {
+					...state.params,
+					userId: acton.userId,
+				},
 			};
 		}
 
@@ -101,14 +119,23 @@ export const setParamsPage = (pageCount: number, page: number) => {
 	} as const;
 };
 
+export const setParamsUserId = (userId: string) => {
+	return {
+		type: 'PACK/SET-PARAMS_USERID',
+		userId,
+	} as const;
+};
+
 // thunk creators!!!
 export const getCardsPacks = ():AppThunkType => (dispatch, getState) => {
 	dispatch(setLoadingStatus('loading'));
 
 	const pageCount = getState().packList.pageCount;
 	const page = getState().packList.page;
+	const user_id = getState().packList.params.userId;
 
-	apiCards.getCards({pageCount, page})
+
+	apiCards.getCards({pageCount, page, user_id})
 		.then(res => {
 			// console.log(res.data);
 			dispatch(setPackList(res.data));

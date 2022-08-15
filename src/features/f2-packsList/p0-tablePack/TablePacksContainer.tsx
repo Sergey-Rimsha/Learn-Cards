@@ -4,7 +4,7 @@ import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
-import {addCardsPack, getCardsPacks} from '../../../store/reducers/packListReducer';
+import {addCardsPack, getCardsPacks, PackListParamsType} from '../../../store/reducers/packListReducer';
 
 import {TablePacks} from './TablePacks';
 
@@ -29,6 +29,8 @@ export const TablePacksContainer = () => {
 
 	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
 	const currentPage = useAppSelector<number>(state => state.packList.page);
+	const params = useAppSelector<PackListParamsType>(state => state.packList.params);
+
 
 	const [namePack, setNamePack] = useState<string>('');
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
@@ -61,7 +63,7 @@ export const TablePacksContainer = () => {
 
 	useEffect(() => {
 		dispatch(getCardsPacks());
-	},[pageCount, currentPage, dispatch]);
+	},[pageCount, currentPage, dispatch, params]);
 
 
 	// для удаления pack карточек

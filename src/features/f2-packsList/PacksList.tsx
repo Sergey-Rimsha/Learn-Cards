@@ -5,6 +5,7 @@ import {PaginationContainer} from '../../components/c6-Pagination/PaginationCont
 
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
+import ShowPackContainer from './f1-showPack/ShowPackContainer';
 
 type PacksListPropsType = {
     isLoading: boolean
@@ -24,7 +25,7 @@ export const PacksList = (props: PacksListPropsType) => {
                 <div className={s.packsList__block}>
                     <div className={s.sidebar}>
                         <h4 className={s.sidebar__title}>Show packs cards</h4>
-                        {/*<MyAllContainer/>*/}
+                        <ShowPackContainer/>
                         <h4 className={s.title}>Number of cards</h4>
                         {/*<DoubleRange/>*/}
                     </div>
