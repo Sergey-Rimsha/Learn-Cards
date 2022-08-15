@@ -5,6 +5,7 @@ import s from './Pagination.module.scss';
 type PaginationPropsType = {
     totalPages: number
     currentPage: number
+    pageCount: number
     isLoading: boolean
     setPageCount: (rangePages: number) => void
     setCurrentPage: (pageCount: number) => void
@@ -81,7 +82,11 @@ const Pagination = (props: PaginationPropsType) => {
             >{'>'}</button>
             <span>Show</span>
             <form>
-                <select defaultValue={8} onChange={onChangeHandlerRange} disabled={props.isLoading}>
+                <select
+                    defaultValue={props.pageCount}
+                    onChange={onChangeHandlerRange}
+                    disabled={props.isLoading}
+                >
                     <option value={4}>4</option>
                     <option value={6}>6</option>
                     <option value={8}>8</option>
