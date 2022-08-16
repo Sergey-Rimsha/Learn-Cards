@@ -80,7 +80,7 @@ export const API = {
 		return instance.post<AuthResponseType>('auth/register', data);
 	},
 	me() {
-		return instance.put<AuthResponseType>('auth/me', {});
+		return instance.post<AuthResponseType>('auth/me', {});
 	},
 	changeProfile(data: ChangeProfileType) {
 		return instance.put<PutResponseType>('auth/me', data);

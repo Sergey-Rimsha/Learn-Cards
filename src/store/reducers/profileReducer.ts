@@ -1,6 +1,6 @@
 import {API, ChangeProfileType} from "../../api/Api";
 import {AppThunkType} from "../store";
-import {setLoadingStatus} from "./appReducer";
+import {setIsAuth, setLoadingStatus} from "./appReducer";
 
 
 type ProfileStateType = {
@@ -77,13 +77,13 @@ export const putProfile = (data: ChangeProfileType): AppThunkType => (dispatch) 
 		});
 };
 
-// get profile 
+// get profile
 export const getMeProfile = (): AppThunkType => (dispatch) => {
 	dispatch(setLoadingStatus('loading'));
 	API.me()
 		.then((res) => {
-			// dispatch(setUserData(res.data.updatedUser));
-			console.log(res.data);
+			dispatch(setUserData(res.data));
+			dispatch(setIsAuth(true));
 		})
 		.catch((err) => {
 			console.log(err);
