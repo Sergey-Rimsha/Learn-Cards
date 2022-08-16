@@ -6,6 +6,7 @@ import {PaginationContainer} from '../../components/c6-Pagination/PaginationCont
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
 import ShowPackContainer from './f1-showPack/ShowPackContainer';
+import SuperDoubleRange from "../../components/c7-DoubleRange/SuperDoubleRange";
 
 type PacksListPropsType = {
     isLoading: boolean
@@ -28,6 +29,7 @@ export const PacksList = (props: PacksListPropsType) => {
                         <ShowPackContainer/>
                         <h4 className={s.title}>Number of cards</h4>
                         {/*<DoubleRange/>*/}
+                        <SuperDoubleRange/>
                     </div>
                     <div className={s.main}>
                         <h2 className={s.main__title}>Packs list</h2>
