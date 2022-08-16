@@ -64,18 +64,21 @@ const Pagination = (props: PaginationPropsType) => {
                     disabled={props.isLoading}
             >{'<'}</button>
             <div className={s.block__pages}>
-                {pages.map((page: number | '...') => (
-                    (page !== '...')
-                        ? <button
-                            key={page}
-                            className={page === props.currentPage ? s.page_active : s.page}
-                            onClick={() => props.setCurrentPage(page)}
-                            disabled={props.isLoading}
-                        >
-                            {page}
-                        </button>
-                        : <span>...</span>
-                ))}
+                {
+                    pages.map((page: number | '...') => (
+
+                        (page !== '...') ?
+                            <button
+                                key={page}
+                                className={page === props.currentPage ? s.page_active : s.page}
+                                onClick={() => props.setCurrentPage(page)}
+                                disabled={props.isLoading}>
+                                    {page}
+                                </button> :
+                            // гребаный кастыль нужно исправлять
+                            <span key={Math.random()}>...</span>
+                    ))
+                }
             </div>
             <button onClick={props.nextPage}
                     disabled={props.isLoading}
