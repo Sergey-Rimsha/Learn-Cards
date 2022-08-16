@@ -7,6 +7,7 @@ import {Layout} from '../Layout';
 import {ProfileContainer} from '../../features/f1-profile/ProfileContainer';
 import {PackListContainer} from '../../features/f2-packsList/PackListContainer';
 import {NotFound} from '../../common/notFound/NotFound';
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 export const PATH = {
 	login: '/login',
@@ -28,8 +29,22 @@ export const Routing = () => {
 				<Route path={'/'} element={<Layout/>} >
 					<Route path={PATH.login} element={<LoginContainer/>}/>
 					<Route path={PATH.register} element={<RegisterContainer/>}/>
-					<Route path={PATH.profile} element={<ProfileContainer/>}/>
-					<Route path={PATH.packList} element={<PackListContainer/>}/>
+					<Route
+						path={PATH.profile}
+						element={
+							<WithAuthRedirect>
+								<ProfileContainer/>
+							</WithAuthRedirect>
+						}
+					/>
+					<Route
+						path={PATH.packList}
+						element={
+							<WithAuthRedirect>
+								<PackListContainer/>
+							</WithAuthRedirect>
+						}
+					/>
 
 					<Route path={'*'} element={<NotFound/>}/>
 				</Route>
