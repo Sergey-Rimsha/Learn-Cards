@@ -40,7 +40,7 @@ export const LoginContainer = () => {
 		if (isAuth) navigate(PATH.profile);
 	}, [isAuth, navigate]);
 
-	// редирект на если забыли пароль
+	// редирект на если забыли пароль, recovery password
 	const redirectLink = () => {
 		navigate(PATH.recovery);
 	};

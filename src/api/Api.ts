@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {PackStateType} from "../store/reducers/packListReducer";
+
+import {PackStateType} from '../store/reducers/packListReducer';
 
 export type LoginDataType = {
 	email: string,

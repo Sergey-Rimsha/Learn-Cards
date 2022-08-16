@@ -4,7 +4,12 @@ import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
-import {addCardsPack, getCardsPacks, PackListParamsType} from '../../../store/reducers/packListReducer';
+import {
+	addCardsPack,
+	getCardsPacks,
+	PackListParamsType,
+	setParamsUserId
+} from '../../../store/reducers/packListReducer';
 
 import {TablePacks} from './TablePacks';
 
@@ -15,17 +20,6 @@ export const TablePacksContainer = () => {
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
-
-	// const isAuth = useSelector<AppRootStateType, boolean>(state => state.app.isAuth);
-
-	// const currentPage = useSelector<AppRootStateType, number>(state => state.app.currentPage);
-	// const pageCount = useSelector<AppRootStateType, number>(state => state.app.pageCount);
-	// // для отрисовки моих или всех
-	// const isId = useSelector<AppRootStateType, boolean>(state => state.app.isId);
-	// const myId = useSelector<AppRootStateType, string>(state => state.profile.userData._id);
-	// const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
-	// const min = useSelector<AppRootStateType, number>(state => state.tablePacks.params.showMinCard);
-	// const max = useSelector<AppRootStateType, number>(state => state.tablePacks.params.showMaxCard);
 
 	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
 	const currentPage = useAppSelector<number>(state => state.packList.page);
@@ -53,17 +47,9 @@ export const TablePacksContainer = () => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	const paramsId = isId ? {user_id: myId} : {};
-	// 	const params = {pageCount: pageCount, page: currentPage, sortPacks, min, max, ...paramsId};
-	// 	if (isAuth) {
-	// 		dispatch(getPackListTC(params));
-	// 	}
-	// }, [isAuth, currentPage, pageCount, dispatch, isId, sortPacks, min, max]);
-
 	useEffect(() => {
 		dispatch(getCardsPacks());
-	},[pageCount, currentPage, dispatch, params]);
+	},[pageCount, currentPage, dispatch, params.userId]);
 
 
 	// для удаления pack карточек
@@ -104,6 +90,14 @@ export const TablePacksContainer = () => {
 			setIsLoading(false);
 		}
 	},[loadingStatus]);
+
+
+	// set unmount params userId
+	useEffect(() => {
+		return () => {
+			dispatch(setParamsUserId(''));
+		};
+	}, []);
 
 	return (
 		<>

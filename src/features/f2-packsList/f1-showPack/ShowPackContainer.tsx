@@ -36,10 +36,11 @@ const ShowPackContainer = () => {
 
     return (
         <div>
-            <ShowPack onclickHandlerMy={onclickHandlerMy}
-                      onclickHandlerAll={onclickHandlerAll}
-                      isId={isId}
-                      isLoading={isLoading}
+            <ShowPack
+                onclickHandlerMy={onclickHandlerMy}
+                onclickHandlerAll={onclickHandlerAll}
+                isId={isId}
+                isLoading={isLoading}
             />
         </div>
     );

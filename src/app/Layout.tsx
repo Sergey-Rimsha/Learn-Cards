@@ -6,9 +6,8 @@ import {Preloader} from '../components/c5-Preloader/Preloader';
 import {AppDispatch, useAppSelector} from '../store/store';
 import {LoadingStatusType} from '../store/reducers/appReducer';
 
-
 import {HeaderContainer} from '../common/header/HeaderContainer';
-
+import {getMeProfile} from '../store/reducers/profileReducer';
 
 export const Layout = () => {
 
@@ -19,7 +18,7 @@ export const Layout = () => {
 
 	useEffect(() => {
 		if (!isAuth) {
-			// dispatch()
+			dispatch(getMeProfile());
 		}
 	},[]);
 
