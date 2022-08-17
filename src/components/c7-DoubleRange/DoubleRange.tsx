@@ -17,9 +17,7 @@ export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 		setValue1(value[0]);
 		setValue2(value[1]);
 
-		setTimeout(() => {
-			props.setParamsRange(value1, value2);
-		}, 1000);
+		props.setParamsRange(value1, value2);
 	};
 
 	const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
