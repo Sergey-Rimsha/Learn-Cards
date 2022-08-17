@@ -3,10 +3,12 @@ import React from 'react';
 
 import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
 
+import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
+
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
 import ShowPackContainer from './f1-showPack/ShowPackContainer';
-import SuperDoubleRange from "../../components/c7-DoubleRange/SuperDoubleRange";
+
 
 type PacksListPropsType = {
     isLoading: boolean
@@ -14,6 +16,7 @@ type PacksListPropsType = {
     currentPage: number
     pageCount: number
     setParamsPagination: (pageCount: number, currentPage: number) => void
+    setParamsRange: (min: number, max: number) => void
 
 }
 
@@ -28,8 +31,9 @@ export const PacksList = (props: PacksListPropsType) => {
                         <h4 className={s.sidebar__title}>Show packs cards</h4>
                         <ShowPackContainer/>
                         <h4 className={s.title}>Number of cards</h4>
-                        {/*<DoubleRange/>*/}
-                        <SuperDoubleRange/>
+                        <DoubleRange
+                            setParamsRange={props.setParamsRange}
+                        />
                     </div>
                     <div className={s.main}>
                         <h2 className={s.main__title}>Packs list</h2>

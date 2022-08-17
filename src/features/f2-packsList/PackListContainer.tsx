@@ -24,6 +24,10 @@ export const PackListContainer = () => {
 		dispatch(setParamsPage(pageCount, currentPage));
 	};
 
+	const setParamsRange = (min: number, max: number) => {
+		console.log(min, max);
+	};
+
 
 	// loading status transform boolean -> useState
 	useEffect(() => {
@@ -42,6 +46,7 @@ export const PackListContainer = () => {
 				currentPage={currentPage}
 				pageCount={pageCount}
 				setParamsPagination={setParamsPagination}
+				setParamsRange={setParamsRange}
 			/>
 		</div>
 
