@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 
 import {LoginContainer} from '../../features/f0-auth/a1-login/LoginContainer';
 import {RegisterContainer} from '../../features/f0-auth/a0-register/RegisterContainer';
@@ -26,7 +26,8 @@ export const Routing = () => {
 	return (
 		<>
 			<Routes>
-				<Route path={'/'} element={<Layout/>} >
+				<Route path={'/'} element={<Layout/>}>
+					<Route index element={<Navigate to={PATH.profile}/>}/>
 					<Route path={PATH.login} element={<LoginContainer/>}/>
 					<Route path={PATH.register} element={<RegisterContainer/>}/>
 					<Route
