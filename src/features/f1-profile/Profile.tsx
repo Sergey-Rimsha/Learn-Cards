@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-
+import ava from '../../assets/img/ava_default.jpg';
 
 import {UserDataType} from '../../store/reducers/profileReducer';
 
@@ -29,7 +29,7 @@ export const Profile = (props: ProfilePropsType) => {
 					Personal Information
 				</div>
 				<div className={s.profile__ava}>
-					<img src={userData.avatar} alt={'ava'}/>
+					<img width={'120px'} height={'120px'} src={userData.avatar || ava} alt={'ava'}/>
 				</div>
 
 				{!editMode &&
