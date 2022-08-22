@@ -1,7 +1,5 @@
-
-.multiRangeWrap {
-	width: 200px;
-}
+@import "src/styles/variables";
+@import "src/styles/mixins";
 
 input[type=range] {
 	box-sizing: border-box;
@@ -46,6 +44,29 @@ input[type=range] {
 			width: 2000px;
 			height: 2px;
 		}
+	}
+}
+
+.multiRangeWrap {
+	width: 200px;
+}
+
+.values {
+	display: flex;
+	justify-content: space-between;
+
+	&__item {
+		width: 32px;
+		height: 24px;
+		background: #21268F;
+		border-radius: 3px;
+		@include FontSanFrancisco();
+		font-weight: 400;
+		font-size: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #FFFFFF;
 	}
 }
 

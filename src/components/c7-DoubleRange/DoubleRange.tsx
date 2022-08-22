@@ -48,21 +48,20 @@ export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 	return (
 		<>
 			<div className={s.multiRangeWrap}>
-				<div>
-					<span>{value1}</span>
-					<span>....</span>
-					<span>{value2}</span>
+				<div className={s.values}>
+					<div className={s.values__item}>{value1}</div>
+					<div className={s.values__item}>{value2}</div>
 				</div>
 				<span className={s.multiRange}>
 					<input
-						max={112}
+						max={110}
 						type='range'
 						value={value && value[0]}
 						onMouseOut={onHandlerSetParams}
 						onChange={onChangeCallback}
 						id='lower'/>
 					<input
-						max={112}
+						max={110}
 						type='range'
 						value={value && value[1]}
 						onMouseOut={onHandlerSetParams}
