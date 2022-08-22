@@ -9,15 +9,13 @@ type DoubleRangePropsType = {
 export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 
 	const [value1, setValue1] = useState(0);
-	const [value2, setValue2] = useState(112);
+	const [value2, setValue2] = useState(110);
 
 	const value= [value1, value2];
 
 	const onChangeHandler = (value: number[]) => {
 		setValue1(value[0]);
 		setValue2(value[1]);
-
-		props.setParamsRange(value1, value2);
 	};
 
 	const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +40,11 @@ export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 		}
 	}
 
+	// по отжатию клавиши мыши отпавляем данные
+	const onHandlerSetParams = () => {
+		props.setParamsRange(value1, value2);
+	};
+
 	return (
 		<>
 			<div className={s.multiRangeWrap}>
@@ -55,12 +58,14 @@ export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 						max={112}
 						type='range'
 						value={value && value[0]}
+						onMouseOut={onHandlerSetParams}
 						onChange={onChangeCallback}
 						id='lower'/>
 					<input
 						max={112}
 						type='range'
 						value={value && value[1]}
+						onMouseOut={onHandlerSetParams}
 						onChange={onChangeCallback}
 						id='upper'/>
 				</span>
@@ -69,15 +74,3 @@ export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 
 	);
 });
-
-
-
-// <div className="superDoubleRange">
-// 	<div className="superDoubleRange_value">{value1}</div>
-// 	<DoubleRange
-// 		onChangeRange={onChangeHandler}
-// 		value={[value1, value2]}
-// 		// сделать так чтоб value1 и value2 изменялось
-// 	/>
-// 	<div className="superDoubleRange_value">{value2}</div>
-// </div>

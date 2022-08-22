@@ -4,7 +4,7 @@ import {AppDispatch, useAppSelector} from '../../store/store';
 
 import {LoadingStatusType} from '../../store/reducers/appReducer';
 
-import {setParamsPage} from '../../store/reducers/packListReducer';
+import {setParamsCardsCount, setParamsPage} from '../../store/reducers/packListReducer';
 
 import {PacksList} from './PacksList';
 
@@ -25,7 +25,7 @@ export const PackListContainer = () => {
 	};
 
 	const setParamsRange = (min: number, max: number) => {
-		console.log(min, max);
+		dispatch(setParamsCardsCount(min, max));
 	};
 
 

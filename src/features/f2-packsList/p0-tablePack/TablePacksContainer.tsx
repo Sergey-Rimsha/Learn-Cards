@@ -49,7 +49,7 @@ export const TablePacksContainer = () => {
 
 	useEffect(() => {
 		dispatch(getCardsPacks());
-	},[pageCount, currentPage, dispatch, params.userId]);
+	},[pageCount, currentPage, dispatch, params.userId, params.min, params.max]);
 
 
 	// для удаления pack карточек
