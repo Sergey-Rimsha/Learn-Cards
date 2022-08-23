@@ -11,7 +11,6 @@ export const SearchInput = (props: SearchInputPropsType) => {
 	
 	const [searchValue, setSearchValue] = useState<string>('');
 
-
 	const onHandlerChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.currentTarget.value);
 	};
@@ -21,7 +20,6 @@ export const SearchInput = (props: SearchInputPropsType) => {
 		setSearchValue('');
 	};
 
-		
 	return (
 		<div className={s.inputBox}>
 			<input

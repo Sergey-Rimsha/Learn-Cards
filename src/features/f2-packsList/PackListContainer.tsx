@@ -29,10 +29,8 @@ export const PackListContainer = () => {
 	};
 
 	const setParamsSearch = (packName: string) => {
-		console.log(packName);
 		dispatch(setParamsSearchPackName(packName));
 	};
-
 
 	// loading status transform boolean -> useState
 	useEffect(() => {
@@ -44,7 +42,7 @@ export const PackListContainer = () => {
 	},[loadingStatus]);
 
 	return (
-		<div>
+		<>
 			<PacksList
 				isLoading={isLoading}
 				totalCount={totalCount}
@@ -54,7 +52,7 @@ export const PackListContainer = () => {
 				setParamsRange={setParamsRange}
 				setParamsSearch={setParamsSearch}
 			/>
-		</div>
+		</>
 
 	);
 };

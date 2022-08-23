@@ -7,7 +7,9 @@ import {Layout} from '../Layout';
 import {ProfileContainer} from '../../features/f1-profile/ProfileContainer';
 import {PackListContainer} from '../../features/f2-packsList/PackListContainer';
 import {NotFound} from '../../common/notFound/NotFound';
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {TablePackNameContainer} from '../../features/f3-packName/p0-TablePackName/TablePackNameContainer';
+import {PackName} from '../../features/f3-packName/PackName';
 
 export const PATH = {
 	login: '/login',
@@ -17,6 +19,7 @@ export const PATH = {
 	newPassword: '/newPassword',
 	notFound: '/404',
 	packList: '/packList',
+	packName: '/packName',
 
 	testComponents: 'testComponents',
 };
@@ -46,6 +49,24 @@ export const Routing = () => {
 							</WithAuthRedirect>
 						}
 					/>
+
+					<Route 
+						path={PATH.packName} 
+						element={
+							<WithAuthRedirect>
+								<PackName/>
+							</WithAuthRedirect>
+						}>
+						<Route
+							path={':packId'}
+							element={
+								<WithAuthRedirect>
+									<PackName/>
+								</WithAuthRedirect>
+							}
+						/>
+					</Route>
+
 
 					<Route path={'*'} element={<NotFound/>}/>
 				</Route>

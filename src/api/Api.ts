@@ -102,3 +102,44 @@ export const apiCards = {
 		return instance.delete<PackStateType>('cards/pack', {params:{id: idPack}});
 	},
 };
+
+export type GetCardsCardParamsType = {
+	cardAnswer?: string
+	cardQuestion?: string
+	cardsPack_id?: string
+	min?: number
+	max?: number
+	sortCards?: string
+	page?: number
+	pageCount?: number
+}
+
+export type GetCardsCardType = {
+	cards: Array<CardsType>
+	cardsTotalCount: number
+	maxGrade: number
+	minGrade: number
+	page: number
+	pageCount: number
+	packUserId: string
+}
+
+export type CardsType = {
+	answer: string
+	question: string
+	comments: string
+	cardsPack_id: string
+	grade: number
+	shots: number
+	user_id: string
+	created: string
+	updated: string
+	_id: string
+}
+
+export const apiCardsCard = {
+	getCardsPack(params?: GetCardsCardParamsType) {
+		console.log(params);
+		return instance.get<GetCardsCardType>('cards/card', {params});
+	},
+};

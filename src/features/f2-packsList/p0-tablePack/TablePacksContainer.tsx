@@ -1,5 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 
+import {useNavigate} from 'react-router-dom';
+
 import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
@@ -8,14 +10,16 @@ import {
 	addCardsPack,
 	getCardsPacks,
 	PackListParamsType,
-	setParamsUserId
+	setParamsUserId,
 } from '../../../store/reducers/packListReducer';
+
+import {PATH} from '../../../app/Routing/Routing';
 
 import {TablePacks} from './TablePacks';
 
 export const TablePacksContainer = () => {
 
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const dispatch = AppDispatch();
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -77,6 +81,7 @@ export const TablePacksContainer = () => {
 	// навигация на таблицу карточек
 	const showCardsPack = (id: string, pageCount: number, name: string) => {
 		// (!isLoading) && navigate(`${PATH.PACK_NAME}/${name}/${id}/${pageCount}`);
+		navigate(`${PATH.packName}/${id}`);
 	};
 
 	const sortTableValue = (value: string) => {
