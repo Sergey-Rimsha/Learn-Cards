@@ -1,5 +1,5 @@
 import {AppThunkType} from '../store';
-import {apiCards, NewCardsPack} from '../../api/Api';
+import {apiPack, NewCardsPack} from '../../api/Api';
 
 import {setLoadingStatus} from './appReducer';
 
@@ -180,7 +180,7 @@ export const getCardsPacks = ():AppThunkType => (dispatch, getState) => {
 		user_id, pageCount, page, max, min, packName,
 	};
 
-	apiCards.getCards(params)
+	apiPack.getCards(params)
 		.then(res => {
 			// console.log(res.data);
 			dispatch(setPackList(res.data));
@@ -195,7 +195,7 @@ export const getCardsPacks = ():AppThunkType => (dispatch, getState) => {
 
 export const addCardsPack = (data: NewCardsPack): AppThunkType => (dispatch) => {
 	dispatch(setLoadingStatus('loading'));
-	apiCards.postCards(data)
+	apiPack.postCards(data)
 	.then(res => {
 		// console.log(res);
 		dispatch(getCardsPacks());
@@ -212,7 +212,7 @@ export const delCardsPack = (id: string):AppThunkType => (dispatch) => {
 
 	dispatch(setLoadingStatus('loading'));
 
-	apiCards.deletePack(id)
+	apiPack.deletePack(id)
 		.then((res) => {
 			dispatch(getCardsPacks());
 		})

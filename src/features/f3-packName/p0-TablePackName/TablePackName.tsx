@@ -4,24 +4,24 @@ import {useParams} from 'react-router-dom';
 
 // import {removeCard} from '../../store/reducers/packNameReducer';
 // import {changeModalEditCard} from '../../store/reducers/modalsReducer';
-
 import Arrow from '../../../assets/img/polygon.svg';
-import {AppDispatch} from '../../../store/store';
+
+import {CardPackNameType} from '../../../store/reducers/packNameReducer';
 
 import s from './TablePackName.module.scss';
 
-import {CardsType, FilterPackName} from './TablePackNameContainer';
+import {FilterPackName} from './TablePackNameContainer';
 
 
 type TablePackNamePropsType = {
-    data: CardsType[]
+    data: CardPackNameType[]
     filter: FilterPackName
     changeFilter: (filter: FilterPackName) => void
 }
 
-export const TablePackName: React.FC<TablePackNamePropsType> = (props) => {
+export const TablePackName = (props: TablePackNamePropsType) => {
     // const isModal = useSelector<AppRootStateType, boolean>(state => state.modals.modalCardEditCard.value);
-    const dispatch = AppDispatch();
+    // const dispatch = AppDispatch();
     const {packId} = useParams();
 
     // для удаления карточки

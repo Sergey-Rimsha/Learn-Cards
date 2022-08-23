@@ -89,7 +89,7 @@ export const API = {
 };
 
 
-export const apiCards = {
+export const apiPack = {
 	getCards(params?: GetParamsType) {
 		return instance.get<PackStateType>('cards/pack', {params});
 	},
@@ -139,7 +139,6 @@ export type CardsType = {
 
 export const apiCardsCard = {
 	getCardsPack(params?: GetCardsCardParamsType) {
-		console.log(params);
 		return instance.get<GetCardsCardType>('cards/card', {params});
 	},
 };
