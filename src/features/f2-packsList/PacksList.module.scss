@@ -33,7 +33,7 @@
 	padding: 24px 48px;
 	width: 100%;
 
-	.title {
+	&__title {
 		margin-bottom: 15px;
 		font-family: 'Poppins', sans-serif;
 		font-style: normal;
@@ -42,4 +42,14 @@
 		line-height: 33px;
 		color: #2D2E46;
 	}
+
+	&__params {
+
+	}
+
+	&__content {
+		margin-top: 24px;
+	}
+
+
 }

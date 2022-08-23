@@ -4,7 +4,7 @@ import {AppDispatch, useAppSelector} from '../../store/store';
 
 import {LoadingStatusType} from '../../store/reducers/appReducer';
 
-import {setParamsCardsCount, setParamsPage} from '../../store/reducers/packListReducer';
+import {setParamsCardsCount, setParamsPage, setParamsSearchPackName} from '../../store/reducers/packListReducer';
 
 import {PacksList} from './PacksList';
 
@@ -28,6 +28,11 @@ export const PackListContainer = () => {
 		dispatch(setParamsCardsCount(min, max));
 	};
 
+	const setParamsSearch = (packName: string) => {
+		console.log(packName);
+		dispatch(setParamsSearchPackName(packName));
+	};
+
 
 	// loading status transform boolean -> useState
 	useEffect(() => {
@@ -47,6 +52,7 @@ export const PackListContainer = () => {
 				pageCount={pageCount}
 				setParamsPagination={setParamsPagination}
 				setParamsRange={setParamsRange}
+				setParamsSearch={setParamsSearch}
 			/>
 		</div>
 

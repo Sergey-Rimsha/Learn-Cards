@@ -49,7 +49,14 @@ export const TablePacksContainer = () => {
 
 	useEffect(() => {
 		dispatch(getCardsPacks());
-	},[pageCount, currentPage, dispatch, params.userId, params.min, params.max]);
+	},[pageCount,
+		currentPage,
+		dispatch,
+		params.userId,
+		params.min,
+		params.max,
+		params.packName,
+	]);
 
 
 	// для удаления pack карточек
@@ -101,15 +108,15 @@ export const TablePacksContainer = () => {
 
 	return (
 		<>
-			<div>
-				<input onChange={onChangePackName}
-					   value={namePack}
-					   disabled={isLoading}/>
-				<button onClick={onHandlerSubmitPackName}
-						disabled={isLoading}>
-					add new pack
-				</button>
-			</div>
+			{/*<div>*/}
+			{/*	<input onChange={onChangePackName}*/}
+			{/*		   value={namePack}*/}
+			{/*		   disabled={isLoading}/>*/}
+			{/*	<button onClick={onHandlerSubmitPackName}*/}
+			{/*			disabled={isLoading}>*/}
+			{/*		add new pack*/}
+			{/*	</button>*/}
+			{/*</div>*/}
 			<TablePacks
 				sortTableValue={sortTableValue}
 				showModalDelete={showModalDelete}
