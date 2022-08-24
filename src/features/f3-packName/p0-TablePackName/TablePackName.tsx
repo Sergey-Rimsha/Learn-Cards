@@ -2,8 +2,6 @@ import React from 'react';
 
 import {useParams} from 'react-router-dom';
 
-// import {removeCard} from '../../store/reducers/packNameReducer';
-// import {changeModalEditCard} from '../../store/reducers/modalsReducer';
 import Arrow from '../../../assets/img/polygon.svg';
 
 import {CardPackNameType} from '../../../store/reducers/packNameReducer';
@@ -11,6 +9,7 @@ import {CardPackNameType} from '../../../store/reducers/packNameReducer';
 import s from './TablePackName.module.scss';
 
 import {FilterPackName} from './TablePackNameContainer';
+import {TableLineCard} from './TableLineCard';
 
 
 type TablePackNamePropsType = {
@@ -20,8 +19,7 @@ type TablePackNamePropsType = {
 }
 
 export const TablePackName = (props: TablePackNamePropsType) => {
-    // const isModal = useSelector<AppRootStateType, boolean>(state => state.modals.modalCardEditCard.value);
-    // const dispatch = AppDispatch();
+
     const {packId} = useParams();
 
     // для удаления карточки
@@ -31,62 +29,49 @@ export const TablePackName = (props: TablePackNamePropsType) => {
         }
     };
 
+    const onClickHandlerFilter = (params: FilterPackName) => {
+        props.changeFilter(params);
+    };
+
     return (
         <>
             <table className={s.table}>
                 <thead>
-                <tr>
-                    <th onClick={() => props.changeFilter('0name')}>
-                        <span>Question</span>
-                        {props.filter === '0name' && <img src={Arrow} alt='Arrow'/>}
-                    </th>
-                    <th>
-                        <span>Answer</span>
-                    </th>
-                    <th onClick={() => props.changeFilter('0updated')}>
-                        <span>Last Updated</span>
-                        {props.filter === '0updated' && <img src={Arrow} alt='Arrow'/>}
-                    </th>
-                    <th onClick={() => props.changeFilter('0cardsCount')}>
-                        <span>Grade</span>
-                        {props.filter === '0cardsCount' && <img src={Arrow} alt='Arrow'/>}
-                    </th>
-                    <th>
-                        <span>Actions</span>
-                    </th>
-                </tr>
+                    <tr>
+                        <th onClick={() => onClickHandlerFilter('0name')}>
+                            <span>Question</span>
+                            {props.filter === '0name' && <img src={Arrow} alt='Arrow'/>}
+                        </th>
+                        <th>
+                            <span>Answer</span>
+                        </th>
+                        <th onClick={() => onClickHandlerFilter('0updated')}>
+                            <span>Last Updated</span>
+                            {props.filter === '0updated' && <img src={Arrow} alt='Arrow'/>}
+                        </th>
+                        <th onClick={() => onClickHandlerFilter('0cardsCount')}>
+                            <span>Grade</span>
+                            {props.filter === '0cardsCount' && <img src={Arrow} alt='Arrow'/>}
+                        </th>
+                        <th>
+                            <span>Actions</span>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                {props.data.map(c => <tr key={c.updated}>
-                        <td>{c.question}</td>
-                        <td>{c.answer}</td>
-                        <td>{new Date(Date.parse(c.updated)).toLocaleDateString()}</td>
-                        <td>{c.grade}</td>
-                        <td>
-                            <div className={s.buttons}>
-                                <button
-                                    className={s.btn}
-                                    // onClick={() => dispatch(changeModalEditCard(true, c._id, c.question,'', c.answer))}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    className={`${s.btn} ${s.active}`}
-                                    onClick={() => deleteCard(c._id)}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </td>
-                    </tr>,
-                )}
+                    {
+                        props.data.map((el) => {
+                           return (
+                            <TableLineCard
+                                item={el}
+                                deleteCard={deleteCard}
+                            />
+                           );
+                        })
+                    }
                 </tbody>
             </table>
-            {/*<Modal visibility={isModal}>*/}
-            {/*    <ModalEditCard cardID={packId}/>*/}
-            {/*</Modal>*/}
         </>
-
     );
 };
 
