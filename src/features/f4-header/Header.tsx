@@ -1,6 +1,6 @@
 import React from 'react';
 
-import s from './NavBar.module.scss';
+import s from './Header.module.scss';
 import {Switch} from './switch/Switch';
 
 type navPropsType = {
@@ -11,9 +11,11 @@ type navPropsType = {
 
 export const Header = (props: navPropsType) => {
     return (
-        <div className={s.wrapper}>
-            <h2 className={s.logo}>It-incubator</h2>
-            <div className={s.switch}>
+        <div className={s.header}>
+            <h2 className={s.header__logo}>
+                It-incubator
+            </h2>
+            <div className={s.header__switch}>
                 <Switch/>
             </div>
             <div className = {s.logOut}

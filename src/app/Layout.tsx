@@ -10,6 +10,8 @@ import {getMeProfile} from '../store/reducers/profileReducer';
 import {HeaderContainer} from '../features/f4-header/HeaderContainer';
 import {HeaderContainerTest} from '../common/header/HeaderContainerTest';
 
+import s from './Layout.module.scss';
+
 export const Layout = () => {
 
 	const dispatch = AppDispatch();
@@ -24,13 +26,17 @@ export const Layout = () => {
 	},[]);
 
 	return (
-		<>
+		<div className={s.layout}>
 			<HeaderContainerTest/>
-			<HeaderContainer />
-			<div>
+			<div className={s.layout__header}>
+				<HeaderContainer />
+			</div>
+			<div className={s.layout__loading}>
 				{status === 'loading' && <Preloader/>}
 			</div>
-			<Outlet />
-		</>
+			<div className={s.layout__main}>
+				<Outlet />
+			</div>
+		</div>
 	);
 };

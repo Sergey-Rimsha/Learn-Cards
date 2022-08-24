@@ -7,8 +7,6 @@ import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
 
 import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
 
-import {SuperInput} from '../../components/c1-SuperInputText/SuperInput';
-
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
 import ShowPackContainer from './f1-showPack/ShowPackContainer';
@@ -29,7 +27,6 @@ export const PacksList = (props: PacksListPropsType) => {
 
     return (
         <>
-            {/*<HeaderContainerTest/>*/}
             <div className={s.packsList}>
                 <div className={s.packsList__block}>
                     <div className={s.sidebar}>
@@ -50,13 +47,15 @@ export const PacksList = (props: PacksListPropsType) => {
                        <div className={s.main__content}>
                            <TablePacksContainer/>
                        </div>
-                        <PaginationContainer
-                            isLoading={props.isLoading}
-                            totalCount={props.totalCount}
-                            currentPage={props.currentPage}
-                            pageCount={props.pageCount}
-                            setParamsPagination={props.setParamsPagination}
-                        />
+                        <div className={s.main__pagination}>
+                            <PaginationContainer
+                                isLoading={props.isLoading}
+                                totalCount={props.totalCount}
+                                currentPage={props.currentPage}
+                                pageCount={props.pageCount}
+                                setParamsPagination={props.setParamsPagination}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

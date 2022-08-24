@@ -4,15 +4,13 @@ import {Provider} from 'react-redux';
 
 import {store} from '../store/store';
 
-import './App.css';
-
 import {Routing} from './Routing/Routing';
 
 
 const App = () => {
 
 	return (
-		<div className='App'>
+		<>
 			<HashRouter>
 				<Provider store={store}>
 					{/*<Common />*/}
@@ -20,7 +18,7 @@ const App = () => {
 				</Provider>
 			</HashRouter>
 
-		</div>
+		</>
 	);
 
 };
