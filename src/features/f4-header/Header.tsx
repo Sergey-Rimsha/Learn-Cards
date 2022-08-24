@@ -2,14 +2,13 @@ import React from 'react';
 
 import s from './Header.module.scss';
 import {Switch} from './switch/Switch';
+import {LogOutContainer} from './h1-logOut/LogOutContainer';
 
-type navPropsType = {
-    onClickHandlerLogOut: () => void
-    profileIcon: string | undefined
-    avatar: string|undefined
+type HeaderPropsType = {
+  
 }
 
-export const Header = (props: navPropsType) => {
+export const Header = (props: HeaderPropsType) => {
     return (
         <div className={s.header}>
             <h2 className={s.header__logo}>
@@ -18,19 +17,8 @@ export const Header = (props: navPropsType) => {
             <div className={s.header__switch}>
                 <Switch/>
             </div>
-            <div className = {s.logOut}
-                 onClick={() => {
-                     props.onClickHandlerLogOut();
-                 }}
-            >
-                <div>
-                    <img
-                        className={s.profileIcon}
-                        src={props.avatar}
-                        alt={'photo'}
-                    />
-                </div>
-                <span>LogOut</span>
+            <div className={s.header__logOut}>
+                <LogOutContainer/>
             </div>
         </div>
     );
