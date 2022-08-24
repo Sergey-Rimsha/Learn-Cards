@@ -58,7 +58,7 @@ export const Routing = () => {
 							</WithAuthRedirect>
 						}>
 						<Route
-							path={':packId'}
+							path={':name/:packId/:pageCount'}
 							element={
 								<WithAuthRedirect>
 									<PackName/>

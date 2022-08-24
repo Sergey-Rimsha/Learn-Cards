@@ -28,12 +28,17 @@ export const PackName = () => {
         ? cards
         : cards.filter(c => c.question.toLowerCase().includes(search.toLowerCase()));
 
+
+    const onClickNavigateBack = () => {
+        navigate(-1);
+    };
+
     return (
         <div>
             {/*<NavBarContainer/>*/}
             <div className={s.table}>
                 <h2 className={s.title}>
-                    <img onClick={() => navigate(-1)} src={Arrow} alt='arrow left'/>
+                    <img onClick={onClickNavigateBack} src={Arrow} alt='arrow left'/>
                     <span>Pack Name "{name}"</span>
                 </h2>
                 <div className={s.search}>

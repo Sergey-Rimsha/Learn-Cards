@@ -81,7 +81,7 @@ export const TablePacksContainer = () => {
 	// навигация на таблицу карточек
 	const showCardsPack = (id: string, pageCount: number, name: string) => {
 		// (!isLoading) && navigate(`${PATH.PACK_NAME}/${name}/${id}/${pageCount}`);
-		navigate(`${PATH.packName}/${id}`);
+		navigate(`${PATH.packName}/${name}/${id}/${pageCount}`);
 	};
 
 	const sortTableValue = (value: string) => {

@@ -23,16 +23,16 @@ export const TablePackNameContainer = (props: ITablePackNameContainer) => {
     const packName = useAppSelector<PackNameStateType>(state => state.packName);
 
     // const cards = useSelector<AppRootStateType, CardPackNameType[]>(state => state.packName.cards);
-    const {packId} = useParams();
+    const {packId, pageCount} = useParams();
     const dispatch = AppDispatch();
 
     useEffect(() => {
-        if (packId) {
+        if (packId && pageCount) {
             // dispatch(getCards(packId, 10, filter));
 
-            dispatch(getCards({cardsPack_id: packId}));
+            dispatch(getCards({cardsPack_id: packId, pageCount: +pageCount}));
         }
-    }, [packId, dispatch]);
+    }, [packId, pageCount, dispatch]);
 
     // const filteredCards = cards.filter(card => {
     //     return card.question.toLowerCase().includes(props.filterTitle.toLowerCase());
