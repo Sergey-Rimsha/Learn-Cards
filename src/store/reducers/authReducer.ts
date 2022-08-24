@@ -114,4 +114,19 @@ export const registerUserTC = (payload: {email: string, password: string}): AppT
 		});
 };
 
+export const logOut = (): AppThunkType => (dispatch) => {
+	dispatch(setLoadingStatus('loading'));
+
+	API.logOut()
+		.then((res) => {
+			dispatch(setIsAuth(false));
+		})
+		.catch(err => {
+			console.log(err);
+		})
+		.finally(() => {
+			dispatch(setLoadingStatus('idle'));
+		});
+};
+
 

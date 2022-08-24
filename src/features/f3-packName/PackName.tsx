@@ -35,7 +35,7 @@ export const PackName = () => {
 
     return (
         <div>
-            {/*<NavBarContainer/>*/}
+            {/*<HeaderContainerTest/>*/}
             <div className={s.table}>
                 <h2 className={s.title}>
                     <img onClick={onClickNavigateBack} src={Arrow} alt='arrow left'/>

@@ -85,7 +85,9 @@ export const API = {
 	changeProfile(data: ChangeProfileType) {
 		return instance.put<PutResponseType>('auth/me', data);
 	},
-
+	logOut() {
+		return instance.delete('auth/me');
+	},
 };
 
 

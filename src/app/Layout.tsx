@@ -6,8 +6,9 @@ import {Preloader} from '../components/c5-Preloader/Preloader';
 import {AppDispatch, useAppSelector} from '../store/store';
 import {LoadingStatusType} from '../store/reducers/appReducer';
 
-import {HeaderContainer} from '../common/header/HeaderContainer';
 import {getMeProfile} from '../store/reducers/profileReducer';
+import {HeaderContainer} from '../features/f4-header/HeaderContainer';
+import {HeaderContainerTest} from '../common/header/HeaderContainerTest';
 
 export const Layout = () => {
 
@@ -24,8 +25,11 @@ export const Layout = () => {
 
 	return (
 		<>
-			<HeaderContainer/>
-			{status === 'loading' && <Preloader/>}
+			<HeaderContainerTest/>
+			<HeaderContainer />
+			<div>
+				{status === 'loading' && <Preloader/>}
+			</div>
 			<Outlet />
 		</>
 	);

@@ -29,7 +29,7 @@ export const PacksList = (props: PacksListPropsType) => {
 
     return (
         <>
-            {/*<NavBarContainer/>*/}
+            {/*<HeaderContainerTest/>*/}
             <div className={s.packsList}>
                 <div className={s.packsList__block}>
                     <div className={s.sidebar}>
