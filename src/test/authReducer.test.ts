@@ -1,11 +1,11 @@
 import {authReducer, AuthStateType, setLoginError, setRegisterStatus} from '../store/reducers/authReducer';
 
 
-let setState: AuthStateType;
+let statrState: AuthStateType;
 
 beforeEach(() => {
 
-	setState = {
+	statrState = {
 		loginError: '',
 		registerStatus: false,
 		activeButton: false,
@@ -15,14 +15,14 @@ beforeEach(() => {
 test('login error message state', () => {
 	const errorMessage = 'password length is small';
 
-	const endState = authReducer(setState, setLoginError(errorMessage));
+	const endState = authReducer(statrState, setLoginError(errorMessage));
 
 	expect(endState.loginError).toBe(errorMessage);
 });
 
 test('registration status', () => {
 	const status = true;
-	const endState = authReducer(setState, setRegisterStatus(status));
+	const endState = authReducer(statrState, setRegisterStatus(status));
 
 	expect(endState.registerStatus).toBeTruthy();
 });

@@ -75,7 +75,7 @@ const initialState: PackStateType = {
 	tokenDeathTime: 1655151219458,
 	params: {
 		userId: '',
-		max: 103,
+		max: 110,
 		min: 0,
 		packName: '',
 	},
