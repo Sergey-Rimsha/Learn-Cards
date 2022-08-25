@@ -1,7 +1,8 @@
 import {NavLink} from 'react-router-dom';
 
+import {PATH} from '../../../app/Routing/Routing';
+
 import styles from './NavigateContainer.module.scss';
-import {PATH} from "../../../app/Routing/Routing";
 
 
 export const NavigateContainer = () => {

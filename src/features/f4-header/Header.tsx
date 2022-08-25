@@ -1,7 +1,7 @@
 import React from 'react';
 
 import s from './Header.module.scss';
-import {Switch} from './switch/Switch';
+import {Switch} from './h0-switch/Switch';
 import {LogOutContainer} from './h1-logOut/LogOutContainer';
 
 type HeaderPropsType = {

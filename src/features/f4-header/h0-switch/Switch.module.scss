@@ -1,6 +1,9 @@
 .wrapper {
   width: 346px;
   display: flex;
+  & a {
+    text-decoration: none;
+  }
 
   .icon * {
     stroke: rgba(45, 46, 70, 0.4);
