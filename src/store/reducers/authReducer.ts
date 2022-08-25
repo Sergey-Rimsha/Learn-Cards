@@ -4,7 +4,7 @@ import {API, LoginDataType} from '../../api/Api';
 import {setIsAuth, setLoadingStatus} from './appReducer';
 import {setUserData} from './profileReducer';
 
-type AuthStateType = {
+export type AuthStateType = {
 	loginError?: string
 	registerStatus: boolean
 	activeButton: boolean
