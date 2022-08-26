@@ -7,7 +7,7 @@ import s from './LogOut.module.scss';
 
 type LogOutPropsType = {
 	profilePhoto: string | undefined
-	onClickHandlerLogOut:() => void
+	onClickHandlerLogOut: () => void
 }
 
 export const LogOut = (props: LogOutPropsType) => {
@@ -20,14 +20,15 @@ export const LogOut = (props: LogOutPropsType) => {
 					 props.onClickHandlerLogOut();
 				 }}
 			>
-				<div>
+				<div className={s.logOut__img}>
 					<img
-						className={s.profileIcon}
 						src={props.profilePhoto || photoDefault}
 						alt={'ava'}
 					/>
 				</div>
-				<span>LogOut</span>
+				<span className={s.logOut__element}>
+					LogOut
+				</span>
 			</div>
 		</>
 	);
