@@ -1,52 +1,56 @@
-.wrapper {
-  width: 346px;
-  display: flex;
-  & a {
-    text-decoration: none;
-  }
+@import "src/styles/variables";
+@import "src/styles/mixins";
 
-  .icon * {
-    stroke: rgba(45, 46, 70, 0.4);
-  }
 
-  span {
-    margin-left: 5px;
-    font-family: 'SF UI Display', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: center;
-    letter-spacing: 0.4px;
-    color: rgba(45, 46, 70, 0.4);
-  }
+.switch {
+	width: 346px;
+	display: flex;
 
-  .block {
-    height: 60px;
-    width: 173px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    cursor: pointer;
-  }
+	& a {
+		text-decoration: none;
+	}
 
-  .active {
-    height: 60px;
-    width: 173px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #DCCCDB;
-    border-bottom: 2px solid #21268F;
+	&__icon * {
+		stroke: rgba(45, 46, 70, 0.4);
+	}
 
-    span {
-      color: rgb(45, 46, 70);
-    }
+	&__item {
+		height: 60px;
+		width: 173px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent;
+		cursor: pointer;
 
-    .icon * {
-      stroke: rgb(45, 46, 70);
-    }
-  }
+		&_active {
+			height: 60px;
+			width: 173px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: #DCCCDB;
+			border-bottom: 2px solid #21268F;
 
+			span {
+				color: rgb(45, 46, 70);
+			}
+
+			.icon * {
+				stroke: rgb(45, 46, 70);
+			}
+		}
+	}
+
+	&__name {
+		margin-left: 5px;
+		@include FontSanFrancisco();
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		text-align: center;
+		letter-spacing: 0.4px;
+		color: rgba(45, 46, 70, 0.4);
+	}
 }
