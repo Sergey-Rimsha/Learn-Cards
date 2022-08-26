@@ -12,13 +12,15 @@ import {AppDispatch, AppRootStateType} from '../../store/store';
 // import {changeModalAddCard} from '../../store/reducers/modalsReducer';
 import s from './PackName.module.scss';
 import {TablePackNameContainer} from './p0-TablePackName/TablePackNameContainer';
+import Pagination from "../../components/c6-Pagination/Pagination";
+import {PaginationContainer} from "../../components/c6-Pagination/PaginationContainer";
 
 
 export const PackName = () => {
     const [search, setSearch] = useState<string>('');
     // const isModal = useSelector<AppRootStateType, boolean>(state => state.modals.modalAddCard);
     const navigate = useNavigate();
-    const {name, packId, pageCount} = useParams();
+    const {name, packId, pageCount = 10} = useParams();
     const cards = useSelector<AppRootStateType, CardPackNameType[]>(state => state.packName.cards);
     // const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
 
@@ -32,6 +34,10 @@ export const PackName = () => {
     const onClickNavigateBack = () => {
         navigate(-1);
     };
+
+    const setParamsPagination = (pageCount: number, currentPage: number) => {
+
+    }
 
     return (
         <div>
@@ -56,6 +62,12 @@ export const PackName = () => {
                 </div>
                 <TablePackNameContainer filterTitle={search}/>
             </div>
+            <PaginationContainer
+                isLoading={false}
+                totalCount={+pageCount}
+                currentPage={1}
+                pageCount={4}
+                setParamsPagination={setParamsPagination}/>
             {/*<Modal visibility={isModal}>*/}
             {/*    <ModalAddCard cardID={packId}/>*/}
             {/*</Modal>*/}
