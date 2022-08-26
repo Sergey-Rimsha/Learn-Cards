@@ -11,14 +11,16 @@ type LogOutPropsType = {
 }
 
 export const LogOut = (props: LogOutPropsType) => {
+
+	const onClickLogOut = () => {
+		props.onClickHandlerLogOut();
+	};
 	
 	
 	return (
 		<>
-			<div className = {s.logOut}
-				 onClick={() => {
-					 props.onClickHandlerLogOut();
-				 }}
+			<div className={s.logOut}
+				 onClick={onClickLogOut}
 			>
 				<div className={s.logOut__img}>
 					<img
