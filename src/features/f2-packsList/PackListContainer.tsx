@@ -22,12 +22,12 @@ export const PackListContainer = () => {
 	// setParams Pagination
 	const setParamsPagination = useCallback((pageCount: number, currentPage: number) => {
 		dispatch(setParamsPage(pageCount, currentPage));
-	},[dispatch]);
+	}, [dispatch]);
 
 	// setParams DoubleRange
-	const setParamsRange = useCallback( (min: number, max: number) => {
+	const setParamsRange = useCallback((min: number, max: number) => {
 		dispatch(setParamsCardsCount(min, max));
-	},[dispatch]);
+	}, [dispatch]);
 
 	// setParams search
 	const setParamsSearch = useCallback((packName: string) => {
@@ -41,21 +41,18 @@ export const PackListContainer = () => {
 		} else {
 			setIsLoading(false);
 		}
-	},[loadingStatus]);
+	}, [loadingStatus]);
 
 	return (
-		<>
-			<PacksList
-				isLoading={isLoading}
-				totalCount={totalCount}
-				currentPage={currentPage}
-				pageCount={pageCount}
-				setParamsPagination={setParamsPagination}
-				setParamsRange={setParamsRange}
-				setParamsSearch={setParamsSearch}
-			/>
-		</>
-
+		<PacksList
+			isLoading={isLoading}
+			totalCount={totalCount}
+			currentPage={currentPage}
+			pageCount={pageCount}
+			setParamsPagination={setParamsPagination}
+			setParamsRange={setParamsRange}
+			setParamsSearch={setParamsSearch}
+		/>
 	);
 };
 
