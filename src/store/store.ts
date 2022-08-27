@@ -11,6 +11,7 @@ import {AuthActionType, authReducer} from './reducers/authReducer';
 import {AppActionType, appReducer} from './reducers/appReducer';
 import {PackListActionType, packListReducer} from './reducers/packListReducer';
 import {packNameReducer} from './reducers/packNameReducer';
+import {learnCardsReducer} from "./reducers/learnCardsReducer";
 
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
 	app: appReducer,
 	packList: packListReducer,
 	packName: packNameReducer,
+	learnCards: learnCardsReducer,
 });
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

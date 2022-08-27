@@ -16,6 +16,7 @@ import {
 import {PATH} from '../../../app/Routing/Routing';
 
 import {TablePacks} from './TablePacks';
+import {getLearnCardsPack} from "../../../store/reducers/learnCardsReducer";
 
 export const TablePacksContainer = () => {
 
@@ -89,8 +90,8 @@ export const TablePacksContainer = () => {
 	};
 
 	const learnCardsPack = (id: string, name: string) => {
-		// dispatch(getLearnCardsPack(id));
-		// navigate(`${PATH.LEARN_CARDS}/${name}`);
+		dispatch(getLearnCardsPack(id));
+		navigate(`${PATH.learnCards}/${name}`);
 	};
 
 

@@ -9,6 +9,7 @@ import {PackListContainer} from '../../features/f2-packsList/PackListContainer';
 import {NotFound} from '../../common/notFound/NotFound';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
 import {PackNameContainer} from '../../features/f3-packName/PackNameContainer';
+import {LearnCardsContainer} from '../../features/f5-learnCards/LearnCardsContainer';
 
 export const PATH = {
 	login: '/login',
@@ -19,6 +20,7 @@ export const PATH = {
 	notFound: '/404',
 	packList: '/packList',
 	packName: '/packName',
+	learnCards: '/learn_cards',
 
 	testComponents: 'testComponents',
 };
@@ -64,6 +66,9 @@ export const Routing = () => {
 								</WithAuthRedirect>
 							}
 						/>
+					</Route>
+					<Route path={PATH.learnCards} element={<LearnCardsContainer/>}>
+						<Route path={':name'} element={<LearnCardsContainer/>}/>
 					</Route>
 
 					<Route path={'*'} element={<NotFound/>}/>

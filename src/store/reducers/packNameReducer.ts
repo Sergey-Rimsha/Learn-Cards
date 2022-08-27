@@ -1,6 +1,6 @@
 import {AppThunkType} from '../store';
 
-import {apiCardsCard, GetCardsCardParamsType} from '../../api/Api';
+import {apiCard, GetCardsCardParamsType} from '../../api/Api';
 
 import {setLoadingStatus} from './appReducer';
 
@@ -86,7 +86,7 @@ export const getCards = (paramsData?: GetCardsCardParamsType): AppThunkType => (
 
     const params = {...paramsData, pageCount, page};
 
-    apiCardsCard.getCardsPack(params)
+    apiCard.getCardsPack(params)
         .then((res) => {
             dispatch(setPackNameList(res.data));
         })
