@@ -7,6 +7,7 @@ import {PaginationContainer} from '../../components/c6-Pagination/PaginationCont
 
 import s from './PackName.module.scss';
 import {TablePackNameContainer} from './p0-TablePackName/TablePackNameContainer';
+import {SearchInput} from "../../components/c8-SearchInput/SearchInput";
 
 type PackNamePropsType = {
     name: string | undefined
@@ -21,19 +22,27 @@ type PackNamePropsType = {
 
 export const PackName = React.memo((props: PackNamePropsType) => {
 
+    const searchParams = (packName: string) => {
+
+    };
+
     return (
-        <div>
-            <div className={s.table}>
-                <h2 className={s.title}>
+        <div className={s.packName}>
+            <div className={s.packName__header}>
+                <h2 className={s.packName__title}>
                     <img onClick={props.onClickNavigateBack} src={Arrow} alt='arrow left'/>
-                    <span>Pack Name "{props.name}"</span>
+                    <span className={s.packName__name}>
+                        Pack Name "{props.name}"
+                    </span>
                 </h2>
-                <div className={s.search}>
-                    <div className={s.buttonWrap}></div>
-                </div>
+            </div>
+            <div className={s.packName__params}>
+                <SearchInput setParamsSearch={searchParams}/>
+            </div>
+            <div className={s.packName__table}>
                 <TablePackNameContainer />
             </div>
-            <div>
+            <div className={s.packName__pagination}>
                 <PaginationContainer
                     isLoading={props.isLoading}
                     totalCount={props.cardsTotalCount}

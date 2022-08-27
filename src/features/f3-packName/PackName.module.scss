@@ -1,33 +1,44 @@
-.table {
-  width: 1008px;
-  height: auto;
-  padding: 19px 24px;
-  margin: 0 auto;
-  background: #FEFEFF;
-  border-radius: 8px;
+@import "src/styles/variables";
+@import "src/styles/mixins";
 
-  .title {
-    margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 33px;
-    color: #2D2E46;
+.packName {
+	display: flex;
+	flex-direction: column;
+	padding: 19px 24px;
+	background: $bgWhite;
+	border-radius: 8px;
 
-    span {
-      margin-left: 10px;
-    }
-  }
+	&__header {
 
-  .search {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 24px;
+		& h2 {
+			margin: 0;
+		}
+	}
 
-    .buttonWrap {
-      margin-left: 24px;
-    }
-  }
+	&__title {
+		@include FontPoppins();
+		font-style: normal;
+		font-size: 22px;
+		line-height: 33px;
+	}
+
+	&__name {
+		margin-left: 15px;
+	}
+
+
+	&__params {
+		margin-top: 20px;
+	}
+
+	&__table {
+		margin-top: 20px;
+	}
+
+	&__pagination {
+		margin-top: 20px;
+	}
+
 }
+
+
