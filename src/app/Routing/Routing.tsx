@@ -8,8 +8,7 @@ import {ProfileContainer} from '../../features/f1-profile/ProfileContainer';
 import {PackListContainer} from '../../features/f2-packsList/PackListContainer';
 import {NotFound} from '../../common/notFound/NotFound';
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
-import {TablePackNameContainer} from '../../features/f3-packName/p0-TablePackName/TablePackNameContainer';
-import {PackName} from '../../features/f3-packName/PackName';
+import {PackNameContainer} from '../../features/f3-packName/PackNameContainer';
 
 export const PATH = {
 	login: '/login',
@@ -54,19 +53,18 @@ export const Routing = () => {
 						path={PATH.packName} 
 						element={
 							<WithAuthRedirect>
-								<PackName/>
+								<PackNameContainer/>
 							</WithAuthRedirect>
 						}>
 						<Route
-							path={':name/:packId/:pageCount'}
+							path={':name/:packId'}
 							element={
 								<WithAuthRedirect>
-									<PackName/>
+									<PackNameContainer/>
 								</WithAuthRedirect>
 							}
 						/>
 					</Route>
-
 
 					<Route path={'*'} element={<NotFound/>}/>
 				</Route>

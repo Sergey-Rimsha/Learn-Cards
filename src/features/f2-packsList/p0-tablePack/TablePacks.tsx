@@ -13,7 +13,7 @@ import s from './TablePacks.module.scss';
 
 type TablePacksPropsType = {
 	showModalDelete: (id: string, name: string) => void
-	showCardsPack: (id: string, pageCount: number, name: string) => void
+	showCardsPack: (id: string, name: string) => void
 	sortTableValue: (value: string) => void
 	learnCardsPack: (id: string, name: string) => void
 	isLoading: boolean
@@ -45,7 +45,7 @@ export const TablePacks = (props: TablePacksPropsType) => {
 		return cardPacks.map(el => {
 			return (
 				<tr key={el._id} className={s.table__wrap}>
-					<th onClick={() => showCardsPack(el._id, el.cardsCount, el.name)}
+					<th onClick={() => showCardsPack(el._id, el.name)}
 					>{el.name}</th>
 					<th>{el.cardsCount}</th>
 					<th>{new Date(Date.parse(el.updated)).toLocaleDateString()}</th>

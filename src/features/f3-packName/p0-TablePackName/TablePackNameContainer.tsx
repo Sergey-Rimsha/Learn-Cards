@@ -13,7 +13,7 @@ import {TablePackName} from './TablePackName';
 export type FilterPackName = '0name' | '0cardsCount' | '0updated'
 
 interface ITablePackNameContainer {
-    filterTitle: string
+
 }
 
 export const TablePackNameContainer = (props: ITablePackNameContainer) => {
@@ -22,15 +22,15 @@ export const TablePackNameContainer = (props: ITablePackNameContainer) => {
 
     const packName = useAppSelector<PackNameStateType>(state => state.packName);
 
-    const {packId, pageCount} = useParams();
+    const {packId} = useParams();
     const dispatch = AppDispatch();
 
     useEffect(() => {
-        if (packId && pageCount) {
+        if (packId) {
             // dispatch(getCards(packId, 10, filter));
-            dispatch(getCards({cardsPack_id: packId, pageCount: +pageCount}));
+            dispatch(getCards({cardsPack_id: packId}));
         }
-    }, [packId, pageCount, dispatch]);
+    }, [packId, dispatch, packName.page, packName.pageCount]);
 
     // const filteredCards = cards.filter(card => {
     //     return card.question.toLowerCase().includes(props.filterTitle.toLowerCase());

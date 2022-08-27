@@ -1,77 +1,47 @@
-import React, {useState} from 'react';
-
-import {useNavigate, useParams} from 'react-router-dom';
-
-import {useSelector} from 'react-redux';
+import React from 'react';
 
 import Arrow from '../../assets/img/arrow-left.svg';
 
-import {CardPackNameType} from '../../store/reducers/packNameReducer';
-import {AppDispatch, AppRootStateType} from '../../store/store';
-
 // import {changeModalAddCard} from '../../store/reducers/modalsReducer';
+import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
+
 import s from './PackName.module.scss';
 import {TablePackNameContainer} from './p0-TablePackName/TablePackNameContainer';
-import Pagination from "../../components/c6-Pagination/Pagination";
-import {PaginationContainer} from "../../components/c6-Pagination/PaginationContainer";
 
+type PackNamePropsType = {
+    name: string | undefined
+    isLoading: boolean
+    page: number
+    pageCount: number
+    cardsTotalCount: number
 
-export const PackName = () => {
-    const [search, setSearch] = useState<string>('');
-    // const isModal = useSelector<AppRootStateType, boolean>(state => state.modals.modalAddCard);
-    const navigate = useNavigate();
-    const {name, packId, pageCount = 10} = useParams();
-    const cards = useSelector<AppRootStateType, CardPackNameType[]>(state => state.packName.cards);
-    // const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading);
+    onClickNavigateBack: () => void
+    setParamsPagination: (pageCount: number, currentPage: number) => void
+}
 
-    const dispatch = AppDispatch();
-
-    const getFilteredCardsAfterSearch = search === ''
-        ? cards
-        : cards.filter(c => c.question.toLowerCase().includes(search.toLowerCase()));
-
-
-    const onClickNavigateBack = () => {
-        navigate(-1);
-    };
-
-    const setParamsPagination = (pageCount: number, currentPage: number) => {
-
-    }
+export const PackName = React.memo((props: PackNamePropsType) => {
 
     return (
         <div>
-            {/*<HeaderContainerTest/>*/}
             <div className={s.table}>
                 <h2 className={s.title}>
-                    <img onClick={onClickNavigateBack} src={Arrow} alt='arrow left'/>
-                    <span>Pack Name "{name}"</span>
+                    <img onClick={props.onClickNavigateBack} src={Arrow} alt='arrow left'/>
+                    <span>Pack Name "{props.name}"</span>
                 </h2>
                 <div className={s.search}>
-                    {/*<TableSearch title={search}*/}
-                    {/*             changeTitle={setSearch}*/}
-                    {/*             isLoading={isLoading}/>*/}
-                    <div className={s.buttonWrap}>
-                        {/*<Button width={'200px'}*/}
-                        {/*        onClick={() => dispatch(changeModalAddCard(true))}*/}
-                        {/*        disabled={isLoading}*/}
-                        {/*>*/}
-                        {/*    Add new question*/}
-                        {/*</Button>*/}
-                    </div>
+                    <div className={s.buttonWrap}></div>
                 </div>
-                <TablePackNameContainer filterTitle={search}/>
+                <TablePackNameContainer />
             </div>
-            <PaginationContainer
-                isLoading={false}
-                totalCount={+pageCount}
-                currentPage={1}
-                pageCount={4}
-                setParamsPagination={setParamsPagination}/>
-            {/*<Modal visibility={isModal}>*/}
-            {/*    <ModalAddCard cardID={packId}/>*/}
-            {/*</Modal>*/}
+            <div>
+                <PaginationContainer
+                    isLoading={props.isLoading}
+                    totalCount={props.cardsTotalCount}
+                    currentPage={props.page}
+                    pageCount={props.pageCount}
+                    setParamsPagination={props.setParamsPagination}/>
+            </div>
         </div>
     );
-};
+});
 

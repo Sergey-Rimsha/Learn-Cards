@@ -29,6 +29,7 @@ export type PackNameStateType = {
 }
 
 export type PackNameActionType = ReturnType<typeof setPackNameList>
+    | ReturnType<typeof setParamsPackNamePagination>
 
 const initialState: PackNameStateType = {
     cards: [],
@@ -36,7 +37,7 @@ const initialState: PackNameStateType = {
     maxGrade: 6,
     minGrade: 0,
     page: 1,
-    pageCount: 4,
+    pageCount: 8,
     packUserId: '',
 };
 
@@ -45,9 +46,17 @@ export const packNameReducer = (state = initialState, acton: PackNameActionType)
         case 'PACK-NAME/SET-PACK_NAME': {
             return {
                 ...state,
-                cards: acton.data,
+                ...acton.data,
             };
         }
+        case 'PACK-NAME/SET-PARAMS_PAGINATION': {
+            return  {
+                ...state,
+                pageCount: acton.pageCount,
+                page: acton.currentPage,
+            };
+        }
+
 
         default:
             return state;
@@ -55,22 +64,31 @@ export const packNameReducer = (state = initialState, acton: PackNameActionType)
 };
 
 
-export const setPackNameList = (data: CardPackNameType[]) => {
+export const setPackNameList = (data: PackNameStateType) => {
     return {
         type: 'PACK-NAME/SET-PACK_NAME',
         data,
     } as const;
 };
 
+export const setParamsPackNamePagination = (pageCount: number, currentPage: number) => {
+      return {
+          type: 'PACK-NAME/SET-PARAMS_PAGINATION',
+          pageCount,
+          currentPage,
+      } as const;
+};
 
-export const getCards = (params?: GetCardsCardParamsType): AppThunkType => ( dispatch) => {
+export const getCards = (paramsData?: GetCardsCardParamsType): AppThunkType => ( dispatch, getState) => {
     dispatch(setLoadingStatus('loading'));
+
+    const {pageCount, page} = getState().packName;
+
+    const params = {...paramsData, pageCount, page};
 
     apiCardsCard.getCardsPack(params)
         .then((res) => {
-
-            dispatch(setPackNameList(res.data.cards));
-            // console.log(res.data);
+            dispatch(setPackNameList(res.data));
         })
         .catch((err) => {
             console.log(err);

@@ -60,9 +60,10 @@ export const TablePackName = (props: TablePackNamePropsType) => {
                 </thead>
                 <tbody>
                     {
-                        props.data.map((el) => {
+                        props.data.map((el, i) => {
                            return (
                             <TableLineCard
+                                key={i}
                                 item={el}
                                 deleteCard={deleteCard}
                             />

@@ -38,14 +38,15 @@ export const PaginationContainer = React.memo((props: PaginationContainerPropsTy
 
     return (
         <div>
-            <Pagination totalPages={totalPages}
-                        currentPage={currentPage}
-                        pageCount={pageCount}
-                        setPageCount={setPageCount}
-                        setCurrentPage={setCurrentPage}
-                        prevPage={prevPage}
-                        nextPage={nextPage}
-                        isLoading={props.isLoading}
+            <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                pageCount={pageCount}
+                setPageCount={setPageCount}
+                setCurrentPage={setCurrentPage}
+                prevPage={prevPage}
+                nextPage={nextPage}
+                isLoading={props.isLoading}
             />
         </div>);
 });
