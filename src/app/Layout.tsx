@@ -27,16 +27,20 @@ export const Layout = () => {
 
 	return (
 		<div className={s.layout}>
-			<HeaderContainerTest/>
-			{
-				isAuth &&
-				<div className={s.layout__header}>
-					<HeaderContainer />
+
+			{/*<HeaderContainerTest/>*/}
+			<div className={s.layout__headerWrap}>
+				{
+					isAuth &&
+					<div className={s.layout__header}>
+						<HeaderContainer />
+					</div>
+				}
+				<div className={s.layout__loading}>
+					{status === 'loading' && <Preloader/>}
 				</div>
-			}
-			<div className={s.layout__loading}>
-				{status === 'loading' && <Preloader/>}
 			</div>
+
 			<div className={s.layout__main}>
 				<Outlet />
 			</div>
