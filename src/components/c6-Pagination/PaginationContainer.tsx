@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import Pagination from './Pagination';
+import {Pagination} from './Pagination';
 
 type PaginationContainerPropsType = {
     isLoading: boolean
@@ -12,12 +12,14 @@ type PaginationContainerPropsType = {
 
 export const PaginationContainer = React.memo((props: PaginationContainerPropsType) => {
 
+    const {setParamsPagination, ...restProps} = props;
+
     const [currentPage, setCurrentPage] = useState<number>(props.currentPage);
     const [pageCount, setPageCount] = useState<number>(props.pageCount);
 
     useEffect(() => {
-        props.setParamsPagination(pageCount, currentPage);
-    }, [currentPage, pageCount, props.setParamsPagination]);
+        setParamsPagination(pageCount, currentPage);
+    }, [currentPage, pageCount,  setParamsPagination]);
 
     useEffect(() => {
         setCurrentPage(1);

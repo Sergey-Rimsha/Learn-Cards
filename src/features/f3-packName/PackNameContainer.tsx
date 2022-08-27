@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 import {useNavigate, useParams} from 'react-router-dom';
 
@@ -29,11 +29,9 @@ export const PackNameContainer = ( ) => {
 		navigate(-1);
 	};
 
-	const setParamsPagination = (pageCount: number, currentPage: number) => {
+	const setParamsPagination = useCallback((pageCount: number, currentPage: number) => {
 		dispatch(setParamsPackNamePagination(pageCount, currentPage));
-
-		console.log(pageCount, currentPage);
-	};
+	},[dispatch]);
 
 	useEffect(() => {
 		if (loadingStatus === 'loading') {

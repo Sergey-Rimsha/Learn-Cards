@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import {AppDispatch, useAppSelector} from '../../store/store';
 
@@ -20,17 +20,19 @@ export const PackListContainer = () => {
 	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
 
 	// setParams Pagination
-	const setParamsPagination = (pageCount: number, currentPage: number) => {
+	const setParamsPagination = useCallback((pageCount: number, currentPage: number) => {
 		dispatch(setParamsPage(pageCount, currentPage));
-	};
+	},[dispatch]);
 
-	const setParamsRange = (min: number, max: number) => {
+	// setParams DoubleRange
+	const setParamsRange = useCallback( (min: number, max: number) => {
 		dispatch(setParamsCardsCount(min, max));
-	};
+	},[dispatch]);
 
-	const setParamsSearch = (packName: string) => {
+	// setParams search
+	const setParamsSearch = useCallback((packName: string) => {
 		dispatch(setParamsSearchPackName(packName));
-	};
+	}, [dispatch]);
 
 	// loading status transform boolean -> useState
 	useEffect(() => {

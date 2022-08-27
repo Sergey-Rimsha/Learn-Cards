@@ -20,7 +20,7 @@ const getRange = (start: number, end: number) => {
 };
 
 
-const Pagination = (props: PaginationPropsType) => {
+export const Pagination = React.memo((props: PaginationPropsType) => {
 
     const onChangeHandlerRange = (e: ChangeEvent<HTMLSelectElement>) => {
         props.setPageCount(+e.currentTarget.value);
@@ -73,8 +73,8 @@ const Pagination = (props: PaginationPropsType) => {
                                 className={page === props.currentPage ? s.page_active : s.page}
                                 onClick={() => props.setCurrentPage(page)}
                                 disabled={props.isLoading}>
-                                    {page}
-                                </button> :
+                                {page}
+                            </button> :
                             // гребаный кастыль нужно исправлять
                             <span key={Math.random()}>...</span>
                     ))
@@ -99,6 +99,4 @@ const Pagination = (props: PaginationPropsType) => {
             <span>Cards per Page</span>
         </div>
     );
-};
-
-export default Pagination;
+});
