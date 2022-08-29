@@ -10,6 +10,8 @@ import {PacksList} from './PacksList';
 
 export const PackListContainer = () => {
 
+	console.log('render PackListContainer');
+
 	const dispatch = AppDispatch();
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);

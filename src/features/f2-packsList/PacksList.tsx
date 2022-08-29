@@ -9,7 +9,7 @@ import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
 
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
-import ShowPackContainer from './f1-showPack/ShowPackContainer';
+import {ShowPackContainer} from './f1-showPack/ShowPackContainer';
 
 
 type PacksListPropsType = {
@@ -23,7 +23,9 @@ type PacksListPropsType = {
 
 }
 
-export const PacksList = (props: PacksListPropsType) => {
+export const PacksList = React.memo((props: PacksListPropsType) => {
+
+	console.log('render PackList');
 
 	return (
 		<div className={s.packsList}>
@@ -59,5 +61,5 @@ export const PacksList = (props: PacksListPropsType) => {
 			</div>
 		</div>
 	);
-};
+});
 

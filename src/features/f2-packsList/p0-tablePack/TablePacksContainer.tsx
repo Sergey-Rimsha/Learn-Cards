@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 
 import {useNavigate} from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import {AppDispatch, useAppSelector} from '../../../store/store';
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
 import {
-	addCardsPack,
+	addCardsPack, delCardsPack,
 	getCardsPacks,
 	PackListParamsType,
 	setParamsUserId,
@@ -15,10 +15,13 @@ import {
 
 import {PATH} from '../../../app/Routing/Routing';
 
-import {TablePacks} from './TablePacks';
-import {getLearnCardsPack} from "../../../store/reducers/learnCardsReducer";
+import {getLearnCardsPack} from '../../../store/reducers/learnCardsReducer';
 
-export const TablePacksContainer = () => {
+import {TablePacks} from './TablePacks';
+
+export const TablePacksContainer = React.memo(() => {
+
+	console.log('render tableContainer');
 
 	const navigate = useNavigate();
 	const dispatch = AppDispatch();
@@ -28,7 +31,11 @@ export const TablePacksContainer = () => {
 
 	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
 	const currentPage = useAppSelector<number>(state => state.packList.page);
-	const params = useAppSelector<PackListParamsType>(state => state.packList.params);
+	const userId = useAppSelector<string>(state => state.packList.params.userId);
+	const min = useAppSelector<number>(state => state.packList.params.min);
+	const max = useAppSelector<number>(state => state.packList.params.max);
+	const packName = useAppSelector<string>(state => state.packList.params.packName);
+
 
 
 	const [namePack, setNamePack] = useState<string>('');
@@ -46,53 +53,38 @@ export const TablePacksContainer = () => {
 	};
 
 	// для добавления карточек Pack
-	const onHandlerSubmitPackName = () => {
+	const onHandlerSubmitPackName = useCallback(() => {
 		if (namePack) {
 			dispatch(addCardsPack({name: namePack}));
 		}
-	};
+	},[dispatch, namePack]);
+
+
 
 	useEffect(() => {
 		dispatch(getCardsPacks());
-	},[pageCount,
-		currentPage,
-		dispatch,
-		params.userId,
-		params.min,
-		params.max,
-		params.packName,
-	]);
+	},[pageCount, currentPage, dispatch, userId, min, max, packName]);
 
-
-	// для удаления pack карточек
-	// const onClickDeletePack = (action?: 'delete') => {
-	// 	if (action === 'delete') dispatch(deleteCardsPack(titleCardID));
-	// 	setShowModal(false);
-	// 	setTitleCard('');
-	// 	setTitleCardID('');
-	// };
 
 	// показать модалку удаления
-	const showModalDelete = (id: string, titleCard: string) => {
-		setTitleCard(titleCard);
-		setTitleCardID(id);
-		setShowModal(true);
-	};
+	const showModalDelete = useCallback((id: string, titleCard: string) => {
+		dispatch(delCardsPack(id));
+	},[dispatch]);
 
 	// навигация на таблицу карточек
-	const showCardsPack = (id: string, name: string) => {
+	const showCardsPack = useCallback((id: string, name: string) => {
 		// (!isLoading) && navigate(`${PATH.PACK_NAME}/${name}/${id}/${pageCount}`);
 		navigate(`${PATH.packName}/${name}/${id}`);
-	};
+	},[navigate]);
 
 	const sortTableValue = (value: string) => {
 		setSortPacks(0 + value);
 	};
 
-	const learnCardsPack = (id: string, name: string) => {
+	const learnCardsPack = useCallback((id: string, name: string) => {
 		dispatch(getLearnCardsPack(id));
 		navigate(`${PATH.learnCards}/${name}`);
-	};
+	},[dispatch, navigate]);
 
 
 
@@ -114,15 +106,6 @@ export const TablePacksContainer = () => {
 
 	return (
 		<>
-			{/*<div>*/}
-			{/*	<input onChange={onChangePackName}*/}
-			{/*		   value={namePack}*/}
-			{/*		   disabled={isLoading}/>*/}
-			{/*	<button onClick={onHandlerSubmitPackName}*/}
-			{/*			disabled={isLoading}>*/}
-			{/*		add new pack*/}
-			{/*	</button>*/}
-			{/*</div>*/}
 			<TablePacks
 				sortTableValue={sortTableValue}
 				showModalDelete={showModalDelete}
@@ -132,4 +115,4 @@ export const TablePacksContainer = () => {
 			/>
 		</>
 	);
-};
+});
