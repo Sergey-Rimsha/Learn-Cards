@@ -25,7 +25,6 @@ type PacksListPropsType = {
 
 export const PacksList = React.memo((props: PacksListPropsType) => {
 
-	console.log('render PackList');
 
 	return (
 		<div className={s.packsList}>

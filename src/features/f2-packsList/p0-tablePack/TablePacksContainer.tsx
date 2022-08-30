@@ -21,8 +21,6 @@ import {TablePacks} from './TablePacks';
 
 export const TablePacksContainer = React.memo(() => {
 
-	console.log('render tableContainer');
-
 	const navigate = useNavigate();
 	const dispatch = AppDispatch();
 

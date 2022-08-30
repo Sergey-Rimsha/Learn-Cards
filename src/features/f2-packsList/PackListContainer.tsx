@@ -8,9 +8,7 @@ import {setParamsCardsCount, setParamsPage, setParamsSearchPackName} from '../..
 
 import {PacksList} from './PacksList';
 
-export const PackListContainer = () => {
-
-	console.log('render PackListContainer');
+export const PackListContainer = React.memo(() => {
 
 	const dispatch = AppDispatch();
 
@@ -56,5 +54,5 @@ export const PackListContainer = () => {
 			setParamsSearch={setParamsSearch}
 		/>
 	);
-};
+});
 

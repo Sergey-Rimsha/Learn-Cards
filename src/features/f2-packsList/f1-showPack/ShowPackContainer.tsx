@@ -9,8 +9,6 @@ import ShowPack from './ShowPack';
 
 export const ShowPackContainer = React.memo(() => {
 
-    console.log('render ShowPack ALL or MY');
-
     const dispatch = AppDispatch();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,12 +17,12 @@ export const ShowPackContainer = React.memo(() => {
     const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
     const userId = useAppSelector<string>(state => state.profile.userData._id);
 
-    const onclickHandlerMy = useCallback(() => {
+    const onClickHandlerMy = useCallback(() => {
         dispatch(setParamsUserId(userId));
         setIsId(true);
     },[dispatch, userId]);
 
-    const onclickHandlerAll = useCallback(() => {
+    const onClickHandlerAll = useCallback(() => {
         dispatch(setParamsUserId(''));
         setIsId(false);
     },[dispatch]);
@@ -40,8 +38,8 @@ export const ShowPackContainer = React.memo(() => {
     return (
         <div>
             <ShowPack
-                onclickHandlerMy={onclickHandlerMy}
-                onclickHandlerAll={onclickHandlerAll}
+                onClickHandlerMy={onClickHandlerMy}
+                onClickHandlerAll={onClickHandlerAll}
                 isId={isId}
                 isLoading={isLoading}
             />
