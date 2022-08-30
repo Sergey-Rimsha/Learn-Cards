@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
 
 import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
@@ -31,14 +30,21 @@ export const PacksList = React.memo((props: PacksListPropsType) => {
 			<div className={s.packsList__block}>
 				<div className={s.sidebar}>
 					<h4 className={s.sidebar__title}>Show packs cards</h4>
-					<ShowPackContainer/>
-					<h4 className={s.title}>Number of cards</h4>
+					<ShowPackContainer
+						isLoading={props.isLoading}
+					/>
+					<h4 className={s.title}>
+						Number of cards
+					</h4>
 					<DoubleRange
 						setParamsRange={props.setParamsRange}
+						isLoading={props.isLoading}
 					/>
 				</div>
 				<div className={s.main}>
-					<h2 className={s.main__title}>Packs list</h2>
+					<h2 className={s.main__title}>
+						Packs list
+					</h2>
 					<div className={s.main__params}>
 						<SearchInput
 							setParamsSearch={props.setParamsSearch}

@@ -1,20 +1,20 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import {AppDispatch, useAppSelector} from '../../../store/store';
 import {setParamsUserId} from '../../../store/reducers/packListReducer';
 
-import {LoadingStatusType} from '../../../store/reducers/appReducer';
-
 import ShowPack from './ShowPack';
 
-export const ShowPackContainer = React.memo(() => {
+type ShowPackContainerPropsType = {
+    isLoading: boolean
+}
+
+export const ShowPackContainer = React.memo((props:ShowPackContainerPropsType) => {
 
     const dispatch = AppDispatch();
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isId, setIsId] = useState<boolean>(false);
 
-    const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
     const userId = useAppSelector<string>(state => state.profile.userData._id);
 
     const onClickHandlerMy = useCallback(() => {
@@ -27,13 +27,6 @@ export const ShowPackContainer = React.memo(() => {
         setIsId(false);
     },[dispatch]);
 
-    useEffect(() => {
-        if (loadingStatus === 'loading') {
-            setIsLoading(true);
-        } else {
-            setIsLoading(false);
-        }
-    },[loadingStatus]);
 
     return (
         <div>
@@ -41,7 +34,7 @@ export const ShowPackContainer = React.memo(() => {
                 onClickHandlerMy={onClickHandlerMy}
                 onClickHandlerAll={onClickHandlerAll}
                 isId={isId}
-                isLoading={isLoading}
+                isLoading={props.isLoading}
             />
         </div>
     );

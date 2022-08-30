@@ -3,6 +3,7 @@ import React, {ChangeEvent, useState} from 'react';
 import s from './DoubleRange.module.scss';
 
 type DoubleRangePropsType = {
+	isLoading: boolean
 	setParamsRange: (min: number, max: number) => void
 }
 
@@ -54,19 +55,23 @@ export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 				</div>
 				<span className={s.multiRange}>
 					<input
+						id='lower'
 						max={110}
 						type='range'
 						value={value && value[0]}
+						disabled={props.isLoading}
 						onMouseOut={onHandlerSetParams}
 						onChange={onChangeCallback}
-						id='lower'/>
+					/>
 					<input
+						id='upper'
 						max={110}
 						type='range'
 						value={value && value[1]}
+						disabled={props.isLoading}
 						onMouseOut={onHandlerSetParams}
 						onChange={onChangeCallback}
-						id='upper'/>
+					/>
 				</span>
 			</div>
 		</>
