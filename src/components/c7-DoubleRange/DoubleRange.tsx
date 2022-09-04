@@ -4,13 +4,15 @@ import s from './DoubleRange.module.scss';
 
 type DoubleRangePropsType = {
 	isLoading: boolean
+	minRange: number
+	maxRange: number
 	setParamsRange: (min: number, max: number) => void
 }
 
 export const DoubleRange = React.memo((props: DoubleRangePropsType) => {
 
-	const [value1, setValue1] = useState(0);
-	const [value2, setValue2] = useState(110);
+	const [value1, setValue1] = useState(props.minRange);
+	const [value2, setValue2] = useState(props.maxRange);
 
 	const value= [value1, value2];
 

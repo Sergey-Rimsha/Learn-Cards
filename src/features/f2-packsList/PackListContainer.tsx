@@ -18,6 +18,8 @@ export const PackListContainer = React.memo(() => {
 	const totalCount = useAppSelector<number>(state => state.packList.cardPacksTotalCount);
 	const currentPage = useAppSelector<number>(state => state.packList.page);
 	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
+	const minRange = useAppSelector<number>(state => state.packList.params.min);
+	const maxRange = useAppSelector<number>(state => state.packList.params.max);
 
 	// setParams Pagination
 	const setParamsPagination = useCallback((pageCount: number, currentPage: number) => {
@@ -49,6 +51,8 @@ export const PackListContainer = React.memo(() => {
 			totalCount={totalCount}
 			currentPage={currentPage}
 			pageCount={pageCount}
+			minRange={minRange}
+			maxRange={maxRange}
 			setParamsPagination={setParamsPagination}
 			setParamsRange={setParamsRange}
 			setParamsSearch={setParamsSearch}

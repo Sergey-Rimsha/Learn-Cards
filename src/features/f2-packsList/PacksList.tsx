@@ -16,6 +16,8 @@ type PacksListPropsType = {
 	totalCount: number
 	currentPage: number
 	pageCount: number
+	minRange: number
+	maxRange: number
 	setParamsPagination: (pageCount: number, currentPage: number) => void
 	setParamsRange: (min: number, max: number) => void
 	setParamsSearch: (packName: string) => void
@@ -37,8 +39,10 @@ export const PacksList = React.memo((props: PacksListPropsType) => {
 						Number of cards
 					</h4>
 					<DoubleRange
-						setParamsRange={props.setParamsRange}
 						isLoading={props.isLoading}
+						minRange={props.minRange}
+						maxRange={props.maxRange}
+						setParamsRange={props.setParamsRange}
 					/>
 				</div>
 				<div className={s.main}>
