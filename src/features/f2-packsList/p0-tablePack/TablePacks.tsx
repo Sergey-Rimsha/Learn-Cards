@@ -10,6 +10,7 @@ import Arrow from '../../../assets/img/polygon.svg';
 import {CardPacksType} from '../../../store/reducers/packListReducer';
 
 import s from './TablePacks.module.scss';
+import {Pack} from './Pack';
 
 type TablePacksPropsType = {
 	showModalDelete: (id: string, name: string) => void
@@ -40,66 +41,21 @@ export const TablePacks = (props: TablePacksPropsType) => {
 		showModalDelete(id, name);
 	};
 
-	// отрисовываем Pack в таблице
-	const renderCardsPacks = () => {
-		return cardPacks.map(el => {
-			return (
-				<tr key={el._id} className={s.table__wrap}>
-					<th onClick={() => showCardsPack(el._id, el.name)}
-					>{el.name}</th>
-					<th>{el.cardsCount}</th>
-					<th>{new Date(Date.parse(el.updated)).toLocaleDateString()}</th>
-					<th>{el.user_name}</th>
-					<th className={s.table__wrapBtn}>
-						{el.user_id === userId &&
-							<span>
-								<button
-									className={`${s.table__btn} ${s.table__btn_delete}`}
-									onClick={() => showModalDeleteHandler(el._id, el.name)}
-									disabled={props.isLoading}
-								>
-										Delete
-								</button>
-								<button className={s.table__btn}
-								        disabled={props.isLoading}
-								>Edit</button>
-							</span>
-						}
-						{
-							el.cardsCount > 0 &&
-							<button
-								className={s.table__btn}
-								disabled={props.isLoading}
-								onClick={() => learnCardsPack(el._id, el.name)}
-							>
-								Learn
-							</button>
-						}
-					</th>
-				</tr>
-			);
-		});
-	};
 
 	return (
 		<div className={s.tablePacks}>
 			<table className={s.table}>
 				<thead className={s.table__head}>
 				<tr className={s.table__wrap}>
-					<th onClick={() => onClickSort('name')}
-					>
+					<th onClick={() => onClickSort('name')}>
 						Name
 						{sortName === 'name' && <img src={Arrow} alt='Arrow'/>}
 					</th>
-					<th
-						onClick={() => onClickSort('cardsCount')}
-					>
+					<th	onClick={() => onClickSort('cardsCount')}>
 						Cards
 						{sortName === 'cardsCount' && <img src={Arrow} alt='Arrow'/>}
 					</th>
-					<th
-						onClick={() => onClickSort('updated')}
-					>
+					<th	onClick={() => onClickSort('updated')}>
 						Last Updated
 						{sortName === 'updated' && <img src={Arrow} alt='Arrow'/>}
 					</th>
@@ -108,7 +64,25 @@ export const TablePacks = (props: TablePacksPropsType) => {
 				</tr>
 				</thead>
 				<tbody className={s.table__body}>
-				{renderCardsPacks()}
+					{
+						cardPacks.map((el) => {
+							return (
+								<Pack
+									key={el._id}
+									isLoading={props.isLoading}
+									_id={el._id}
+									user_id={el.user_id}
+									name={el.name}
+									cardsCount={el.cardsCount}
+									updated={el.updated}
+									user_name={el.user_name}
+									learnCardsPack={learnCardsPack}
+									showCardsPack={showCardsPack}
+									showModalDeleteHandler={showModalDeleteHandler}
+								/>
+							);
+						})
+					}
 				</tbody>
 			</table>
 		</div>

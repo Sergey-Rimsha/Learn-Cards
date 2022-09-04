@@ -1,0 +1,102 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.modal {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 100;
+
+	&__wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__block {
+		width: 395px;
+		height: 221px;
+		background: $bgWhite;
+		border-radius: 2px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+	}
+
+	&__title {
+		height: 57px;
+		display: flex;
+		align-items: center;
+
+		padding-left: 25px;
+
+		@include FontPoppins();
+		font-style: normal;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 27px;
+		color: #2D2E46;
+
+		border-bottom: solid 1px #EDF0F6;
+	}
+
+	&__description {
+		@include FontSanFrancisco();
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 24px;
+		color: $black-color;
+
+		padding: 0 25px;
+
+		& span {
+			font-weight: 700;
+		}
+	}
+
+	&__btnGroup {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 25px 25px 25px;
+	}
+
+	&__button {
+		width: 124px;
+		height: 36px;
+		border-radius: 30px;
+		border: none;
+
+		@include FontSanFrancisco();
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 19px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+		transition: 0.3s;
+
+		&_cansel {
+			color: #21268F;
+			opacity: 0.8;
+			background: #D7D8EF;
+		}
+
+		&_delete {
+			color: #ECECF9;
+			background: #F1453D;
+			box-shadow: 0 4px 18px rgba(241, 69, 61, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+		}
+
+		&:hover {
+			font-size: 18px;
+		}
+	}
+
+}

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
 
 import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
 
 import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
+
+import {ModalDelete} from '../../components/с10-modalDelete/ModalDelete';
 
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
@@ -27,9 +29,16 @@ type PacksListPropsType = {
 
 export const PacksList = React.memo((props: PacksListPropsType) => {
 
+	const [showModal, setShowModal] = useState<boolean>(true);
 
 	return (
 		<div className={s.packsList}>
+			{/*{*/}
+			{/*	showModal &&*/}
+			{/*	<ModalDelete*/}
+			{/*		title={'Pack name delete'}*/}
+			{/*	/>*/}
+			{/*}*/}
 			<div className={s.packsList__block}>
 				<div className={s.sidebar}>
 					<h4 className={s.sidebar__title}>Show packs cards</h4>
