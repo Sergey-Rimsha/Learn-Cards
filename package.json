@@ -2,6 +2,26 @@
   "name": "cards-project",
   "version": "0.1.0",
   "private": true,
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "no-console": "warn",
+      "quotes": ["warn", "single"],
+      "jsx-quotes": ["warn", "prefer-single"],
+      "max-len": ["warn", {"code": 120}],
+      "comma-dangle": ["warn", "always-multiline"],
+      "semi": ["warn", "always"],
+      "import/order": ["warn",
+        {
+          "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+          "newlines-between": "always-and-inside-groups"
+        }
+      ]
+    }
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -38,53 +58,6 @@
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "no-console": "warn",
-      "quotes": [
-        "warn",
-        "single"
-      ],
-      "jsx-quotes": [
-        "warn",
-        "prefer-single"
-      ],
-      "max-len": [
-        "warn",
-        {
-          "code": 120
-        }
-      ],
-      "comma-dangle": [
-        "warn",
-        "always-multiline"
-      ],
-      "semi": [
-        "warn",
-        "always"
-      ],
-      "import/order": [
-        "warn",
-        {
-          "groups": [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-            "object",
-            "type"
-          ],
-          "newlines-between": "always-and-inside-groups"
-        }
-      ]
-    }
   },
   "browserslist": {
     "production": [

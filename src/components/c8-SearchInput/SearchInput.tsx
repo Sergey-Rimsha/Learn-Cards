@@ -3,14 +3,14 @@ import React, {ChangeEvent, useCallback, useState} from 'react';
 import s from './SearchInput.module.scss';
 
 type SearchInputPropsType = {
-	packNameSearch: string
+	packNameSearch?: string
 	setParamsSearch: (packName: string) => void
 }
 
 
 export const SearchInput = React.memo((props: SearchInputPropsType) => {
 
-	const {setParamsSearch, packNameSearch} = props;
+	const {setParamsSearch, packNameSearch = ''} = props;
 
 	const [searchValue, setSearchValue] = useState<string>(packNameSearch);
 
