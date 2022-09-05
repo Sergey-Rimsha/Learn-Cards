@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
 
 import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
 
 import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
+
+import {ModalAdded} from '../../components/с11-modalAdded/ModalAdded';
 
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
@@ -13,6 +15,7 @@ import {ShowPackContainer} from './f1-showPack/ShowPackContainer';
 
 type PacksListPropsType = {
 	isLoading: boolean
+	showModal: boolean
 	totalCount: number
 	currentPage: number
 	pageCount: number
@@ -22,21 +25,35 @@ type PacksListPropsType = {
 	setParamsPagination: (pageCount: number, currentPage: number) => void
 	setParamsRange: (min: number, max: number) => void
 	setParamsSearch: (packName: string) => void
-
+	onHandlerSubmitPackName: (packName: string) => void
+	onHandlerShowModal: (show: boolean) => void
 }
 
 export const PacksList = React.memo((props: PacksListPropsType) => {
 
-	const [showModal, setShowModal] = useState<boolean>(true);
+	const {onHandlerSubmitPackName, onHandlerShowModal, ...restProps} = props;
+
+	// const [showModal, setShowModal] = useState<boolean>(true);
+
+	const onHandlerSubmit = useCallback((packName: string) => {
+		onHandlerSubmitPackName(packName);
+	},[onHandlerSubmitPackName]);
+
+	const onClickHandlerShowModal = useCallback((show: boolean) => {
+		console.log(show);
+		onHandlerShowModal(show);
+	},[onHandlerShowModal]);
 
 	return (
 		<div className={s.packsList}>
-			{/*{*/}
-			{/*	showModal &&*/}
-			{/*	<ModalDelete*/}
-			{/*		title={'Pack name delete'}*/}
-			{/*	/>*/}
-			{/*}*/}
+			{
+				props.showModal &&
+				<ModalAdded
+					title={'Add new pack'}
+					onSubmitName={onHandlerSubmit}
+					onShowModal={onClickHandlerShowModal}
+				/>
+			}
 			<div className={s.packsList__block}>
 				<div className={s.sidebar}>
 					<h4 className={s.sidebar__title}>Show packs cards</h4>
@@ -63,7 +80,9 @@ export const PacksList = React.memo((props: PacksListPropsType) => {
 							setParamsSearch={props.setParamsSearch}
 						/>
 						<div className={s.main__btn}>
-							<button>
+							<button
+								onClick={() => onClickHandlerShowModal(true)}
+							>
 								Add new pack
 							</button>
 						</div>

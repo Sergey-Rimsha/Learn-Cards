@@ -193,7 +193,7 @@ export const getCardsPacks = ():AppThunkType => (dispatch, getState) => {
 		});
 };
 
-export const addCardsPack = (data: NewCardsPack): AppThunkType => (dispatch) => {
+export const addedPackTC = (data: NewCardsPack): AppThunkType => (dispatch) => {
 	dispatch(setLoadingStatus('loading'));
 	apiPack.postCards(data)
 	.then(res => {

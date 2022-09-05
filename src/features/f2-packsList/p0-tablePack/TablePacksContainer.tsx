@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import {useNavigate} from 'react-router-dom';
 
@@ -6,13 +6,11 @@ import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
-import {addCardsPack, delCardsPack, getCardsPacks, setParamsUserId} from '../../../store/reducers/packListReducer';
+import {delCardsPack, getCardsPacks, setParamsUserId} from '../../../store/reducers/packListReducer';
 
 import {PATH} from '../../../app/Routing/Routing';
 
 import {getLearnCardsPack} from '../../../store/reducers/learnCardsReducer';
-
-import {ModalDelete} from '../../../components/с10-modalDelete/ModalDelete';
 
 import {TablePacks} from './TablePacks';
 
@@ -33,7 +31,6 @@ export const TablePacksContainer = React.memo(() => {
 
 
 
-	const [namePack, setNamePack] = useState<string>('');
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
 
 	// const isDelete = useSelector<AppRootStateType, boolean>(state => state.modals.modalDelete);
@@ -41,17 +38,12 @@ export const TablePacksContainer = React.memo(() => {
 	const [titleCardID, setTitleCardID] = useState<string>('');
 
 
-	// read input value
-	const onChangePackName = (e: ChangeEvent<HTMLInputElement>) => {
-		setNamePack(e.currentTarget.value);
-	};
-
 	// для добавления карточек Pack
-	const onHandlerSubmitPackName = useCallback(() => {
-		if (namePack) {
-			dispatch(addCardsPack({name: namePack}));
-		}
-	},[dispatch, namePack]);
+	// const onHandlerSubmitPackName = useCallback(() => {
+	// 	if (namePack) {
+	// 		dispatch(addCardsPack({name: namePack}));
+	// 	}
+	// },[dispatch, namePack]);
 
 
 
