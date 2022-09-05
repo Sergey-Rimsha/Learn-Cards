@@ -30,13 +30,19 @@ export const PackName = React.memo((props: PackNamePropsType) => {
 	return (
 		<div className={s.packName}>
 			<div className={s.packName__header}>
-				<h2 className={s.packName__title}>
-					<img onClick={props.onClickNavigateBack} src={Arrow}
-						 alt='arrow left'/>
-					<span className={s.packName__name}>
+				<div className={s.packName__title}>
+					<div className={s.packName__arrow}>
+						<img
+							onClick={props.onClickNavigateBack}
+							src={Arrow}
+							width={'20px'}
+							height={'20px'}
+							alt='arrow left'/>
+					</div>
+					<div className={s.packName__name}>
                         Pack Name "{props.name}"
-                    </span>
-				</h2>
+                    </div>
+				</div>
 			</div>
 			<div className={s.packName__params}>
 				<SearchInput

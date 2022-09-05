@@ -1,3 +1,6 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
 .table {
 	border-spacing: 0;
 	border-collapse: collapse;
@@ -13,12 +16,12 @@
 		}
 
 		th {
-			font-family: 'SF UI Display', sans-serif;
+			@include FontSanFrancisco();
 			font-style: normal;
 			font-weight: 700;
 			font-size: 13px;
 			line-height: 16px;
-			color: #2D2E46;
+			color: $base-color;
 			cursor: pointer;
 
 			&:first-child {
@@ -65,12 +68,12 @@
 		td {
 			max-width: 200px;
 			position: relative;
-			font-family: 'SF UI Display', sans-serif;
+			@include FontSanFrancisco();
 			font-style: normal;
 			font-weight: 400;
 			font-size: 13px;
 			line-height: 16px;
-			color: #000000;
+			color: $black-color;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			overflow: hidden;
@@ -109,7 +112,7 @@
 		.btn {
 			width: 55px;
 			padding: 6px 0;
-			font-family: 'SF UI Display', sans-serif;
+			@include FontSanFrancisco();
 			font-style: normal;
 			font-weight: 600;
 			font-size: 12px;

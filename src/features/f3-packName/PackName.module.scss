@@ -9,21 +9,33 @@
 	border-radius: 8px;
 
 	&__header {
-
-		& h2 {
-			margin: 0;
-		}
+		margin: 0;
 	}
 
 	&__title {
+		display: flex;
+
 		@include FontPoppins();
 		font-style: normal;
 		font-size: 22px;
 		line-height: 33px;
+
+	}
+
+	&__arrow {
+		display: flex;
+		align-items: center;
+		& img {
+			display: flex;
+		}
 	}
 
 	&__name {
 		margin-left: 15px;
+		max-width: 300px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 
 
