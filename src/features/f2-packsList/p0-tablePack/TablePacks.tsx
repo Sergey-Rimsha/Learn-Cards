@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import {useSelector} from 'react-redux';
 
@@ -13,7 +13,7 @@ import s from './TablePacks.module.scss';
 import {Pack} from './Pack';
 
 type TablePacksPropsType = {
-	showModalDelete: (id: string, name: string) => void
+	onHandlerModalDelete: (id: string, name: string) => void
 	showCardsPack: (id: string, name: string) => void
 	sortTableValue: (value: string) => void
 	learnCardsPack: (id: string, name: string) => void
@@ -23,7 +23,7 @@ type TablePacksPropsType = {
 
 export const TablePacks = (props: TablePacksPropsType) => {
 
-	const {showCardsPack, sortTableValue, learnCardsPack, showModalDelete} = props;
+	const {showCardsPack, sortTableValue, learnCardsPack, onHandlerModalDelete, ...restProps} = props;
 
 	const cardPacks = useAppSelector<Array<CardPacksType>>(state => state.packList.cardPacks);
 
@@ -37,9 +37,9 @@ export const TablePacks = (props: TablePacksPropsType) => {
 	};
 
 	// открываем модалку для удаления
-	const showModalDeleteHandler = (id: string, name: string) => {
-		showModalDelete(id, name);
-	};
+	const onHandlerDeletePack = useCallback((id: string, name: string) => {
+		onHandlerModalDelete(id, name);
+	},[onHandlerModalDelete]);
 
 
 	return (
@@ -78,7 +78,7 @@ export const TablePacks = (props: TablePacksPropsType) => {
 									user_name={el.user_name}
 									learnCardsPack={learnCardsPack}
 									showCardsPack={showCardsPack}
-									showModalDeleteHandler={showModalDeleteHandler}
+									onHandlerDeletePack={onHandlerDeletePack}
 								/>
 							);
 						})

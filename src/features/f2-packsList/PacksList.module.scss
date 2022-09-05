@@ -1,3 +1,6 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
 .packsList {
 
 	min-height: 700px;
@@ -21,12 +24,12 @@
 
 	.title {
 		margin-bottom: 20px;
-		font-family: 'SF UI Display', sans-serif;
+		@include FontSanFrancisco();
 		font-style: normal;
 		font-weight: 600;
 		font-size: 16px;
 		line-height: 19px;
-		color: #2D2E46;
+		color: $base-color;
 	}
 }
 
@@ -37,16 +40,36 @@
 
 	&__title {
 		margin-bottom: 15px;
-		font-family: 'Poppins', sans-serif;
+		@include FontPoppins();
 		font-style: normal;
-		font-weight: 600;
 		font-size: 22px;
 		line-height: 33px;
-		color: #2D2E46;
 	}
 
 	&__params {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
+	&__btn {
+
+		& button {
+			width: 184px;
+			height: 36px;
+			border: none;
+			background: #21268F;
+			box-shadow: 0 4px 18px rgba(33, 38, 143, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+			border-radius: 30px;
+
+			@include FontSanFrancisco();
+			font-style: normal;
+			font-weight: 500;
+			font-size: 16px;
+			line-height: 19px;
+			color: #ECECF9;
+			text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+		}
 	}
 
 	&__content {

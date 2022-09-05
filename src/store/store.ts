@@ -11,7 +11,7 @@ import {AuthActionType, authReducer} from './reducers/authReducer';
 import {AppActionType, appReducer} from './reducers/appReducer';
 import {PackListActionType, packListReducer} from './reducers/packListReducer';
 import {packNameReducer} from './reducers/packNameReducer';
-import {learnCardsReducer} from "./reducers/learnCardsReducer";
+import {learnCardsReducer} from './reducers/learnCardsReducer';
 
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

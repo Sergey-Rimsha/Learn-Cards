@@ -1,19 +1,26 @@
+import React, {useCallback} from 'react';
 
 import s from './ModalDelete.module.scss';
 
 type ModalDeletePropsType = {
 	title?: string
+	name?: string
+	onClickHandlerDeletePack: () => void
+	showModalDeletePack: (show: boolean) => void
+	
 }
 
-export const ModalDelete = (props: ModalDeletePropsType) => {
+export const ModalDelete = React.memo((props: ModalDeletePropsType) => {
 
-	const onClickHandlerCancel = () => {
+	const {onClickHandlerDeletePack, showModalDeletePack, ...restProps} = props;
 
-	};
+	const onClickHandlerCancel = useCallback(() => {
+		showModalDeletePack(false);
+	},[showModalDeletePack]);
 
-	const onClickHandlerDelete = () => {
-
-	};
+	const onClickHandlerDelete = useCallback(() => {
+		onClickHandlerDeletePack();
+	},[onClickHandlerDeletePack]);
 
 	return (
 		<div className={s.modal}>
@@ -25,7 +32,7 @@ export const ModalDelete = (props: ModalDeletePropsType) => {
 					<div className={s.modal__description}>
 						Do you really want to remove
 						<span>
-							{' Pack Name - Name Pack? '}
+							{` Pack Name - ${props.name}? `}
 						</span>
 						All cards will be excluded from this course.
 					</div>
@@ -47,4 +54,4 @@ export const ModalDelete = (props: ModalDeletePropsType) => {
 			</div>
 		</div>
 	);
-};
+});

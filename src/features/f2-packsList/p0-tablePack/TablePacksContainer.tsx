@@ -6,16 +6,13 @@ import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
-import {
-	addCardsPack, delCardsPack,
-	getCardsPacks,
-	PackListParamsType,
-	setParamsUserId,
-} from '../../../store/reducers/packListReducer';
+import {addCardsPack, delCardsPack, getCardsPacks, setParamsUserId} from '../../../store/reducers/packListReducer';
 
 import {PATH} from '../../../app/Routing/Routing';
 
 import {getLearnCardsPack} from '../../../store/reducers/learnCardsReducer';
+
+import {ModalDelete} from '../../../components/с10-modalDelete/ModalDelete';
 
 import {TablePacks} from './TablePacks';
 
@@ -40,7 +37,6 @@ export const TablePacksContainer = React.memo(() => {
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
 
 	// const isDelete = useSelector<AppRootStateType, boolean>(state => state.modals.modalDelete);
-	const [showModal, setShowModal] = useState<boolean>(false);
 	const [titleCard, setTitleCard] = useState<string>('');
 	const [titleCardID, setTitleCardID] = useState<string>('');
 
@@ -65,7 +61,7 @@ export const TablePacksContainer = React.memo(() => {
 
 
 	// показать модалку удаления
-	const showModalDelete = useCallback((id: string, titleCard: string) => {
+	const onHandlerModalDelete = useCallback((id: string, titleCard: string) => {
 		dispatch(delCardsPack(id));
 	},[dispatch]);
 
@@ -105,11 +101,11 @@ export const TablePacksContainer = React.memo(() => {
 	return (
 		<>
 			<TablePacks
+				isLoading={isLoading}
 				sortTableValue={sortTableValue}
-				showModalDelete={showModalDelete}
+				onHandlerModalDelete={onHandlerModalDelete}
 				showCardsPack={showCardsPack}
 				learnCardsPack={learnCardsPack}
-				isLoading={isLoading}
 			/>
 		</>
 	);

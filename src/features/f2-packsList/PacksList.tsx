@@ -6,8 +6,6 @@ import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
 
 import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
 
-import {ModalDelete} from '../../components/с10-modalDelete/ModalDelete';
-
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
 import {ShowPackContainer} from './f1-showPack/ShowPackContainer';
@@ -64,6 +62,11 @@ export const PacksList = React.memo((props: PacksListPropsType) => {
 							packNameSearch={props.packNameSearch}
 							setParamsSearch={props.setParamsSearch}
 						/>
+						<div className={s.main__btn}>
+							<button>
+								Add new pack
+							</button>
+						</div>
 					</div>
 					<div className={s.main__content}>
 						<TablePacksContainer/>
