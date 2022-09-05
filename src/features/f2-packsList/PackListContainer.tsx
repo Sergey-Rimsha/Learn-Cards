@@ -8,7 +8,7 @@ import {
 	addedPackTC,
 	setParamsCardsCount,
 	setParamsPage,
-	setParamsSearchPackName
+	setParamsSearchPackName,
 } from '../../store/reducers/packListReducer';
 
 import {PacksList} from './PacksList';

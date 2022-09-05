@@ -40,7 +40,6 @@ export const PacksList = React.memo((props: PacksListPropsType) => {
 	},[onHandlerSubmitPackName]);
 
 	const onClickHandlerShowModal = useCallback((show: boolean) => {
-		console.log(show);
 		onHandlerShowModal(show);
 	},[onHandlerShowModal]);
 
