@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 
 import {useSelector} from 'react-redux';
 
@@ -22,19 +22,21 @@ type PackPropsType = {
 
 export const Pack = React.memo((props: PackPropsType) => {
 
+	const {showCardsPack, showModalDeleteHandler, learnCardsPack, ...restProps} = props;
+
 	const userId = useSelector<AppRootStateType, string>(state => state.profile.userData._id);
 
-	const onClickHandlerShowCardsPack = () => {
-		props.showCardsPack(props._id, props.name);
-	};
+	const onClickHandlerShowCardsPack = useCallback(() => {
+		showCardsPack(props._id, props.name);
+	},[showCardsPack]);
 
-	const onClickHandlerDeletePack = () => {
-		props.showModalDeleteHandler(props._id, props.name);
-	};
+	const onClickHandlerDeletePack = useCallback(() => {
+		showModalDeleteHandler(props._id, props.name);
+	},[showModalDeleteHandler]);
 
-	const onClickHandlerLearnCardsPack = () => {
-		props.learnCardsPack(props._id, props.name);
-	};
+	const onClickHandlerLearnCardsPack = useCallback(() => {
+		learnCardsPack(props._id, props.name);
+	},[learnCardsPack]);
 
 	return (
 		<>
@@ -48,17 +50,17 @@ export const Pack = React.memo((props: PackPropsType) => {
 				<th className={s.table__wrapBtn}>
 					{props.user_id === userId &&
 						<span>
-								<button
-									className={`${s.table__btn} ${s.table__btn_delete}`}
-									onClick={onClickHandlerDeletePack}
-									disabled={props.isLoading}
-								>
-										Delete
-								</button>
-								<button className={s.table__btn}
-								        disabled={props.isLoading}
-								>Edit</button>
-							</span>
+							<button
+								className={`${s.table__btn} ${s.table__btn_delete}`}
+								onClick={onClickHandlerDeletePack}
+								disabled={props.isLoading}
+							>
+								Delete
+							</button>
+							<button className={s.table__btn}
+							        disabled={props.isLoading}
+							>Edit</button>
+						</span>
 					}
 					{
 						props.cardsCount > 0 &&
