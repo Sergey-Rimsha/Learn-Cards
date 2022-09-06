@@ -173,6 +173,6 @@ export const apiCard = {
 		return instance.get<GetCardsCardType>('cards/card', {params});
 	},
 	postNewCard(params: PostCardParamsType) {
-		return instance.put<CardsType>('cards/card', {card:{params}});
+		return instance.post<CardsType>('cards/card', {card: params});
 	},
 };

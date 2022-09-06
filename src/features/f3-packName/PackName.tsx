@@ -17,14 +17,14 @@ type PackNamePropsType = {
 	page: number
 	pageCount: number
 	cardsTotalCount: number
-
+	showModal: boolean
 	onClickNavigateBack: () => void
 	setParamsPagination: (pageCount: number, currentPage: number) => void
+	saveNewCard: (question: string, answer: string) => void
+	showModalNewCard:(show: boolean) => void
 }
 
 export const PackName = React.memo((props: PackNamePropsType) => {
-
-	const [showModal, setShowModal] = useState(false);
 
 	const searchParams = (packName: string) => {
 
@@ -32,18 +32,18 @@ export const PackName = React.memo((props: PackNamePropsType) => {
 
 
 	const onHandlerSaveNewCard = (question: string, answer: string) => {
-		console.log({question, answer});
-		onHandlerCancelModal(false);
+		props.saveNewCard(question, answer);
 	};
 
 	const onHandlerCancelModal = (show: boolean) => {
-		setShowModal(show);
+		// setShowModal(show);
+		props.showModalNewCard(show);
 	};
 
 	return (
 		<div className={s.packName}>
 			{
-				showModal &&
+				props.showModal &&
 				<ModalCardInfo
 					// title={'Edite Card'}
 					onSaveCard={onHandlerSaveNewCard}

@@ -6,21 +6,20 @@ import {useParams} from 'react-router-dom';
 import {AppDispatch, useAppSelector} from '../../../store/store';
 
 
-import {getCards, PackNameStateType} from '../../../store/reducers/packNameReducer';
+import {CardPackNameType, getCards} from '../../../store/reducers/packNameReducer';
 
 import {TablePackName} from './TablePackName';
 
 export type FilterPackName = '0name' | '0cardsCount' | '0updated'
 
-interface ITablePackNameContainer {
 
-}
-
-export const TablePackNameContainer = (props: ITablePackNameContainer) => {
+export const TablePackNameContainer = () => {
 
     const [filter, setFilter] = useState<FilterPackName>('0updated');
 
-    const packName = useAppSelector<PackNameStateType>(state => state.packName);
+    const cards = useAppSelector<CardPackNameType[]>(state => state.packName.cards);
+    const page = useAppSelector<number>(state => state.packName.page);
+    const pageCount = useAppSelector<number>(state => state.packName.pageCount);
 
     const {packId} = useParams();
     const dispatch = AppDispatch();
@@ -30,7 +29,7 @@ export const TablePackNameContainer = (props: ITablePackNameContainer) => {
             // dispatch(getCards(packId, 10, filter));
             dispatch(getCards({cardsPack_id: packId}));
         }
-    }, [packId, dispatch, packName.page, packName.pageCount]);
+    }, [packId, dispatch, page, pageCount]);
 
     // const filteredCards = cards.filter(card => {
     //     return card.question.toLowerCase().includes(props.filterTitle.toLowerCase());
@@ -39,7 +38,7 @@ export const TablePackNameContainer = (props: ITablePackNameContainer) => {
     return (
         <div>
             <TablePackName
-                data={packName.cards}
+                data={cards}
                 filter={filter}
                 changeFilter={setFilter}/>
         </div>

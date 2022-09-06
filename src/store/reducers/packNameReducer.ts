@@ -102,9 +102,11 @@ export const getCards = (paramsData?: GetCardsCardParamsType): AppThunkType => (
 export const postNewCard = (params: PostCardParamsType):AppThunkType => (dispatch) => {
     dispatch(setLoadingStatus('loading'));
 
+    const cardsPack_id = params.cardsPack_id;
+
     apiCard.postNewCard(params)
         .then((res) => {
-            console.log(res);
+            dispatch(getCards({cardsPack_id}));
         })
         .catch((err) => {
             console.log(err);
