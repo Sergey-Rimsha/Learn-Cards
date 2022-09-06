@@ -1,5 +1,5 @@
-//@import './../src/styles/mixins';
-//@import './../src/styles/variables';
+@import "src/styles/variables";
+@import "src/styles/mixins";
 
 $colorBg: #ECECF9;
 $colorWhite: #FFFFFF;
@@ -31,13 +31,12 @@ $colorGray: #F8F7FD;
 	&__head {
 		height: 48px;
 		background-color: $colorBg;
-		//@include FontSanFrancisco();
-		font-family: 'SF UI Display', sans-serif;
+		@include FontSanFrancisco();
 		font-style: normal;
 		font-weight: 700;
 		font-size: 13px;
 		line-height: 16px;
-		color: #2D2E46;
+		color: $base-color;
 	}
 
 	&__body {
@@ -47,7 +46,7 @@ $colorGray: #F8F7FD;
 		font-weight: 400;
 		font-size: 13px;
 		line-height: 16px;
-		color: #2D2E46;
+		color: $base-color;
 
 		& tr {
 			//background-color: $colorGray;
@@ -78,8 +77,7 @@ $colorGray: #F8F7FD;
 		width: 48px;
 		cursor: pointer;
 
-		//@include FontSanFrancisco();
-		font-family: 'SF UI Display', sans-serif;
+		@include FontSanFrancisco();
 		font-style: normal;
 		font-weight: 600;
 		font-size: 12px;

@@ -21,6 +21,9 @@ export const TableLineCard = React.memo((props: TableLineCardPropsType) => {
     const onClickHandlerDeleteCard = useCallback( () => {
         deleteCard(item._id);
     }, [deleteCard, item._id]);
+
+
+    // onClick={() => dispatch(changeModalEditCard(true, c._id, c.question,'', c.answer))}
     
     return (
         <>
@@ -32,15 +35,14 @@ export const TableLineCard = React.memo((props: TableLineCardPropsType) => {
                 <td>
                     {
                         myUserId === item.user_id ?
-                            <div className={s.buttons}>
+                            <div className={s.buttonsGroup}>
                                 <button
-                                    className={s.btn}
-                                    // onClick={() => dispatch(changeModalEditCard(true, c._id, c.question,'', c.answer))}
+                                    className={s.buttonsGroup__btn}
                                 >
                                     Edit
                                 </button>
                                 <button
-                                    className={`${s.btn} ${s.active}`}
+                                    className={`${s.buttonsGroup__btn} ${s.buttonsGroup__btn_active}`}
                                     onClick={onClickHandlerDeleteCard}
                                 >
                                     Delete

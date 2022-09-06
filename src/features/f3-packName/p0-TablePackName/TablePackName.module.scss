@@ -104,12 +104,12 @@
 		}
 	}
 
-	.buttons {
+	.buttonsGroup {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
 
-		.btn {
+		&__btn {
 			width: 55px;
 			padding: 6px 0;
 			@include FontSanFrancisco();
@@ -121,18 +121,13 @@
 			background: #D7D8EF;
 			border-radius: 2px;
 			border: none;
-			text-transform: uppercase;
 			cursor: pointer;
-			transition: 1s linear;
 
-			&:active {
-				transform: scale(0.5);
+			&_active {
+				background: #F1453D;
+				color: #FFFFFF;
 			}
 		}
 
-		.active {
-			background: #F1453D;
-			color: #FFFFFF;
-		}
 	}
 }
