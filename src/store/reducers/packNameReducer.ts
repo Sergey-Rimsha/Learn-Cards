@@ -1,6 +1,6 @@
 import {AppThunkType} from '../store';
 
-import {apiCard, GetCardsCardParamsType} from '../../api/Api';
+import {apiCard, GetCardsCardParamsType, PostCardParamsType} from '../../api/Api';
 
 import {setLoadingStatus} from './appReducer';
 
@@ -89,6 +89,22 @@ export const getCards = (paramsData?: GetCardsCardParamsType): AppThunkType => (
     apiCard.getCardsPack(params)
         .then((res) => {
             dispatch(setPackNameList(res.data));
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+            dispatch(setLoadingStatus('idle'));
+        });
+};
+
+
+export const postNewCard = (params: PostCardParamsType):AppThunkType => (dispatch) => {
+    dispatch(setLoadingStatus('loading'));
+
+    apiCard.postNewCard(params)
+        .then((res) => {
+            console.log(res);
         })
         .catch((err) => {
             console.log(err);

@@ -156,7 +156,7 @@ export type CardsType = {
 }
 
 
-type PostCardParamsType = {
+export type PostCardParamsType = {
 	cardsPack_id: string
 	question?: string
 	answer?: string
