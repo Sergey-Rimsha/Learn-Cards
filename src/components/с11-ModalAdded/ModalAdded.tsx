@@ -6,15 +6,16 @@ import s from './ModalAdded.module.scss';
 
 type ModalAddedPropsType = {
 	title?: string
+	name?: string
 	onSubmitName: (name: string) => void
 	onShowModal: (show: boolean) => void
 }
 
 export const  ModalAdded = React.memo((props: ModalAddedPropsType) => {
 
-	const {onSubmitName, onShowModal, ...restProps} = props;
+	const {onSubmitName, onShowModal, name = '', ...restProps} = props;
 
-	const [name, setName] = useState<string>('');
+	const [namePack, setNamePack] = useState<string>(name);
 
 	// отменяем и закрываем модалку
 	const onClickHandlerCancel = useCallback(() => {
@@ -23,14 +24,15 @@ export const  ModalAdded = React.memo((props: ModalAddedPropsType) => {
 
 	// сохраняем значение
 	const onClickHandlerSave = useCallback(() => {
-		if (name) {
-			onSubmitName(name);
+		if (namePack) {
+			onSubmitName(namePack);
 		}
-	},[onSubmitName, name]);
+	},[onSubmitName, namePack]);
 
 	// считываем занчение из инпута
 	const onChangeHandlerInput = (e: ChangeEvent<HTMLInputElement>) => {
-		setName(e.currentTarget.value);
+		setNamePack(e.currentTarget.value);
+		console.log(e.currentTarget.value);
 	};
 
 	return (
@@ -44,7 +46,7 @@ export const  ModalAdded = React.memo((props: ModalAddedPropsType) => {
 						<TextField
 							type={'text'}
 							label={'Name pack'}
-							value={name}
+							value={namePack}
 							onChange={onChangeHandlerInput}
 						/>
 					</div>

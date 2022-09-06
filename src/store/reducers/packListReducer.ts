@@ -1,5 +1,5 @@
 import {AppThunkType} from '../store';
-import {apiPack, NewCardsPack} from '../../api/Api';
+import {apiPack, NewCardsPack, PutParamsPackNameType} from '../../api/Api';
 
 import {setLoadingStatus} from './appReducer';
 
@@ -218,6 +218,21 @@ export const delCardsPack = (id: string):AppThunkType => (dispatch) => {
 		})
 		.catch((err) => {
 			// console.log(err);
+		})
+		.finally(() => {
+			dispatch(setLoadingStatus('idle'));
+		});
+};
+
+export const editePackName = (params: PutParamsPackNameType):AppThunkType => (dispatch) => {
+	dispatch(setLoadingStatus('loading'));
+
+	apiPack.putPackName(params)
+		.then(res => {
+			dispatch(getCardsPacks());
+		})
+		.catch(err => {
+			console.log(err);
 		})
 		.finally(() => {
 			dispatch(setLoadingStatus('idle'));

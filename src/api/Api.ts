@@ -60,6 +60,11 @@ export type PutResponseType = {
 	updatedUser: AuthResponseType
 }
 
+export type PutParamsPackNameType = {
+	_id: string
+	name: string
+}
+
 const instance = axios.create({
 	// process.env.REACT_APP_BACK_URL || для gh-page
 	// https://neko-back.herokuapp.com/2.0/ для gh-page
@@ -102,6 +107,9 @@ export const apiPack = {
 
 	deletePack(idPack: string) {
 		return instance.delete<PackStateType>('cards/pack', {params:{id: idPack}});
+	},
+	putPackName(cardsPack: PutParamsPackNameType) {
+		return instance.put('cards/pack', {cardsPack});
 	},
 };
 

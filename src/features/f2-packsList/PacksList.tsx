@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
 
 import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
 
@@ -6,7 +6,7 @@ import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
 
 import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
 
-import {ModalAdded} from '../../components/с11-modalAdded/ModalAdded';
+import {ModalAdded} from '../../components/с11-ModalAdded/ModalAdded';
 
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
@@ -32,8 +32,6 @@ type PacksListPropsType = {
 export const PacksList = React.memo((props: PacksListPropsType) => {
 
 	const {onHandlerSubmitPackName, onHandlerShowModal, ...restProps} = props;
-
-	// const [showModal, setShowModal] = useState<boolean>(true);
 
 	const onHandlerSubmit = useCallback((packName: string) => {
 		onHandlerSubmitPackName(packName);
