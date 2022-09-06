@@ -21,6 +21,8 @@ export const PackNameContainer = ( ) => {
 	const cardsTotalCount = useAppSelector<number>(state => state.packName.cardsTotalCount);
 
 
+
+
 	const dispatch = AppDispatch();
 	const navigate = useNavigate();
 	const {name, packId} = useParams();

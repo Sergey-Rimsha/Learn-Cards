@@ -10,6 +10,7 @@ import {ModalCardInfo} from '../../components/c12-ModalCardInfo/ModalCardInfo';
 
 import s from './PackName.module.scss';
 import {TablePackNameContainer} from './p0-TablePackName/TablePackNameContainer';
+import {useAppSelector} from "../../store/store";
 
 type PackNamePropsType = {
 	name: string | undefined
@@ -25,6 +26,9 @@ type PackNamePropsType = {
 }
 
 export const PackName = React.memo((props: PackNamePropsType) => {
+
+	const cardsPackUserID = useAppSelector<string>(state => state.packName.packUserId);
+	const myUserID = useAppSelector<string>(state => state.profile.userData._id);
 
 	const {saveNewCard, showModalNewCard} = props;
 
@@ -71,13 +75,16 @@ export const PackName = React.memo((props: PackNamePropsType) => {
 					<SearchInput
 						setParamsSearch={searchParams}/>
 				</div>
-				<div className={s.packName__btn}>
-					<button
-						onClick={() => onHandlerCancelModal(true)}
-					>
-						Add new card
-					</button>
-				</div>
+				{
+					cardsPackUserID === myUserID &&
+					<div className={s.packName__btn}>
+						<button
+							onClick={() => onHandlerCancelModal(true)}
+						>
+							Add new card
+						</button>
+					</div>
+				}
 			</div>
 			<div className={s.packName__table}>
 				<TablePackNameContainer/>
