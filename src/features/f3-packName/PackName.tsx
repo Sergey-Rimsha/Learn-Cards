@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 
 import Arrow from '../../assets/img/arrow-left.svg';
 
@@ -26,19 +26,20 @@ type PackNamePropsType = {
 
 export const PackName = React.memo((props: PackNamePropsType) => {
 
+	const {saveNewCard, showModalNewCard} = props;
+
 	const searchParams = (packName: string) => {
 
 	};
 
 
-	const onHandlerSaveNewCard = (question: string, answer: string) => {
-		props.saveNewCard(question, answer);
-	};
+	const onHandlerSaveNewCard = useCallback((question: string, answer: string) => {
+		saveNewCard(question, answer);
+	},[saveNewCard]);
 
-	const onHandlerCancelModal = (show: boolean) => {
-		// setShowModal(show);
-		props.showModalNewCard(show);
-	};
+	const onHandlerCancelModal = useCallback((show: boolean) => {
+		showModalNewCard(show);
+	},[showModalNewCard]);
 
 	return (
 		<div className={s.packName}>
