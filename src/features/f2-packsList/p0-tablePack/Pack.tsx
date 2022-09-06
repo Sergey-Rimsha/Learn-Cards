@@ -2,14 +2,13 @@ import React, {useCallback, useState} from 'react';
 
 import {useSelector} from 'react-redux';
 
-import {AppDispatch, AppRootStateType} from '../../../store/store';
+import {AppRootStateType} from '../../../store/store';
 
-import {ModalDelete} from '../../../components/с10-modalDelete/ModalDelete';
+import {ModalDelete} from '../../../components/с10-ModalDelete/ModalDelete';
 
 import {ModalAdded} from '../../../components/с11-ModalAdded/ModalAdded';
 
 import s from './TablePacks.module.scss';
-import {editePackName} from "../../../store/reducers/packListReducer";
 
 type PackPropsType = {
 	isLoading: boolean
@@ -22,14 +21,12 @@ type PackPropsType = {
 	showCardsPack: (_id: string, name: string) => void
 	onHandlerDeletePack: (_id: string, name: string) => void
 	learnCardsPack: (_id: string, name: string) => void
-
+	onHandlerEditePackName: (_id: string, name: string) => void
 }
 
 export const Pack = React.memo((props: PackPropsType) => {
 
-	const {showCardsPack, onHandlerDeletePack, learnCardsPack} = props;
-
-	const dispatch = AppDispatch();
+	const {showCardsPack, onHandlerDeletePack, learnCardsPack, onHandlerEditePackName} = props;
 
 	const [showModal, setShowModal] = useState<boolean>(false);
 	const [showModalEdite, setShowModalEdite] = useState<boolean>(false);
@@ -58,8 +55,8 @@ export const Pack = React.memo((props: PackPropsType) => {
 	},[learnCardsPack, props._id, props.name]);
 	
 	
-	const onHandlerEditePackName = (name: string) => {
-		dispatch(editePackName({_id: props._id, name}));
+	const onHandlerPackName = (name: string) => {
+		onHandlerEditePackName(props._id, name);
 		onHandlerShowEditeModal(false);
 	};
 	
@@ -85,7 +82,7 @@ export const Pack = React.memo((props: PackPropsType) => {
 				<ModalAdded
 					title={'Rename pack'}
 					name={props.name}
-					onSubmitName={onHandlerEditePackName} 
+					onSubmitName={onHandlerPackName} 
 					onShowModal={onHandlerShowEditeModal}
 				/>
 			}

@@ -13,21 +13,20 @@ import s from './TablePacks.module.scss';
 import {Pack} from './Pack';
 
 type TablePacksPropsType = {
+	isLoading: boolean
 	onHandlerModalDelete: (id: string, name: string) => void
 	showCardsPack: (id: string, name: string) => void
 	sortTableValue: (value: string) => void
 	learnCardsPack: (id: string, name: string) => void
-	isLoading: boolean
+	onHandlerNewPackName: (id: string, name: string) => void
 }
 
 
 export const TablePacks = (props: TablePacksPropsType) => {
 
-	const {showCardsPack, sortTableValue, learnCardsPack, onHandlerModalDelete, ...restProps} = props;
+	const {showCardsPack, sortTableValue, learnCardsPack, onHandlerModalDelete, onHandlerNewPackName} = props;
 
 	const cardPacks = useAppSelector<Array<CardPacksType>>(state => state.packList.cardPacks);
-
-	const userId = useSelector<AppRootStateType, string>(state => state.profile.userData._id);
 
 	const [sortName, setSortName] = useState<string>('updated');
 
@@ -40,6 +39,10 @@ export const TablePacks = (props: TablePacksPropsType) => {
 	const onHandlerDeletePack = useCallback((id: string, name: string) => {
 		onHandlerModalDelete(id, name);
 	},[onHandlerModalDelete]);
+
+	const onHandlerEditePackName = useCallback((_id: string, name: string) => {
+		onHandlerNewPackName(_id, name);
+	},[onHandlerNewPackName]);
 
 
 	return (
@@ -79,6 +82,7 @@ export const TablePacks = (props: TablePacksPropsType) => {
 									learnCardsPack={learnCardsPack}
 									showCardsPack={showCardsPack}
 									onHandlerDeletePack={onHandlerDeletePack}
+									onHandlerEditePackName={onHandlerEditePackName}
 								/>
 							);
 						})

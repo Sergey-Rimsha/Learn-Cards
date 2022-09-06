@@ -6,7 +6,7 @@ import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
-import {delCardsPack, getCardsPacks, setParamsUserId} from '../../../store/reducers/packListReducer';
+import {delCardsPack, editePackName, getCardsPacks, setParamsUserId} from '../../../store/reducers/packListReducer';
 
 import {PATH} from '../../../app/Routing/Routing';
 
@@ -29,23 +29,7 @@ export const TablePacksContainer = React.memo(() => {
 	const max = useAppSelector<number>(state => state.packList.params.max);
 	const packName = useAppSelector<string>(state => state.packList.params.packName);
 
-
-
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
-
-	// const isDelete = useSelector<AppRootStateType, boolean>(state => state.modals.modalDelete);
-	const [titleCard, setTitleCard] = useState<string>('');
-	const [titleCardID, setTitleCardID] = useState<string>('');
-
-
-	// для добавления карточек Pack
-	// const onHandlerSubmitPackName = useCallback(() => {
-	// 	if (namePack) {
-	// 		dispatch(addCardsPack({name: namePack}));
-	// 	}
-	// },[dispatch, namePack]);
-
-
 
 	useEffect(() => {
 		dispatch(getCardsPacks());
@@ -73,6 +57,10 @@ export const TablePacksContainer = React.memo(() => {
 	},[dispatch, navigate]);
 
 
+	const onHandlerNewPackName = (_id: string, name: string) => {
+		dispatch(editePackName({_id, name}));
+	};
+
 
 	useEffect(() => {
 		if (loadingStatus === 'loading') {
@@ -98,6 +86,7 @@ export const TablePacksContainer = React.memo(() => {
 				onHandlerModalDelete={onHandlerModalDelete}
 				showCardsPack={showCardsPack}
 				learnCardsPack={learnCardsPack}
+				onHandlerNewPackName={onHandlerNewPackName}
 			/>
 		</>
 	);
