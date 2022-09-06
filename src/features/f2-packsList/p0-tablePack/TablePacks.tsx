@@ -40,6 +40,7 @@ export const TablePacks = (props: TablePacksPropsType) => {
 		onHandlerModalDelete(id, name);
 	},[onHandlerModalDelete]);
 
+	// rename Pack name
 	const onHandlerEditePackName = useCallback((_id: string, name: string) => {
 		onHandlerNewPackName(_id, name);
 	},[onHandlerNewPackName]);

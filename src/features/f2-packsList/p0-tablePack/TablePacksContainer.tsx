@@ -56,7 +56,7 @@ export const TablePacksContainer = React.memo(() => {
 		navigate(`${PATH.learnCards}/${name}`);
 	},[dispatch, navigate]);
 
-
+	// rename Pack name
 	const onHandlerNewPackName = (_id: string, name: string) => {
 		dispatch(editePackName({_id, name}));
 	};

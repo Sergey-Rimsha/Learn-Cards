@@ -54,12 +54,13 @@ export const Pack = React.memo((props: PackPropsType) => {
 		learnCardsPack(props._id, props.name);
 	},[learnCardsPack, props._id, props.name]);
 	
-	
+	// rename Pack name
 	const onHandlerPackName = (name: string) => {
 		onHandlerEditePackName(props._id, name);
 		onHandlerShowEditeModal(false);
 	};
-	
+
+	// show close Rename Modal Pack name
 	const onHandlerShowEditeModal = (show: boolean) => {
 		setShowModalEdite(show);
 	};
