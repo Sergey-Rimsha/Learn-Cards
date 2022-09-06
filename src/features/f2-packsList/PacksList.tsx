@@ -6,7 +6,7 @@ import {DoubleRange} from '../../components/c7-DoubleRange/DoubleRange';
 
 import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
 
-import {ModalAdded} from '../../components/с11-ModalAdded/ModalAdded';
+import {ModalAdded} from '../../components/c11-ModalAdded/ModalAdded';
 
 import s from './PacksList.module.scss';
 import {TablePacksContainer} from './p0-tablePack/TablePacksContainer';
@@ -31,7 +31,7 @@ type PacksListPropsType = {
 
 export const PacksList = React.memo((props: PacksListPropsType) => {
 
-	const {onHandlerSubmitPackName, onHandlerShowModal, ...restProps} = props;
+	const {onHandlerSubmitPackName, onHandlerShowModal} = props;
 
 	const onHandlerSubmit = useCallback((packName: string) => {
 		onHandlerSubmitPackName(packName);

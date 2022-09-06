@@ -4,9 +4,9 @@ import {useSelector} from 'react-redux';
 
 import {AppRootStateType} from '../../../store/store';
 
-import {ModalDelete} from '../../../components/с10-ModalDelete/ModalDelete';
+import {ModalDelete} from '../../../components/c10-ModalDelete/ModalDelete';
 
-import {ModalAdded} from '../../../components/с11-ModalAdded/ModalAdded';
+import {ModalAdded} from '../../../components/c11-ModalAdded/ModalAdded';
 
 import s from './TablePacks.module.scss';
 

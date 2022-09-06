@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Arrow from '../../assets/img/arrow-left.svg';
 
-// import {changeModalAddCard} from '../../store/reducers/modalsReducer';
 import {PaginationContainer} from '../../components/c6-Pagination/PaginationContainer';
 
 import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
+
+import {ModalCardInfo} from '../../components/c12-ModalCardInfo/ModalCardInfo';
 
 import s from './PackName.module.scss';
 import {TablePackNameContainer} from './p0-TablePackName/TablePackNameContainer';
@@ -23,12 +24,32 @@ type PackNamePropsType = {
 
 export const PackName = React.memo((props: PackNamePropsType) => {
 
+	const [showModal, setShowModal] = useState(false);
+
 	const searchParams = (packName: string) => {
 
 	};
 
+
+	const onHandlerSaveNewCard = (question: string, answer: string) => {
+		console.log({question, answer});
+		onHandlerCancelModal(false);
+	};
+
+	const onHandlerCancelModal = (show: boolean) => {
+		setShowModal(show);
+	};
+
 	return (
 		<div className={s.packName}>
+			{
+				showModal &&
+				<ModalCardInfo
+					// title={'Edite Card'}
+					onSaveCard={onHandlerSaveNewCard}
+					onCancelModal={onHandlerCancelModal}
+				/>
+			}
 			<div className={s.packName__header}>
 				<div className={s.packName__title}>
 					<div className={s.packName__arrow}>
@@ -45,8 +66,17 @@ export const PackName = React.memo((props: PackNamePropsType) => {
 				</div>
 			</div>
 			<div className={s.packName__params}>
-				<SearchInput
-					setParamsSearch={searchParams}/>
+				<div className={s.packName__input}>
+					<SearchInput
+						setParamsSearch={searchParams}/>
+				</div>
+				<div className={s.packName__btn}>
+					<button
+						onClick={() => onHandlerCancelModal(true)}
+					>
+						Add new card
+					</button>
+				</div>
 			</div>
 			<div className={s.packName__table}>
 				<TablePackNameContainer/>

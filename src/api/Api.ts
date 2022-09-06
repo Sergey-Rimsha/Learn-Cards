@@ -155,8 +155,24 @@ export type CardsType = {
 	_id: string
 }
 
+
+type PostCardParamsType = {
+	cardsPack_id: string
+	question?: string
+	answer?: string
+	grade?: number
+	shots?: number
+	answerImg?: string
+	questionImg?: string
+	questionVideo?: string
+	answerVideo?: string
+}
+
 export const apiCard = {
 	getCardsPack(params?: GetCardsCardParamsType) {
 		return instance.get<GetCardsCardType>('cards/card', {params});
+	},
+	postNewCard(params: PostCardParamsType) {
+		return instance.put<CardsType>('cards/card', {card:{params}});
 	},
 };
