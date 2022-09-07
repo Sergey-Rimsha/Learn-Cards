@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 
 import {useParams} from 'react-router-dom';
 
@@ -23,6 +23,8 @@ type TablePackNamePropsType = {
 
 export const TablePackName = (props: TablePackNamePropsType) => {
 
+    const {onShowEditeModal} = props;
+
     const {packId} = useParams();
 
     const dispatch = AppDispatch();
@@ -38,9 +40,9 @@ export const TablePackName = (props: TablePackNamePropsType) => {
         props.changeFilter(params);
     };
 
-    const onHandlerShowEditeModal = (params: ModalCardEditeStateType) => {
-        props.onShowEditeModal(params);
-    };
+    const onHandlerShowEditeModal = useCallback((params: ModalCardEditeStateType) => {
+        onShowEditeModal(params);
+    },[onShowEditeModal]);
 
     return (
         <>

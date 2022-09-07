@@ -18,21 +18,21 @@ export const TableLineCard = React.memo((props: TableLineCardPropsType) => {
 
     const myUserId = useAppSelector<string>(state => state.profile.userData._id);
 
-    const {item, deleteCard} = props;
+    const {item, deleteCard, onHandlerShowEditeModal} = props;
 
     const onClickHandlerDeleteCard = useCallback( () => {
         deleteCard(item._id);
     }, [deleteCard, item._id]);
 
-    const onClickHandlerShowEditeModal = () => {
+    const onClickHandlerShowEditeModal = useCallback(() => {
         const params = {
             show: true,
             question: item.question,
             answer: item.answer,
             _id: item._id,
         };
-        props.onHandlerShowEditeModal(params);
-    };
+        onHandlerShowEditeModal(params);
+    },[onHandlerShowEditeModal, item.question, item.answer, item._id]);
 
 
     // onClick={() => dispatch(changeModalEditCard(true, c._id, c.question,'', c.answer))}
