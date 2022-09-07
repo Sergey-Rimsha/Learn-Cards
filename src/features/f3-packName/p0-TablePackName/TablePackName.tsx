@@ -4,7 +4,9 @@ import {useParams} from 'react-router-dom';
 
 import Arrow from '../../../assets/img/polygon.svg';
 
-import {CardPackNameType} from '../../../store/reducers/packNameReducer';
+import {CardPackNameType, removeCard} from '../../../store/reducers/packNameReducer';
+
+import {AppDispatch} from '../../../store/store';
 
 import s from './TablePackName.module.scss';
 
@@ -22,10 +24,12 @@ export const TablePackName = (props: TablePackNamePropsType) => {
 
     const {packId} = useParams();
 
+    const dispatch = AppDispatch();
+
     // для удаления карточки
     const deleteCard = (id: string) => {
         if (packId) {
-            // dispatch(removeCard(id, packId));
+            dispatch(removeCard(id, packId));
         }
     };
 
