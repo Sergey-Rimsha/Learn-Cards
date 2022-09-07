@@ -22,11 +22,23 @@ export type StateRenamePackModal = {
 	show: boolean
 }
 
+export type StateDeletePackModal = {
+	name: string
+	_id: string
+	show: boolean
+}
+
 export const TablePacksContainer = React.memo(() => {
 
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
 	const [stateRenamePackModal, setStateRenamePackModal] = useState<StateRenamePackModal>({
+		name: 'string',
+		_id: 'string',
+		show: false,
+	});
+
+	const [steteDeletePack, setStateDeletePack] = useState<StateDeletePackModal>({
 		name: 'string',
 		_id: 'string',
 		show: false,
@@ -42,7 +54,6 @@ export const TablePacksContainer = React.memo(() => {
 	const min = useAppSelector<number>(state => state.packList.params.min);
 	const max = useAppSelector<number>(state => state.packList.params.max);
 	const packName = useAppSelector<string>(state => state.packList.params.packName);
-
 
 
 	// показать модалку удаления
