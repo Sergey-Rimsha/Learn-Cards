@@ -5,11 +5,13 @@ import {CardPackNameType} from '../../../store/reducers/packNameReducer';
 import {useAppSelector} from '../../../store/store';
 
 import s from './TablePackName.module.scss';
+import {ModalCardEditeStateType} from "./TablePackNameContainer";
 
 
 export type TableLineCardPropsType = {
     item: CardPackNameType
     deleteCard:(_id: string) => void
+    onHandlerShowEditeModal: (params: ModalCardEditeStateType) => void
 }
 
 export const TableLineCard = React.memo((props: TableLineCardPropsType) => {
@@ -21,6 +23,16 @@ export const TableLineCard = React.memo((props: TableLineCardPropsType) => {
     const onClickHandlerDeleteCard = useCallback( () => {
         deleteCard(item._id);
     }, [deleteCard, item._id]);
+
+    const onClickHandlerShowEditeModal = () => {
+        const params = {
+            show: true,
+            question: item.question,
+            answer: item.answer,
+            _id: item._id,
+        };
+        props.onHandlerShowEditeModal(params);
+    };
 
 
     // onClick={() => dispatch(changeModalEditCard(true, c._id, c.question,'', c.answer))}
@@ -38,6 +50,7 @@ export const TableLineCard = React.memo((props: TableLineCardPropsType) => {
                             <div className={s.buttonsGroup}>
                                 <button
                                     className={s.buttonsGroup__btn}
+                                    onClick={onClickHandlerShowEditeModal}
                                 >
                                     Edit
                                 </button>

@@ -10,7 +10,7 @@ import {AppDispatch} from '../../../store/store';
 
 import s from './TablePackName.module.scss';
 
-import {FilterPackName} from './TablePackNameContainer';
+import {FilterPackName, ModalCardEditeStateType} from './TablePackNameContainer';
 import {TableLineCard} from './TableLineCard';
 
 
@@ -18,6 +18,7 @@ type TablePackNamePropsType = {
     data: CardPackNameType[]
     filter: FilterPackName
     changeFilter: (filter: FilterPackName) => void
+    onShowEditeModal: (params: ModalCardEditeStateType) => void
 }
 
 export const TablePackName = (props: TablePackNamePropsType) => {
@@ -35,6 +36,10 @@ export const TablePackName = (props: TablePackNamePropsType) => {
 
     const onClickHandlerFilter = (params: FilterPackName) => {
         props.changeFilter(params);
+    };
+
+    const onHandlerShowEditeModal = (params: ModalCardEditeStateType) => {
+        props.onShowEditeModal(params);
     };
 
     return (
@@ -70,6 +75,7 @@ export const TablePackName = (props: TablePackNamePropsType) => {
                                 key={i}
                                 item={el}
                                 deleteCard={deleteCard}
+                                onHandlerShowEditeModal={onHandlerShowEditeModal}
                             />
                            );
                         })

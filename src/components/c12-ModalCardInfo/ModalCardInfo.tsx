@@ -16,10 +16,10 @@ type ModalCardInfoPropsType = {
 
 export const ModalCardInfo = React.memo((props: ModalCardInfoPropsType) => {
 
-	const {onSaveCard, onCancelModal} = props;
+	const {onSaveCard, onCancelModal, question = '', answer= ''} = props;
 
-	const [valueQuestion, setValueQuestion] = useState('');
-	const [valueAnswer, setValueAnswer] = useState('');
+	const [valueQuestion, setValueQuestion] = useState(question);
+	const [valueAnswer, setValueAnswer] = useState(answer);
 
 	const onChangeHandlerQuestion = (e: ChangeEvent<HTMLInputElement>) => {
 		setValueQuestion(e.currentTarget.value);

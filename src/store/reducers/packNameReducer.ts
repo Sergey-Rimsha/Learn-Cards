@@ -133,4 +133,19 @@ export const removeCard = (id: string, packId: string): AppThunkType => (dispatc
 		});
 };
 
+export const updateCard = (params: PostCardParamsType): AppThunkType => (dispatch) => {
+	dispatch(setLoadingStatus('loading'));
+
+	apiCard.updateCard(params)
+		.then((res) => {
+			dispatch(getCards({cardsPack_id: params.cardsPack_id}));
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+		.finally(() => {
+			dispatch(setLoadingStatus('idle'));
+		});
+};
+
 

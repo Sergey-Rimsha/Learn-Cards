@@ -158,6 +158,7 @@ export type CardsType = {
 
 export type PostCardParamsType = {
 	cardsPack_id: string
+	_id?: string
 	question?: string
 	answer?: string
 	grade?: number
@@ -177,5 +178,8 @@ export const apiCard = {
 	},
 	removeCard(id: string) {
 		return instance.delete(`cards/card?id=${id}`);
+	},
+	updateCard(params: PostCardParamsType) {
+		return instance.put('cards/card', {card: params});
 	},
 };
