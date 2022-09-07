@@ -6,9 +6,8 @@ import {AppRootStateType} from '../../../store/store';
 
 import {ModalDelete} from '../../../components/c10-ModalDelete/ModalDelete';
 
-import {ModalAdded} from '../../../components/c11-ModalAdded/ModalAdded';
-
 import s from './TablePacks.module.scss';
+import {StateRenamePackModal} from './TablePacksContainer';
 
 type PackPropsType = {
 	isLoading: boolean
@@ -21,15 +20,14 @@ type PackPropsType = {
 	showCardsPack: (_id: string, name: string) => void
 	onHandlerDeletePack: (_id: string, name: string) => void
 	learnCardsPack: (_id: string, name: string) => void
-	onHandlerEditePackName: (_id: string, name: string) => void
+	onHandlerOpenRenameModal: (params: StateRenamePackModal) => void
 }
 
 export const Pack = React.memo((props: PackPropsType) => {
 
-	const {showCardsPack, onHandlerDeletePack, learnCardsPack, onHandlerEditePackName} = props;
+	const {showCardsPack, onHandlerDeletePack, learnCardsPack, onHandlerOpenRenameModal} = props;
 
 	const [showModal, setShowModal] = useState<boolean>(false);
-	const [showModalEdite, setShowModalEdite] = useState<boolean>(false);
 
 	const userId = useSelector<AppRootStateType, string>(state => state.profile.userData._id);
 
@@ -54,22 +52,22 @@ export const Pack = React.memo((props: PackPropsType) => {
 		learnCardsPack(props._id, props.name);
 	},[learnCardsPack, props._id, props.name]);
 	
-	// rename Pack name
-	const onHandlerPackName = (name: string) => {
-		onHandlerEditePackName(props._id, name);
-		onHandlerShowEditeModal(false);
-	};
-
-	// show close Rename Modal Pack name
-	const onHandlerShowEditeModal = (show: boolean) => {
-		setShowModalEdite(show);
+	
+	
+	const onClickHandlerRenamePackModal = () => {
+		const params = {
+			_id: props._id,
+			name: props.name,
+			show: true,
+		};
+		onHandlerOpenRenameModal(params);
 	};
 
 
 	return (
 		<>
 			{
-				showModal &&
+				!showModal ||
                 <ModalDelete
                     title={'Delete pack'}
                     name={props.name}
@@ -77,16 +75,7 @@ export const Pack = React.memo((props: PackPropsType) => {
                     showModalDeletePack={showModalDeletePack}
                 />
 			}
-
-			{
-				showModalEdite &&
-				<ModalAdded
-					title={'Rename pack'}
-					name={props.name}
-					onSubmitName={onHandlerPackName} 
-					onShowModal={onHandlerShowEditeModal}
-				/>
-			}
+			
 			<tr className={s.table__wrap}>
 				<th onClick={onClickHandlerShowCardsPack}>
 					{props.name}
@@ -107,7 +96,7 @@ export const Pack = React.memo((props: PackPropsType) => {
 							<button
 								className={s.table__btn}
 								disabled={props.isLoading}
-								onClick={() => onHandlerShowEditeModal(true)}
+								onClick={onClickHandlerRenamePackModal}
 							>
 								Edit
 							</button>

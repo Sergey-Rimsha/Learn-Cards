@@ -1,9 +1,6 @@
 import React, {useCallback, useState} from 'react';
 
-import {useSelector} from 'react-redux';
-
-import {AppRootStateType, useAppSelector} from '../../../store/store';
-
+import {useAppSelector} from '../../../store/store';
 
 import Arrow from '../../../assets/img/polygon.svg';
 
@@ -11,6 +8,7 @@ import {CardPacksType} from '../../../store/reducers/packListReducer';
 
 import s from './TablePacks.module.scss';
 import {Pack} from './Pack';
+import {StateRenamePackModal} from "./TablePacksContainer";
 
 type TablePacksPropsType = {
 	isLoading: boolean
@@ -18,13 +16,13 @@ type TablePacksPropsType = {
 	showCardsPack: (id: string, name: string) => void
 	sortTableValue: (value: string) => void
 	learnCardsPack: (id: string, name: string) => void
-	onHandlerNewPackName: (id: string, name: string) => void
+	openModalRenamePack: (params: StateRenamePackModal) => void
 }
 
 
 export const TablePacks = (props: TablePacksPropsType) => {
 
-	const {showCardsPack, sortTableValue, learnCardsPack, onHandlerModalDelete, onHandlerNewPackName} = props;
+	const {showCardsPack, sortTableValue, learnCardsPack, onHandlerModalDelete, openModalRenamePack} = props;
 
 	const cardPacks = useAppSelector<Array<CardPacksType>>(state => state.packList.cardPacks);
 
@@ -40,11 +38,9 @@ export const TablePacks = (props: TablePacksPropsType) => {
 		onHandlerModalDelete(id, name);
 	},[onHandlerModalDelete]);
 
-	// rename Pack name
-	const onHandlerEditePackName = useCallback((_id: string, name: string) => {
-		onHandlerNewPackName(_id, name);
-	},[onHandlerNewPackName]);
-
+	const onHandlerOpenRenameModal = useCallback((params: StateRenamePackModal) => {
+		openModalRenamePack(params);
+	},[openModalRenamePack]);
 
 	return (
 		<div className={s.tablePacks}>
@@ -83,7 +79,7 @@ export const TablePacks = (props: TablePacksPropsType) => {
 									learnCardsPack={learnCardsPack}
 									showCardsPack={showCardsPack}
 									onHandlerDeletePack={onHandlerDeletePack}
-									onHandlerEditePackName={onHandlerEditePackName}
+									onHandlerOpenRenameModal={onHandlerOpenRenameModal}
 								/>
 							);
 						})

@@ -13,7 +13,7 @@ type ModalAddedPropsType = {
 
 export const  ModalAdded = React.memo((props: ModalAddedPropsType) => {
 
-	const {onSubmitName, onShowModal, name = '', ...restProps} = props;
+	const {onSubmitName, onShowModal, name = ''} = props;
 
 	const [namePack, setNamePack] = useState<string>(name);
 
@@ -32,7 +32,6 @@ export const  ModalAdded = React.memo((props: ModalAddedPropsType) => {
 	// считываем занчение из инпута
 	const onChangeHandlerInput = (e: ChangeEvent<HTMLInputElement>) => {
 		setNamePack(e.currentTarget.value);
-		console.log(e.currentTarget.value);
 	};
 
 	return (

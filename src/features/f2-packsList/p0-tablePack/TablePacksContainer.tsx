@@ -12,16 +12,30 @@ import {PATH} from '../../../app/Routing/Routing';
 
 import {getLearnCardsPack} from '../../../store/reducers/learnCardsReducer';
 
+import {ModalAdded} from '../../../components/c11-ModalAdded/ModalAdded';
+
 import {TablePacks} from './TablePacks';
 
+export type StateRenamePackModal = {
+	name: string
+	_id: string
+	show: boolean
+}
+
 export const TablePacksContainer = React.memo(() => {
+
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [sortPacks, setSortPacks] = useState<string>('0updated');
+	const [stateRenamePackModal, setStateRenamePackModal] = useState<StateRenamePackModal>({
+		name: 'string',
+		_id: 'string',
+		show: false,
+	});
 
 	const navigate = useNavigate();
 	const dispatch = AppDispatch();
 
-	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const loadingStatus = useAppSelector<LoadingStatusType>(state => state.app.status);
-
 	const pageCount = useAppSelector<number>(state => state.packList.pageCount);
 	const currentPage = useAppSelector<number>(state => state.packList.page);
 	const userId = useAppSelector<string>(state => state.packList.params.userId);
@@ -29,11 +43,6 @@ export const TablePacksContainer = React.memo(() => {
 	const max = useAppSelector<number>(state => state.packList.params.max);
 	const packName = useAppSelector<string>(state => state.packList.params.packName);
 
-	const [sortPacks, setSortPacks] = useState<string>('0updated');
-
-	useEffect(() => {
-		dispatch(getCardsPacks());
-	},[pageCount, currentPage, dispatch, userId, min, max, packName]);
 
 
 	// показать модалку удаления
@@ -56,11 +65,25 @@ export const TablePacksContainer = React.memo(() => {
 		navigate(`${PATH.learnCards}/${name}`);
 	},[dispatch, navigate]);
 
-	// rename Pack name
-	const onHandlerNewPackName = (_id: string, name: string) => {
-		dispatch(editePackName({_id, name}));
+	// open modal and save state _id pack and OldName
+	const openModalRenamePack = (params: StateRenamePackModal) => {
+		setStateRenamePackModal({...params});
 	};
 
+	// rename Pack
+	const renamePack = (name: string) => {
+		dispatch(editePackName({_id: stateRenamePackModal._id, name}));
+		onShowEditeModal(false);
+	};
+
+	//show edite Modal rename Pack
+	const onShowEditeModal = (show: boolean) => {
+		setStateRenamePackModal({...stateRenamePackModal, show});
+	};
+
+	useEffect(() => {
+		dispatch(getCardsPacks());
+	},[pageCount, currentPage, dispatch, userId, min, max, packName]);
 
 	useEffect(() => {
 		if (loadingStatus === 'loading') {
@@ -69,7 +92,6 @@ export const TablePacksContainer = React.memo(() => {
 			setIsLoading(false);
 		}
 	},[loadingStatus]);
-
 
 	// set unmount params userId
 	useEffect(() => {
@@ -80,13 +102,22 @@ export const TablePacksContainer = React.memo(() => {
 
 	return (
 		<>
+			{
+				!stateRenamePackModal.show ||
+                <ModalAdded
+                    title={'Rename pack'}
+                    name={stateRenamePackModal.name}
+                    onSubmitName={renamePack}
+                    onShowModal={onShowEditeModal}
+                />
+			}
 			<TablePacks
 				isLoading={isLoading}
 				sortTableValue={sortTableValue}
 				onHandlerModalDelete={onHandlerModalDelete}
 				showCardsPack={showCardsPack}
 				learnCardsPack={learnCardsPack}
-				onHandlerNewPackName={onHandlerNewPackName}
+				openModalRenamePack={openModalRenamePack}
 			/>
 		</>
 	);
