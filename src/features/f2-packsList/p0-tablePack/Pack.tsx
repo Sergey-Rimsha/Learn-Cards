@@ -1,13 +1,11 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
 
 import {useSelector} from 'react-redux';
 
 import {AppRootStateType} from '../../../store/store';
 
-import {ModalDelete} from '../../../components/c10-ModalDelete/ModalDelete';
-
 import s from './TablePacks.module.scss';
-import {StateRenamePackModal} from './TablePacksContainer';
+import {StateDeletePackModal, StateRenamePackModal} from './TablePacksContainer';
 
 type PackPropsType = {
 	isLoading: boolean
@@ -18,16 +16,14 @@ type PackPropsType = {
 	updated: string,
 	user_name: string,
 	showCardsPack: (_id: string, name: string) => void
-	onHandlerDeletePack: (_id: string, name: string) => void
 	learnCardsPack: (_id: string, name: string) => void
 	onHandlerOpenRenameModal: (params: StateRenamePackModal) => void
+	onHandlerOpenModalRemovePack: (state: StateDeletePackModal) => void
 }
 
 export const Pack = React.memo((props: PackPropsType) => {
 
-	const {showCardsPack, onHandlerDeletePack, learnCardsPack, onHandlerOpenRenameModal} = props;
-
-	const [showModal, setShowModal] = useState<boolean>(false);
+	const {showCardsPack, learnCardsPack, onHandlerOpenRenameModal, onHandlerOpenModalRemovePack} = props;
 
 	const userId = useSelector<AppRootStateType, string>(state => state.profile.userData._id);
 
@@ -36,23 +32,15 @@ export const Pack = React.memo((props: PackPropsType) => {
 		showCardsPack(props._id, props.name);
 	},[showCardsPack, props._id, props.name]);
 
-	// удаляем Pack Cards
+	// set state delete modal pack
 	const onClickHandlerDeletePack = useCallback(() => {
-		onHandlerDeletePack(props._id, props.name);
-		// закрывем модалку
-		setShowModal(false);
-	},[onHandlerDeletePack, props._id, props.name]);
-
-	// показываем и прячем модалку Delete Pack
-	const showModalDeletePack = (show: boolean) => {
-		setShowModal(show);
-	};
+		onHandlerOpenModalRemovePack({_id: props._id, name: props.name, show: true});
+	},[onHandlerOpenModalRemovePack, props._id, props.name]);
 
 	const onClickHandlerLearnCardsPack = useCallback(() => {
 		learnCardsPack(props._id, props.name);
 	},[learnCardsPack, props._id, props.name]);
-	
-	
+
 	
 	const onClickHandlerRenamePackModal = () => {
 		const params = {
@@ -66,16 +54,6 @@ export const Pack = React.memo((props: PackPropsType) => {
 
 	return (
 		<>
-			{
-				!showModal ||
-                <ModalDelete
-                    title={'Delete pack'}
-                    name={props.name}
-                    onClickHandlerDeletePack={onClickHandlerDeletePack}
-                    showModalDeletePack={showModalDeletePack}
-                />
-			}
-			
 			<tr className={s.table__wrap}>
 				<th onClick={onClickHandlerShowCardsPack}>
 					{props.name}
@@ -88,7 +66,7 @@ export const Pack = React.memo((props: PackPropsType) => {
 						<span>
 							<button
 								className={`${s.table__btn} ${s.table__btn_delete}`}
-								onClick={() => showModalDeletePack(true)}
+								onClick={onClickHandlerDeletePack}
 								disabled={props.isLoading}
 							>
 								Delete

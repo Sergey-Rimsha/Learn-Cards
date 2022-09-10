@@ -8,21 +8,21 @@ import {CardPacksType} from '../../../store/reducers/packListReducer';
 
 import s from './TablePacks.module.scss';
 import {Pack} from './Pack';
-import {StateRenamePackModal} from "./TablePacksContainer";
+import {StateDeletePackModal, StateRenamePackModal} from './TablePacksContainer';
 
 type TablePacksPropsType = {
 	isLoading: boolean
-	onHandlerModalDelete: (id: string, name: string) => void
 	showCardsPack: (id: string, name: string) => void
 	sortTableValue: (value: string) => void
 	learnCardsPack: (id: string, name: string) => void
 	openModalRenamePack: (params: StateRenamePackModal) => void
+	openModalRemovePack: (state: StateDeletePackModal) => void
 }
 
 
-export const TablePacks = (props: TablePacksPropsType) => {
+export const TablePacks = React.memo((props: TablePacksPropsType) => {
 
-	const {showCardsPack, sortTableValue, learnCardsPack, onHandlerModalDelete, openModalRenamePack} = props;
+	const {showCardsPack, sortTableValue, learnCardsPack, openModalRenamePack, openModalRemovePack} = props;
 
 	const cardPacks = useAppSelector<Array<CardPacksType>>(state => state.packList.cardPacks);
 
@@ -34,9 +34,9 @@ export const TablePacks = (props: TablePacksPropsType) => {
 	};
 
 	// открываем модалку для удаления
-	const onHandlerDeletePack = useCallback((id: string, name: string) => {
-		onHandlerModalDelete(id, name);
-	},[onHandlerModalDelete]);
+	const onHandlerOpenModalRemovePack = useCallback((state: StateDeletePackModal) => {
+		openModalRemovePack(state);
+	},[openModalRemovePack]);
 
 	const onHandlerOpenRenameModal = useCallback((params: StateRenamePackModal) => {
 		openModalRenamePack(params);
@@ -64,29 +64,29 @@ export const TablePacks = (props: TablePacksPropsType) => {
 				</tr>
 				</thead>
 				<tbody className={s.table__body}>
-					{
-						cardPacks.map((el) => {
-							return (
-								<Pack
-									key={el._id}
-									isLoading={props.isLoading}
-									_id={el._id}
-									user_id={el.user_id}
-									name={el.name}
-									cardsCount={el.cardsCount}
-									updated={el.updated}
-									user_name={el.user_name}
-									learnCardsPack={learnCardsPack}
-									showCardsPack={showCardsPack}
-									onHandlerDeletePack={onHandlerDeletePack}
-									onHandlerOpenRenameModal={onHandlerOpenRenameModal}
-								/>
-							);
-						})
-					}
+				{
+					cardPacks.map((el) => {
+						return (
+							<Pack
+								key={el._id}
+								isLoading={props.isLoading}
+								_id={el._id}
+								user_id={el.user_id}
+								name={el.name}
+								cardsCount={el.cardsCount}
+								updated={el.updated}
+								user_name={el.user_name}
+								learnCardsPack={learnCardsPack}
+								showCardsPack={showCardsPack}
+								onHandlerOpenModalRemovePack={onHandlerOpenModalRemovePack}
+								onHandlerOpenRenameModal={onHandlerOpenRenameModal}
+							/>
+						);
+					})
+				}
 				</tbody>
 			</table>
 		</div>
 	);
-};
+});
 

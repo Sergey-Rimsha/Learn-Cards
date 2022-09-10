@@ -6,13 +6,20 @@ import {AppDispatch, useAppSelector} from '../../../store/store';
 
 import {LoadingStatusType} from '../../../store/reducers/appReducer';
 
-import {delCardsPack, editePackName, getCardsPacks, setParamsUserId} from '../../../store/reducers/packListReducer';
+import {
+	delCardsPack,
+	editePackName,
+	getCardsPacks,
+	setParamsUserId,
+} from '../../../store/reducers/packListReducer';
 
 import {PATH} from '../../../app/Routing/Routing';
 
 import {getLearnCardsPack} from '../../../store/reducers/learnCardsReducer';
 
 import {ModalAdded} from '../../../components/c11-ModalAdded/ModalAdded';
+
+import {ModalDelete} from '../../../components/c10-ModalDelete/ModalDelete';
 
 import {TablePacks} from './TablePacks';
 
@@ -30,6 +37,8 @@ export type StateDeletePackModal = {
 
 export const TablePacksContainer = React.memo(() => {
 
+	console.log('render');
+
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
 	const [stateRenamePackModal, setStateRenamePackModal] = useState<StateRenamePackModal>({
@@ -38,7 +47,7 @@ export const TablePacksContainer = React.memo(() => {
 		show: false,
 	});
 
-	const [steteDeletePack, setStateDeletePack] = useState<StateDeletePackModal>({
+	const [stateDeletePack, setStateDeletePack] = useState<StateDeletePackModal>({
 		name: 'string',
 		_id: 'string',
 		show: false,
@@ -54,13 +63,7 @@ export const TablePacksContainer = React.memo(() => {
 	const min = useAppSelector<number>(state => state.packList.params.min);
 	const max = useAppSelector<number>(state => state.packList.params.max);
 	const packName = useAppSelector<string>(state => state.packList.params.packName);
-
-
-	// показать модалку удаления
-	const onHandlerModalDelete = useCallback((id: string, titleCard: string) => {
-		dispatch(delCardsPack(id));
-	},[dispatch]);
-
+	
 	// навигация на таблицу карточек
 	const showCardsPack = useCallback((id: string, name: string) => {
 		// (!isLoading) && navigate(`${PATH.PACK_NAME}/${name}/${id}/${pageCount}`);
@@ -92,6 +95,22 @@ export const TablePacksContainer = React.memo(() => {
 		setStateRenamePackModal({...stateRenamePackModal, show});
 	};
 
+	//show delete Modal pack
+	const onShowRemovePack = useCallback((show: boolean) => {
+		setStateDeletePack({...stateDeletePack, show});
+	},[stateDeletePack]);
+	
+	// open modal and set state delete modal pack
+	const openModalRemovePack = (state: StateDeletePackModal) => {
+		setStateDeletePack(state);
+	};
+
+	// dispatch delete pack and close delete modal
+	const onHandlerModalDelete = useCallback(() => {
+		dispatch(delCardsPack(stateDeletePack._id));
+		onShowRemovePack(false);
+	},[dispatch, onShowRemovePack, stateDeletePack._id]);
+
 	useEffect(() => {
 		dispatch(getCardsPacks());
 	},[pageCount, currentPage, dispatch, userId, min, max, packName]);
@@ -122,13 +141,22 @@ export const TablePacksContainer = React.memo(() => {
                     onShowModal={onShowEditeModal}
                 />
 			}
+			{
+				!stateDeletePack.show ||
+				<ModalDelete
+					title={'Delete pack'}
+					name={stateDeletePack.name}
+					onClickHandlerDeletePack={onHandlerModalDelete}
+					showModalDeletePack={onShowRemovePack}
+				/>
+			}
 			<TablePacks
 				isLoading={isLoading}
 				sortTableValue={sortTableValue}
-				onHandlerModalDelete={onHandlerModalDelete}
 				showCardsPack={showCardsPack}
 				learnCardsPack={learnCardsPack}
 				openModalRenamePack={openModalRenamePack}
+				openModalRemovePack={openModalRemovePack}
 			/>
 		</>
 	);
