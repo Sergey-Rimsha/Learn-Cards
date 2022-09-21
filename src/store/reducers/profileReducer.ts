@@ -1,6 +1,7 @@
-import {API, ChangeProfileType} from "../../api/Api";
-import {AppThunkType} from "../store";
-import {setIsAuth, setLoadingStatus} from "./appReducer";
+import {API, ChangeProfileType} from '../../api/Api';
+import {AppThunkType} from '../store';
+
+import {setIsAuth, setLoadingStatus} from './appReducer';
 
 
 type ProfileStateType = {
