@@ -8,9 +8,10 @@ import {SearchInput} from '../../components/c8-SearchInput/SearchInput';
 
 import {ModalCardInfo} from '../../components/c12-ModalCardInfo/ModalCardInfo';
 
+import {useAppSelector} from '../../store/store';
+
 import s from './PackName.module.scss';
 import {TablePackNameContainer} from './p0-TablePackName/TablePackNameContainer';
-import {useAppSelector} from "../../store/store";
 
 type PackNamePropsType = {
 	name: string | undefined
@@ -22,7 +23,7 @@ type PackNamePropsType = {
 	onClickNavigateBack: () => void
 	setParamsPagination: (pageCount: number, currentPage: number) => void
 	saveNewCard: (question: string, answer: string) => void
-	showModalNewCard:(show: boolean) => void
+	showModalNewCard: (show: boolean) => void
 }
 
 export const PackName = React.memo((props: PackNamePropsType) => {
@@ -39,21 +40,21 @@ export const PackName = React.memo((props: PackNamePropsType) => {
 
 	const onHandlerSaveNewCard = useCallback((question: string, answer: string) => {
 		saveNewCard(question, answer);
-	},[saveNewCard]);
+	}, [saveNewCard]);
 
 	const onHandlerCancelModal = useCallback((show: boolean) => {
 		showModalNewCard(show);
-	},[showModalNewCard]);
+	}, [showModalNewCard]);
 
 	return (
 		<div className={s.packName}>
 			{
 				props.showModal &&
-				<ModalCardInfo
+                <ModalCardInfo
 					// title={'Edite Card'}
-					onSaveCard={onHandlerSaveNewCard}
-					onCancelModal={onHandlerCancelModal}
-				/>
+                    onSaveCard={onHandlerSaveNewCard}
+                    onCancelModal={onHandlerCancelModal}
+                />
 			}
 			<div className={s.packName__header}>
 				<div className={s.packName__title}>
@@ -66,8 +67,8 @@ export const PackName = React.memo((props: PackNamePropsType) => {
 							alt='arrow left'/>
 					</div>
 					<div className={s.packName__name}>
-                        Pack Name "{props.name}"
-                    </div>
+						Pack Name "{props.name}"
+					</div>
 				</div>
 			</div>
 			<div className={s.packName__params}>
@@ -77,13 +78,13 @@ export const PackName = React.memo((props: PackNamePropsType) => {
 				</div>
 				{
 					cardsPackUserID === myUserID &&
-					<div className={s.packName__btn}>
-						<button
-							onClick={() => onHandlerCancelModal(true)}
-						>
-							Add new card
-						</button>
-					</div>
+                    <div className={s.packName__btn}>
+                        <button
+                            onClick={() => onHandlerCancelModal(true)}
+                        >
+                            Add new card
+                        </button>
+                    </div>
 				}
 			</div>
 			<div className={s.packName__table}>

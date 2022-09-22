@@ -13,7 +13,6 @@ export const Switch = () => {
 
     const setActive = ({isActive}: {isActive:boolean}) => (isActive ? s.switch__item_active : '');
 
-
     return (
         <div className={s.switch}>
             <NavLink

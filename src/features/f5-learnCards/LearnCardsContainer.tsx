@@ -28,10 +28,7 @@ const getCard = (cards: LearnCardType[]) => {
 
 export const LearnCardsContainer = () => {
 
-	const dispatch = AppDispatch();
-
 	const {name} = useParams();
-
 
 	const [card, setCard] = useState<LearnCardType>({
 		answer: '1',
@@ -79,7 +76,7 @@ export const LearnCardsContainer = () => {
 
 	useEffect(() => {
 		setCard(getCard(stateCards));
-	},[stateCards]);
+	}, [stateCards]);
 
 
 	return (

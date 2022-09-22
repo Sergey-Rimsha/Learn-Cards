@@ -20,13 +20,9 @@ export const PackNameContainer = ( ) => {
 	const pageCount = useAppSelector<number>(state => state.packName.pageCount);
 	const cardsTotalCount = useAppSelector<number>(state => state.packName.cardsTotalCount);
 
-
-
-
 	const dispatch = AppDispatch();
 	const navigate = useNavigate();
 	const {name, packId} = useParams();
-
 
 	const onClickNavigateBack = () => {
 		navigate(-1);
@@ -38,7 +34,6 @@ export const PackNameContainer = ( ) => {
 
 	// Save New Card dispatch Thunk
 	const saveNewCard = (question: string, answer: string) => {
-		console.log(answer);
 		if (packId) {
 			dispatch(postNewCard({question, answer, cardsPack_id: packId}));
 			showModalNewCard(false);
@@ -49,7 +44,6 @@ export const PackNameContainer = ( ) => {
 		setShowModal(show);
 	};
 
-
 	useEffect(() => {
 		if (loadingStatus === 'loading') {
 			setIsLoading(true);
@@ -57,8 +51,7 @@ export const PackNameContainer = ( ) => {
 			setIsLoading(false);
 		}
 	},[loadingStatus]);
-	
-	
+
 	return (
 		<>
 			<PackName

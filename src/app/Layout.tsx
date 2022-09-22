@@ -8,7 +8,6 @@ import {LoadingStatusType} from '../store/reducers/appReducer';
 
 import {getMeProfile} from '../store/reducers/profileReducer';
 import {HeaderContainer} from '../features/f4-header/HeaderContainer';
-import {HeaderContainerTest} from '../common/header/HeaderContainerTest';
 
 import s from './Layout.module.scss';
 
@@ -29,18 +28,17 @@ export const Layout = () => {
 		<div className={s.layout}>
 
 			{/*<HeaderContainerTest/>*/}
-			<div className={s.layout__headerWrap}>
-				{
-					isAuth &&
-					<div className={s.layout__header}>
-						<HeaderContainer />
-					</div>
-				}
-				<div className={s.layout__loading}>
-					{status === 'loading' && <Preloader/>}
-				</div>
-			</div>
-
+			{
+				isAuth &&
+                <div className={s.layout__headerWrap}>
+                    <div className={s.layout__header}>
+                        <HeaderContainer />
+                    </div>
+                    <div className={s.layout__loading}>
+						{status === 'loading' && <Preloader/>}
+                    </div>
+                </div>
+			}
 			<div className={s.layout__main}>
 				<Outlet />
 			</div>

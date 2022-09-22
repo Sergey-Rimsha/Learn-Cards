@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
 
-
-
-
 import SuperButton from '../../components/c2-SuperButton/SuperButton';
 import {SuperRadio} from '../../components/c9-SuperRadio/SuperRadio';
 
@@ -25,12 +22,12 @@ export const LearnCards = (props: LearnCardsType) => {
 
 	const [yourself, setYourself] = useState<string>(rate[0]);
 	const [rating, setRatingId] = useState<number>(1);
-	
+
 	const handleChangeRadio = (options: string, rating: number) => {
 		setYourself(options);
 		setRatingId(rating + 1);
 	};
-	
+
 	const onClickNextAsk = () => {
 		props.onNextQuestion(rating);
 		setYourself(rate[0]);
@@ -55,37 +52,37 @@ export const LearnCards = (props: LearnCardsType) => {
 
 				{
 					props.stateLearn === 'answer' &&
-					<div className={s.cards__question}>
-						Answer:
-						<span>
+                    <div className={s.cards__question}>
+                        Answer:
+                        <span>
 							{props.answer}
 						</span>
-					</div>
+                    </div>
 				}
 
 				{
 					props.stateLearn === 'answer' &&
-					<div className={s.cards__rate}>
-						<h4>Rate yourself:</h4>
+                    <div className={s.cards__rate}>
+                        <h4>Rate yourself:</h4>
 
-						<SuperRadio
-							name={'radio'}
-							options={rate}
-							value={yourself}
-							onChangeOption={handleChangeRadio}
-						/>
-					</div>
+                        <SuperRadio
+                            name={'radio'}
+                            options={rate}
+                            value={yourself}
+                            onChangeOption={handleChangeRadio}
+                        />
+                    </div>
 				}
 
 				<div className={s.cards__btnWrap}>
 					<SuperButton
 						onClick={props.onCancel}>
-							Cancel
+						Cancel
 					</SuperButton>
 					{
 						props.stateLearn === 'question' ?
 							<SuperButton onClick={props.onShowAnswer}>
-								Show answer
+								Answer
 							</SuperButton>
 							: <SuperButton onClick={onClickNextAsk}>
 								Next

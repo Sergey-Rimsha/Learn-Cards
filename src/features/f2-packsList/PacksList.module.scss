@@ -2,7 +2,7 @@
 @import "src/styles/mixins";
 
 .packsList {
-
+	margin-bottom: 20px;
 	 &__block {
 		width: 1200px;
 		height: auto;
@@ -10,7 +10,6 @@
 		display: flex;
 		background: #FEFEFF;
 		border-radius: 8px;
-
 	}
 }
 

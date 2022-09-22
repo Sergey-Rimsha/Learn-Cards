@@ -37,8 +37,6 @@ export type StateDeletePackModal = {
 
 export const TablePacksContainer = React.memo(() => {
 
-	console.log('render');
-
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [sortPacks, setSortPacks] = useState<string>('0updated');
 	const [stateRenamePackModal, setStateRenamePackModal] = useState<StateRenamePackModal>({

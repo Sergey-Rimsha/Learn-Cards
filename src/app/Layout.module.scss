@@ -5,7 +5,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	padding-bottom: 20px;
+	//padding-bottom: 20px;
 
 	&__headerWrap {
 		width: 100%;
@@ -23,9 +23,8 @@
 	}
 
 	&__main {
-		//margin-top: 24px;
 		display: flex;
-		min-height: 100px;
 		height: 100%;
+		align-items: center;
 	}
 }

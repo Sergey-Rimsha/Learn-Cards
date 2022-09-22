@@ -5,7 +5,7 @@ import {CardPackNameType} from '../../../store/reducers/packNameReducer';
 import {useAppSelector} from '../../../store/store';
 
 import s from './TablePackName.module.scss';
-import {ModalCardEditeStateType} from "./TablePackNameContainer";
+import {ModalCardEditeStateType} from './TablePackNameContainer';
 
 
 export type TableLineCardPropsType = {
