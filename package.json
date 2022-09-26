@@ -1,5 +1,5 @@
 {
-  "name": "learn-card",
+  "name": "learn-cards",
   "version": "0.1.0",
   "private": true,
   "eslintConfig": {
@@ -71,5 +71,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://Sergey-Rimsha.github.io/cards-project"
+  "homepage": "https://sergey-rimsha.github.io/learn-cards/"
 }
